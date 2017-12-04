@@ -26,7 +26,7 @@ public class CheckStudentDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_student_detail);
+        setContentView(R.layout.activity_checked_student_detail);
         Intent intent = getIntent();
         checkOBJ = (CheckOBJ) intent.getSerializableExtra("checkOBJ");
         teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");

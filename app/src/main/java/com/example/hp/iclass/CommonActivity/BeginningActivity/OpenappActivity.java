@@ -26,7 +26,7 @@ public class OpenappActivity extends AppCompatActivity implements OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_openapp);
+        setContentView(R.layout.activity_splash);
         final LinearLayout tv_lin = (LinearLayout) findViewById(R.id.text_lin);//要显示的字体
         final LinearLayout tv_hide_lin = (LinearLayout) findViewById(R.id.text_hide_lin);//所谓的布
         ImageView logo = (ImageView) findViewById(R.id.image);//图片

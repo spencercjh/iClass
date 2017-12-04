@@ -46,7 +46,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_checkcondition);
+        setContentView(R.layout.activity_check_condition);
         should = (TextView) findViewById(R.id.text_should);
         present = (TextView) findViewById(R.id.text_present);
         seatbtn = (Button) findViewById(R.id.button_seat);

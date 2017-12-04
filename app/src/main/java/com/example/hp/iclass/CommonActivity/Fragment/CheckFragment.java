@@ -67,11 +67,11 @@ public class CheckFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.checkfragment_teacher, container, false);
+        View view = inflater.inflate(R.layout.fragment_teacher_check, container, false);
         if (choice_user == 1) {
-            view = inflater.inflate(R.layout.checkfragment_teacher, container, false);
+            view = inflater.inflate(R.layout.fragment_teacher_check, container, false);
         } else if (choice_user == 0) {
-            view = inflater.inflate(R.layout.checkfragment_student, container, false);
+            view = inflater.inflate(R.layout.fragment_student_check, container, false);
         }
         tl_head = view.findViewById(R.id.tl_head);
         ((AppCompatActivity) getActivity()).setSupportActionBar(tl_head);
@@ -204,7 +204,7 @@ public class CheckFragment extends Fragment {
                 //对ListView的优化，convertView为空时，创建一个新视图；convertView不为空时，代表它是滚出
                 //屏幕，放入Recycler中的视图,若需要用到其他layout，则用inflate(),同一视图，用fiindViewBy()
                 if (convertView == null) {
-                    view = View.inflate(getActivity(), R.layout.subject_item_teacher, null);
+                    view = View.inflate(getActivity(), R.layout.item_teacher_subject, null);
                 } else {
                     view = convertView;
                 }
@@ -322,7 +322,7 @@ public class CheckFragment extends Fragment {
                 //对ListView的优化，convertView为空时，创建一个新视图；convertView不为空时，代表它是滚出
                 //屏幕，放入Recycler中的视图,若需要用到其他layout，则用inflate(),同一视图，用fiindViewBy()
                 if (convertView == null) {
-                    view = View.inflate(getActivity(), R.layout.subject_item_student, null);
+                    view = View.inflate(getActivity(), R.layout.item_student_subject, null);
                 } else {
                     view = convertView;
                 }
