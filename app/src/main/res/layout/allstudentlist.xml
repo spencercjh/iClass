@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="18sp"
+            android:layout_alignEnd="@+id/linearLayout2"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/linearLayout2"
+            android:orientation="horizontal"
+            android:layout_alignStart="@+id/linearLayout2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="姓名: " />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:text="学号: " />
+
+            <TextView
+                android:id="@+id/tv_studentID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lines="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="18sp"
+            android:layout_below="@+id/linearLayout1"
+            android:orientation="horizontal"
+            android:layout_alignStart="@+id/linearLayout3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="学院: " />
+
+            <TextView
+                android:id="@+id/tv_college"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="班级: " />
+
+            <TextView
+                android:id="@+id/tv_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:lines="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="18sp"
+            android:layout_below="@+id/linearLayout2"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:id="@+id/linearLayout3"
+            android:layout_toEndOf="@+id/imageView3">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="出勤: " />
+
+            <TextView
+                android:id="@+id/tv_stupresent"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="评分: " />
+
+            <TextView
+                android:id="@+id/tv_stuscore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:lines="1" />
+        </LinearLayout>
+
+        <!--
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:textAllCaps="false"
+            android:layout_gravity="right"
+            android:text="Delete"
+            android:id="@+id/btn_delete"
+            android:layout_alignBottom="@+id/linearLayout2"
+            android:layout_alignTop="@+id/linearLayout1"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+            -->
+    </RelativeLayout>
+
+
+</LinearLayout>
