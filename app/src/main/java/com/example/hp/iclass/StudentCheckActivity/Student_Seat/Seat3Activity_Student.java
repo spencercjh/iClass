@@ -335,7 +335,7 @@ public class Seat3Activity_Student extends AppCompatActivity {
         @Override
         public View getView(int arg0, View arg1, ViewGroup arg2) {
             // TODO Auto-generated method stub
-            view = LayoutInflater.from(context).inflate(R.layout.seat, arg2, false);
+            view = LayoutInflater.from(context).inflate(R.layout.item_seat, arg2, false);
             checkOBJ = (CheckOBJ) getItem(arg0);
             if (checkOBJ.getStudent_id() == null) {
                 FrameLayout frameLayout = view.findViewById(R.id.mylayout);

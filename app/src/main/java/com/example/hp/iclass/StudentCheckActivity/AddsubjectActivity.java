@@ -37,7 +37,7 @@ public class AddsubjectActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addsubject);
+        setContentView(R.layout.activity_student_add_subject);
 
         Intent intent = getIntent();
         choice_user = (int) intent.getSerializableExtra("user");

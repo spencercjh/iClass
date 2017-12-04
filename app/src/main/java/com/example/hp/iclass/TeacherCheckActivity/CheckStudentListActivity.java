@@ -33,7 +33,7 @@ public class CheckStudentListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_student_list);
+        setContentView(R.layout.activity_checked_student_list);
         Intent intent = getIntent();
         teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
         subjectOBJ = (SubjectOBJ) intent.getSerializableExtra("subjectOBJ");
@@ -103,7 +103,7 @@ public class CheckStudentListActivity extends AppCompatActivity {
                 //对ListView的优化，convertView为空时，创建一个新视图；convertView不为空时，代表它是滚出
                 //屏幕，放入Recycler中的视图,若需要用到其他layout，则用inflate(),同一视图，用fiindViewBy()
                 if (convertView == null) {
-                    view = View.inflate(getBaseContext(), R.layout.studentlist, null);
+                    view = View.inflate(getBaseContext(), R.layout.item_checked_student, null);
                 } else {
                     view = convertView;
                 }

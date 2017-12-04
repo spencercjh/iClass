@@ -40,7 +40,7 @@ public class HistoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.historyfragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_history, container, false);
         Toolbar tl_head = view.findViewById(R.id.tl_head);
         tl_head.setTitle("                         历史信息");
         tl_head.setTitleTextColor(Color.WHITE);

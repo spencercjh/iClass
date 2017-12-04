@@ -29,7 +29,7 @@ public class CheckOBJ implements Serializable {
         this.start_time = start_time;
     }
 
-    //从servlet中获取(seat activity)
+    //从servlet中获取(item_seat activity)
     public CheckOBJ(String student_id, String check_time, int ischeck, int seat_index) {
         this.student_id = student_id;
         this.check_time = check_time;
