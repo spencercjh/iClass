@@ -80,6 +80,9 @@ public class CheckOBJ implements Serializable {
         return seat_index;
     }
 
+    public void setSeat_index(int seat_index) {
+        this.seat_index = seat_index;
+    }
 
     public int getIscheck() {
         return ischeck;
