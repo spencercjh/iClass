@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><!--http://blog.csdn.net/lihenair/article/details/46432849-->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="10dp"
+    android:insetRight="10dp">
+
+    <shape android:shape="rectangle">
+        <solid android:color="#a9b7b7" />
+    </shape>
+
+</inset>

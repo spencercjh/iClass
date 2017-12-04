@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_reupdate"
+        android:icon="@android:drawable/sym_call_missed"
+        android:orderInCategory="1"
+        android:title="重置签到"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_check"
+        android:checkable="true"
+        android:enabled="true"
+        android:icon="@android:drawable/sym_call_outgoing"
+        android:orderInCategory="2"
+        android:title="开始签到"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_refresh"
+        android:icon="@drawable/ic_refresh"
+        android:orderInCategory="3"
+        android:title="刷新"
+        app:showAsAction="always" />
+</menu>

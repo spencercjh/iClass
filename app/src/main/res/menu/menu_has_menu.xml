@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_refresh"
+        android:icon="@drawable/ic_refresh"
+        android:orderInCategory="1"
+        android:title="刷新"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/addsubject"
+        android:icon="@drawable/ic_search"
+        android:title="添加课程" />
+    <item
+        android:id="@+id/end"
+        android:icon="@android:drawable/ic_notification_clear_all"
+        android:title="退出" />
+</menu>

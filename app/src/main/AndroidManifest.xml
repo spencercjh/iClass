@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.hp.iclass">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_mycube"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".CommonActivity.BeginningActivity.OpenappActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".CommonActivity.BeginningActivity.Login.LoginActivity" />
+        <activity android:name=".CommonActivity.MainActivity" />
+        <activity android:name=".StudentCheckActivity.AddsubjectActivity" />
+        <activity android:name=".StudentCheckActivity.Student_Seat.Seat3Activity_Student" />
+        <activity android:name=".StudentCheckActivity.Student_Seat.SeatErrorActivity_Student" />
+        <activity android:name=".StudentCheckActivity.Student_Seat.Seat2Activity_Student" />
+        <activity android:name=".StudentCheckActivity.Student_Seat.Seat1Activity_Student" />
+        <activity android:name=".TeacherCheckActivity.CheckConditionActivity" />
+        <activity android:name=".CommonActivity.BeginningActivity.Login.ForgetkeyActivity" />
+        <activity android:name=".TeacherCheckActivity.CheckStudentListActivity" />
+        <activity android:name=".TeacherCheckActivity.CheckStudentDetailActivity" />
+        <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat1Activity_Teacher" />
+        <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat2Activity_Teacher" />
+        <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat3Activity_Teacher" />
+    </application>
+
+</manifest>

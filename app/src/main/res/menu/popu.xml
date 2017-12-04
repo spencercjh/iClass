@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_quick_add"
+        android:title="@string/快速加分" />
+    <item
+        android:id="@+id/menu_quick_minus"
+        android:title="@string/快速扣分" />
+    <item
+        android:id="@+id/menu_info"
+        android:title="@string/详细信息" />
+</menu>
