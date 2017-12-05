@@ -50,6 +50,7 @@ public class AllStudentListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_only_fresh, menu);
         return true;
+
     }
 
     @Override
