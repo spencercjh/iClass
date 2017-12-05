@@ -27,12 +27,12 @@
         <activity android:name=".StudentCheckActivity.Student_Seat.Seat1Activity_Student" />
         <activity android:name=".TeacherCheckActivity.CheckConditionActivity" />
         <activity android:name=".CommonActivity.BeginningActivity.Login.ForgetkeyActivity" />
-        <activity android:name=".TeacherCheckActivity.CheckStudentListActivity" />
-        <activity android:name=".TeacherCheckActivity.CheckStudentDetailActivity" />
+        <activity android:name=".TeacherCheckActivity.CheckedStudentListActivity" />
+        <activity android:name=".TeacherCheckActivity.CheckedStudentDetailActivity" />
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat1Activity_Teacher" />
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat2Activity_Teacher" />
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat3Activity_Teacher" />
-        <activity android:name=".TeacherCheckActivity.CheckAllStudentActivity" />
+        <activity android:name=".TeacherCheckActivity.AllStudentListActivity" />
     </application>
 
 </manifest>
