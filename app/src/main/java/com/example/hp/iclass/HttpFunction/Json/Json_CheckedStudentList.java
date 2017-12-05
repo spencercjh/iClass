@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * iClass
  */
 
-public class Json_CheckInfoList {
+public class Json_CheckedStudentList {
     public static ArrayList<CheckOBJ> parserJson(String jsonStr) {
         ArrayList<CheckOBJ> list = new ArrayList<>();
         try {

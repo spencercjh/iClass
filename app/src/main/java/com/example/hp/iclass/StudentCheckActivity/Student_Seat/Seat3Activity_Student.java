@@ -30,7 +30,7 @@ import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStartT
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_InsertCheckInfo;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_QuaryCheckSituation;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
-import com.example.hp.iclass.HttpFunction.Json.Json_CheckInfoList;
+import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
 import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
@@ -94,7 +94,7 @@ public class Seat3Activity_Student extends AppCompatActivity {
         ArrayList<CheckOBJ> seat = new ArrayList<>();
         ArrayList<CheckOBJ> check_student = new ArrayList<>();
         try {
-            check_student = Json_CheckInfoList.parserJson(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
+            check_student = Json_CheckedStudentList.parserJson(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

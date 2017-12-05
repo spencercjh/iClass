@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetStudentName;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
-import com.example.hp.iclass.HttpFunction.Json.Json_CheckInfoList;
+import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
 import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
@@ -24,7 +24,7 @@ import com.example.hp.iclass.R;
 
 import java.util.ArrayList;
 
-public class CheckStudentListActivity extends AppCompatActivity {
+public class CheckedStudentListActivity extends AppCompatActivity {
     private ListView lv;
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
@@ -76,7 +76,7 @@ public class CheckStudentListActivity extends AppCompatActivity {
 
     private void Teacher_FillCheckInfoList() throws InterruptedException {
         lv = (ListView) findViewById(R.id.stulv);
-        final ArrayList<CheckOBJ> CheckInfoList = Json_CheckInfoList.parserJson(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
+        final ArrayList<CheckOBJ> CheckInfoList = Json_CheckedStudentList.parserJson(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
 
         //获取ListView,并通过Adapter把studentlist的信息显示到ListView
         //为ListView设置一个适配器,getCount()返回数据个数;getView()为每一行设置一个条目
@@ -159,7 +159,7 @@ public class CheckStudentListActivity extends AppCompatActivity {
                     ischeck_num = -1;
                 }
                 checkOBJ = new CheckOBJ(student_id, student_name, check_time, ischeck_num);
-                Intent intent = new Intent(CheckStudentListActivity.this, CheckStudentDetailActivity.class);
+                Intent intent = new Intent(CheckedStudentListActivity.this, CheckedStudentDetailActivity.class);
                 intent.putExtra("subjectOBJ", subjectOBJ);
                 intent.putExtra("teacherOBJ", teacherOBJ);
                 intent.putExtra("checkOBJ", checkOBJ);
@@ -176,7 +176,7 @@ public class CheckStudentListActivity extends AppCompatActivity {
                 final String subject_id = Tsubject_id.getText().toString().trim();
                 final String subject_name = Tsubject_name.getText().toString().trim();
                 // Use an Alert dialog to confirm delete operation
-                new AlertDialog.Builder(CheckStudentListActivity.this)
+                new AlertDialog.Builder(CheckedStudentListActivity.this)
                         .setMessage("你确认要删除 " + subject_name + " 这门课程吗？")
                         .setPositiveButton("删除",
                                 new DialogInterface.OnClickListener() {

@@ -243,7 +243,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
     }
 
     private void CheckStudentDetail() {
-        Intent it = new Intent(this, CheckStudentListActivity.class);
+        Intent it = new Intent(this, CheckedStudentListActivity.class);
         it.putExtra("teacherOBJ", teacherOBJ);
         it.putExtra("subjectOBJ", subjectOBJ);
         startActivity(it);

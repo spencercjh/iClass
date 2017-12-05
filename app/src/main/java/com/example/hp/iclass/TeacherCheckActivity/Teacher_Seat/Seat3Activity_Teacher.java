@@ -29,13 +29,13 @@ import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubj
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountCheckStudent_AllTypes;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_UpdateStudentScore;
-import com.example.hp.iclass.HttpFunction.Json.Json_CheckInfoList;
+import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
 import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
 import com.example.hp.iclass.TeacherCheckActivity.CheckConditionActivity;
-import com.example.hp.iclass.TeacherCheckActivity.CheckStudentDetailActivity;
+import com.example.hp.iclass.TeacherCheckActivity.CheckedStudentDetailActivity;
 
 import java.util.ArrayList;
 
@@ -87,7 +87,7 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
         ArrayList<CheckOBJ> check_student = new ArrayList<>();
         try {
             subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
-            check_student = Json_CheckInfoList.parserJson2(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
+            check_student = Json_CheckedStudentList.parserJson2(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -147,7 +147,7 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
                                     }
                                     break;
                                 case R.id.menu_info:
-                                    Intent intent = new Intent(Seat3Activity_Teacher.this, CheckStudentDetailActivity.class);
+                                    Intent intent = new Intent(Seat3Activity_Teacher.this, CheckedStudentDetailActivity.class);
                                     intent.putExtra("teacherOBJ", teacherOBJ);
                                     intent.putExtra("subjectOBJ", subjectOBJ);
                                     intent.putExtra("checkOBJ", seat.get(position));
@@ -341,7 +341,7 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
                 if (checkOBJ.getStudent_id() == null) { //座位为空，能坐下
                     dialog1(selectItem);
                 } else {  //座位有人
-                    Intent intent = new Intent(Seat3Activity_Teacher.this, CheckStudentDetailActivity.class);
+                    Intent intent = new Intent(Seat3Activity_Teacher.this, CheckedStudentDetailActivity.class);
                     intent.putExtra("teacherOBJ", teacherOBJ);
                     intent.putExtra("subjectOBJ", subjectOBJ);
                     intent.putExtra("checkOBJ", checkOBJ);

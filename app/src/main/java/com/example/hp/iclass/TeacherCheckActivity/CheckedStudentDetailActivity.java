@@ -15,7 +15,7 @@ import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
 
-public class CheckStudentDetailActivity extends AppCompatActivity {
+public class CheckedStudentDetailActivity extends AppCompatActivity {
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private CheckOBJ checkOBJ = new CheckOBJ();
