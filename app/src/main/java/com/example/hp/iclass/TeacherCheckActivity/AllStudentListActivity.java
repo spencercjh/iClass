@@ -37,7 +37,6 @@ public class AllStudentListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 goback();
-
             }
         });
         try {
@@ -46,6 +45,7 @@ public class AllStudentListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_only_fresh, menu);
