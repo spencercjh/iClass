@@ -33,6 +33,8 @@
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat2Activity_Teacher" />
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat3Activity_Teacher" />
         <activity android:name=".TeacherCheckActivity.CheckAllStudentActivity" />
+        <activity android:name=".history_subjectinfo_teacherActivity" />
+        <activity android:name=".history_subjectinfo_studentActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorlogin"
+    tools:context=".TeacherCheckActivity.CheckConditionActivity">
+
+    <TextView
+        android:id="@+id/text_subject_th"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/这门课已经上到第"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.154" />
+
+    <LinearLayout
+        android:id="@+id/loginPanel"
+        android:layout_width="290dp"
+        android:layout_height="307dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/background_login_div"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.605"
+        tools:layout_editor_absoluteY="193dp">
+
+        <LinearLayout
+            android:layout_width="250sp"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="95sp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+
+                android:gravity="center"
+                android:text="状态"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/text_should"
+                android:layout_width="145dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:layout_weight="0.94" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="250sp"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="95sp"
+                android:layout_height="60sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="座位"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/text_present"
+                android:layout_width="145dp"
+                android:layout_height="60sp"
+                android:gravity="center"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="95sp"
+                android:layout_height="60sp"
+                android:layout_weight="0.00"
+
+                android:text="签到时间: "
+                android:layout_gravity="center_horizontal"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_starttime"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_seat"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15sp"
+            android:background="@drawable/background_button_div"
+            android:text="@string/查看签到座位表" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@color/blue_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:navigationIcon="@drawable/ic_back" />
+
+    <!--android:text="查看签到座位表" />-->
+</android.support.constraint.ConstraintLayout>
