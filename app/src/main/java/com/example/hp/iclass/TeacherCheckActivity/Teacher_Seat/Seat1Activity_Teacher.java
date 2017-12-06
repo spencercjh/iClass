@@ -259,7 +259,8 @@ public class Seat1Activity_Teacher extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_only_fresh, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_only_fresh, menu);
         return true;
     }
 

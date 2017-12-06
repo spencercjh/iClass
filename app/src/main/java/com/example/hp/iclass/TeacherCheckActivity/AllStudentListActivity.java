@@ -3,11 +3,13 @@ package com.example.hp.iclass.TeacherCheckActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.health.SystemHealthManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +49,7 @@ public class AllStudentListActivity extends AppCompatActivity {
         tl_head.setNavigationIcon(R.drawable.ic_back);
         tl_head.setTitle("  本教学班全体学生信息");
         tl_head.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(tl_head);
         tl_head.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,9 +87,10 @@ public class AllStudentListActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_only_fresh, menu);
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_only_fresh, menu);
         return true;
-
     }
 
     @Override
@@ -98,6 +102,7 @@ public class AllStudentListActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -229,10 +234,16 @@ public class AllStudentListActivity extends AppCompatActivity {
     }
 
     private void goback() {
+        Intent it = new Intent(this, CheckConditionActivity.class);
+        it.putExtra("teacherOBJ", teacherOBJ);
+        it.putExtra("subjectOBJ", subjectOBJ);
+        startActivity(it);
+//        clear_memory();
         finish();
+        System.gc();
     }
 
     public void onBackPressed() {
-        finish();
+        goback();
     }
 }

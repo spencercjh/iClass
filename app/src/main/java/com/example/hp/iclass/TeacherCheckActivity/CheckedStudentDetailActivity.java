@@ -5,6 +5,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RatingBar;
 
@@ -14,6 +17,8 @@ import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
+
+import java.lang.reflect.Method;
 
 public class CheckedStudentDetailActivity extends AppCompatActivity {
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
@@ -45,6 +50,7 @@ public class CheckedStudentDetailActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.setTitle(checkOBJ.getStudent_id() + " : " + checkOBJ.getStudent_name());
         toolbar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,6 +68,44 @@ public class CheckedStudentDetailActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if (menu != null) {
+            if(menu.getClass().getSimpleName().equalsIgnoreCase("MenuBuilder")) {
+                try {
+                    Method method = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                    method.setAccessible(true);
+                    method.invoke(menu, true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return super.onMenuOpened(featureId, menu);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_only_fresh, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_refresh) {
+            try {
+                score = Fun_QuaryStudentScore.http_QuaryStudentScore(checkOBJ);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                score = 0;
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void goback() {

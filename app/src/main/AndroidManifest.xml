@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hp.iclass">
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -33,7 +32,8 @@
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat2Activity_Teacher" />
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat3Activity_Teacher" />
         <activity android:name=".history_subjectinfo_teacherActivity" />
-        <activity android:name=".history_subjectinfo_studentActivity"></activity>
+        <activity android:name=".history_subjectinfo_studentActivity" />
+        <activity android:name=".TeacherCheckActivity.AllStudentListActivity" />
     </application>
 
 </manifest>

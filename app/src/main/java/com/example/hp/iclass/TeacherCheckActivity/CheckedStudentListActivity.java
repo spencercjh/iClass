@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class CheckedStudentListActivity extends AppCompatActivity {
         tl_head.setNavigationIcon(R.drawable.ic_back);
         tl_head.setTitle("           已签学生信息");
         tl_head.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(tl_head);
         tl_head.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +67,28 @@ public class CheckedStudentListActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_only_fresh, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_refresh) {
+            try {
+                Teacher_FillCheckInfoList();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+  /*  @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_switch_list, menu);
         return true;
@@ -86,24 +110,27 @@ public class CheckedStudentListActivity extends AppCompatActivity {
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if (b) {
                         Toast.makeText(CheckedStudentListActivity.this, "true", Toast.LENGTH_SHORT).show();
-                        /*try {
+                        setContentView(R.layout.activity_checked_student_list);
+                        *//*try {
                             Teacher_FillCheckInfoList();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
-                        }*/
+                        }*//*
                     } else {
                         Toast.makeText(CheckedStudentListActivity.this, "false", Toast.LENGTH_SHORT).show();
-                        /*try {
+                        setContentView(R.layout.activity_check_all_student_list);
+                        *//*try {
                             Teacher_FillAllStudentList();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
-                        }*/
+                        }*//*
                     }
                 }
             });
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
+
 
     private void Teacher_FillCheckInfoList() throws InterruptedException {
         lv = (ListView) findViewById(R.id.stulv);
@@ -353,10 +380,16 @@ public class CheckedStudentListActivity extends AppCompatActivity {
     }
 
     private void goback() {
+        Intent it = new Intent(this, CheckConditionActivity.class);
+        it.putExtra("teacherOBJ", teacherOBJ);
+        it.putExtra("subjectOBJ", subjectOBJ);
+        startActivity(it);
+//        clear_memory();
         finish();
+        System.gc();
     }
 
     public void onBackPressed() {
-        finish();
+        goback();
     }
 }

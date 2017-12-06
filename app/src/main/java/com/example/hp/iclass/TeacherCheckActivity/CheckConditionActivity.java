@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -42,7 +43,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
     private TextView Tsubject_th;
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
-
+    private Button allstudent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,16 +55,18 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         infobtn = (Button) findViewById(R.id.button_student_info);
         button_end_check = (Button) findViewById(R.id.button_end_check);
         Tsubject_th = (TextView) findViewById(R.id.text_subject_th);
+        allstudent=(Button)findViewById(R.id.allstudent);
         seatbtn.setOnClickListener(this);
         infobtn.setOnClickListener(this);
         button_end_check.setOnClickListener(this);
+        allstudent.setOnClickListener(this);
 
         Intent intent = getIntent();
         teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
         subjectOBJ = (SubjectOBJ) intent.getSerializableExtra("subjectOBJ");
         try {
             subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
-            Tsubject_th.setText(subject_th_tips + String.valueOf(subjectOBJ.getSubject_th()) + " 大节");
+            Tsubject_th.setText(subject_th_tips + String.valueOf(subjectOBJ.getSubject_th()) + getString(R.string.大节));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -104,7 +107,8 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_teacher_check, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_teacher_check, menu);
         return true;
     }
 
@@ -242,7 +246,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         button_end_check.setText("本节课程签到已结束！");
     }
 
-    private void CheckStudentDetail() {
+    private void CheckedStudentList() {
         Intent it = new Intent(this, CheckedStudentListActivity.class);
         it.putExtra("teacherOBJ", teacherOBJ);
         it.putExtra("subjectOBJ", subjectOBJ);
@@ -299,9 +303,18 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         if (view.getId() == R.id.button_end_check) {
             endcheck();
         } else if (view.getId() == R.id.button_student_info) {
-            CheckStudentDetail();
+            CheckedStudentList();
         } else if (view.getId() == R.id.button_seat) {
             CheckSeat();
+        }else if(view.getId()==R.id.allstudent){
+            AllStudentList();
         }
+    }
+
+    private void AllStudentList() {
+        Intent it = new Intent(this, AllStudentListActivity.class);
+        it.putExtra("teacherOBJ", teacherOBJ);
+        it.putExtra("subjectOBJ", subjectOBJ);
+        startActivity(it);
     }
 }
