@@ -61,7 +61,7 @@ public class AllStudentListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         try {
-            Teacher_FillCheckInfoList();
+            Teacher_FillAllStudentList();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -94,7 +94,7 @@ public class AllStudentListActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.menu_refresh) {
             try {
-                Teacher_FillCheckInfoList();
+                Teacher_FillAllStudentList();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -102,7 +102,7 @@ public class AllStudentListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void Teacher_FillCheckInfoList() throws InterruptedException {
+    private void Teacher_FillAllStudentList() throws InterruptedException {
         lv = (ListView) findViewById(R.id.allstudentlist);
         final ArrayList<StudentOBJ> AllStudentList = Json_AllStudentList.parserJson(Fun_GetAllStudent.http_GetAllStudent(subjectOBJ));
         //获取ListView,并通过Adapter把studentlist的信息显示到ListView
@@ -217,7 +217,7 @@ public class AllStudentListActivity extends AppCompatActivity {
                                                         int which) {
                                         //根据subject_id从数据库中删除课程，记得补2017年11月27日23:13:52
                                         try {
-                                            Teacher_FillCheckInfoList();
+                                            Teacher_FillAllStudentList();
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
