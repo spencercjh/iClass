@@ -16,7 +16,9 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetStudentName;
+import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentScore;
+import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentCheckNum;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllStudent;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_QuaryOneSubjectTable;
 import com.example.hp.iclass.HttpFunction.Json.Json_AllStudentList;
@@ -31,7 +33,7 @@ public class AllStudentListActivity extends AppCompatActivity {
     private ListView lv;
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
-    private StudentOBJ StudentOBJ = new StudentOBJ();
+    private StudentOBJ studentOBJ = new StudentOBJ();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,45 +145,61 @@ public class AllStudentListActivity extends AppCompatActivity {
                 TextView Tstudent_class = view.findViewById(R.id.tv_class);
                 Tstudent_class.setText(studentOBJ.getStudent_class());
                 TextView Tischeck = view.findViewById(R.id.tv_ischeck);
-//                Tischeck.setText();
+                int all_check_num;
+                try {
+                    all_check_num = Fun_CountOneStudentCheckNum.http_CountOneStudentCheckNum(subjectOBJ, studentOBJ);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    all_check_num = -1;
+                }
+                int subject_th_num;
+                try {
+                    subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
+                    subject_th_num = subjectOBJ.getSubject_th();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    subject_th_num = -1;
+                }
+                Tischeck.setText(String.valueOf(all_check_num) + "/" + String.valueOf(subject_th_num));
                 TextView Tscore = view.findViewById(R.id.tv_stuscore);
-
+                int score;
+                try {
+                    score = Fun_QuaryStudentScore.http_QuaryStudentScore(subjectOBJ, studentOBJ);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    score = -1;
+                }
+                Tscore.setText(String.valueOf(score));
                 return view;
             }
         });
-      /*  lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 //                RelativeLayout item = (RelativeLayout) view;
                 TextView Tstudent_name = view.findViewById(R.id.tv_name);
                 TextView Tstudent_id = view.findViewById(R.id.tv_studentID);
-                TextView Tcheck_time = view.findViewById(R.id.tv_checktime);
-                TextView Tischeck = view.findViewById(R.id.tv_situation);
+                TextView Tstudent_college = view.findViewById(R.id.tv_college);
+                TextView Tstudent_class=view.findViewById(R.id.tv_class);
+                TextView Tischeck=view.findViewById(R.id.tv_ischeck);
+                TextView Tscore=view.findViewById(R.id.tv_stuscore);
                 String student_name = Tstudent_name.getText().toString().trim();
                 String student_id = Tstudent_id.getText().toString().trim();
-                String check_time = Tcheck_time.getText().toString().trim();
+                String student_college = Tstudent_college.getText().toString().trim();
+                String student_class=Tstudent_class.getText().toString().trim();
                 String ischeck = Tischeck.getText().toString().trim();
-                int ischeck_num;
-                if (ischeck.equals(R.string.Ten分钟内签到)) {
-                    ischeck_num = 1;
-                } else if (ischeck.equals(R.string.Forty分钟内签到)) {
-                    ischeck_num = 2;
-                } else if (ischeck.equals(R.string.Ninety分钟内签到)) {
-                    ischeck_num = 3;
-                } else if (ischeck.equals(R.string.Ninety分钟后签到)) {
-                    ischeck_num = 4;
-                } else {
-                    ischeck_num = -1;
-                }
-                StudentOBJ = new StudentOBJ(student_id, student_name, check_time, ischeck_num);
-                Intent intent = new Intent(CheckedStudentListActivity.this, CheckedStudentDetailActivity.class);
+                String score=Tscore.getText().toString().trim();
+                studentOBJ=new StudentOBJ(student_id,student_name,student_college,student_class);
+               /* Intent intent = new Intent(AllStudentListActivity.this, #.class);
                 intent.putExtra("subjectOBJ", subjectOBJ);
                 intent.putExtra("teacherOBJ", teacherOBJ);
-                intent.putExtra("StudentOBJ", StudentOBJ);
+                intent.putExtra("studentOBJ", studentOBJ);
+                intent.putExtra("ischeck",ischeck);
+                intent.putExtra("score",score);
                 intent.putExtra("user", "teacher");
-                startActivity(intent);
+                startActivity(intent);*/
             }
-        });*/
+        });
 /*        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long id) {
