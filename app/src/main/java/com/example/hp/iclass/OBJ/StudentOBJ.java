@@ -20,6 +20,10 @@ public class StudentOBJ implements Serializable {
     public StudentOBJ() {
     }
 
+    public StudentOBJ(String student_id) {
+        this.student_id = student_id;
+    }
+
     //    全体学生列表中点击一个item重新构造数据结构
     public StudentOBJ(String student_id, String student_name, String student_college, String student_class) {
         this.student_id = student_id;

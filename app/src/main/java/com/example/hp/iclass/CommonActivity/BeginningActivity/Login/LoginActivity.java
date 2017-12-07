@@ -282,9 +282,4 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "再按一次返回键退出程序", Toast.LENGTH_SHORT).show();
         }
     }
-    public void Test(View view){
-        Intent intent=new Intent(this, StudentListActivity.class);
-        startActivity(intent);
-    }
-
 }

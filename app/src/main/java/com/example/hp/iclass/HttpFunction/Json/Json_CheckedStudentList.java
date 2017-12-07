@@ -1,6 +1,7 @@
 package com.example.hp.iclass.HttpFunction.Json;
 
 import com.example.hp.iclass.OBJ.CheckOBJ;
+import com.example.hp.iclass.OBJ.StudentOBJ;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,5 +54,20 @@ public class Json_CheckedStudentList {
 
     private static String Adjust_Time(String time) {
         return time.substring(11);
+    }
+    public static ArrayList<StudentOBJ>parserJson3(String jsonStr){
+        ArrayList<StudentOBJ> list=new ArrayList<>();
+        try{
+            JSONArray jsonArray = new JSONArray(jsonStr);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject list_item = jsonArray.getJSONObject(i);
+                String student_id =list_item.getString("student_id");
+                StudentOBJ studentOBJ=new StudentOBJ(student_id);
+                list.add(studentOBJ);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

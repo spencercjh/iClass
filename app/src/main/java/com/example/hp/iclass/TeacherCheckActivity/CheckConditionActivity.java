@@ -30,6 +30,7 @@ import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat1Activity_Tea
 import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat2Activity_Teacher;
 import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat3Activity_Teacher;
 import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.SeatErrorActivity_Teacher;
+import com.example.hp.iclass.TeacherCheckActivity.tab.StudentListActivity;
 
 public class CheckConditionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -52,14 +53,12 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         present = (TextView) findViewById(R.id.text_present);
         seatbtn = (Button) findViewById(R.id.button_seat);
         tl_head = (Toolbar) findViewById(R.id.toolbar);
-        infobtn = (Button) findViewById(R.id.button_student_info);
+        infobtn = (Button) findViewById(R.id.button_student_list);
         button_end_check = (Button) findViewById(R.id.button_end_check);
         Tsubject_th = (TextView) findViewById(R.id.text_subject_th);
-        allstudent=(Button)findViewById(R.id.allstudent);
         seatbtn.setOnClickListener(this);
         infobtn.setOnClickListener(this);
         button_end_check.setOnClickListener(this);
-        allstudent.setOnClickListener(this);
 
         Intent intent = getIntent();
         teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
@@ -246,8 +245,8 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         button_end_check.setText("本节课程签到已结束！");
     }
 
-    private void CheckedStudentList() {
-        Intent it = new Intent(this, CheckedStudentListActivity.class);
+    private void StudentList() {
+        Intent it = new Intent(this, StudentListActivity.class);
         it.putExtra("teacherOBJ", teacherOBJ);
         it.putExtra("subjectOBJ", subjectOBJ);
         startActivity(it);
@@ -303,8 +302,8 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
     public void onClick(View view) {
         if (view.getId() == R.id.button_end_check) {
             endcheck();
-        } else if (view.getId() == R.id.button_student_info) {
-            CheckedStudentList();
+        } else if (view.getId() == R.id.button_student_list) {
+            StudentList();
         } else if (view.getId() == R.id.button_seat) {
             CheckSeat();
         }else if(view.getId()==R.id.allstudent){

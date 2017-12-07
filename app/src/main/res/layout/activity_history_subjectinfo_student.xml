@@ -62,9 +62,9 @@
                 android:id="@+id/text_should"
                 android:layout_width="145dp"
                 android:layout_height="60dp"
+                android:layout_weight="0.94"
                 android:gravity="center"
-                android:textSize="30sp"
-                android:layout_weight="0.94" />
+                android:textSize="30sp" />
 
         </LinearLayout>
 

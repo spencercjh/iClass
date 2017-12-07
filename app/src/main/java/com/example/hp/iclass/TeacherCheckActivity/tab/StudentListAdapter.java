@@ -6,24 +6,31 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.hp.iclass.OBJ.CheckOBJ;
+import com.example.hp.iclass.OBJ.SubjectOBJ;
+import com.example.hp.iclass.OBJ.TeacherOBJ;
+
 public class StudentListAdapter extends FragmentPagerAdapter {
 	private ArrayList<String> mTitleArray;
-
-	public StudentListAdapter(FragmentManager fm, ArrayList<String> titleArray) {
+	private TeacherOBJ teacherOBJ = new TeacherOBJ();
+	private SubjectOBJ subjectOBJ = new SubjectOBJ();
+	public StudentListAdapter(FragmentManager fm, ArrayList<String> titleArray,SubjectOBJ subjectOBJ,TeacherOBJ teacherOBJ) {
 		super(fm);
 		mTitleArray = titleArray;
+		this.teacherOBJ=teacherOBJ;
+		this.subjectOBJ=subjectOBJ;
 	}
 
 	@Override
 	public Fragment getItem(int position) {
 		if (position == 0) {
-			return new CheckedStudentListFragment();
+			return new CheckedStudentListFragment(subjectOBJ,teacherOBJ);
 		} else if (position == 1) {
-			return new UnCheckedStudentListFragment();
+			return new UnCheckedStudentListFragment(subjectOBJ,teacherOBJ);
 		}else if(position== 2){
-            return new AllStudentListFragment();
+            return new AllStudentListFragment(subjectOBJ,teacherOBJ);
         }
-		return new UnCheckedStudentListFragment();
+		return new CheckedStudentListFragment(subjectOBJ,teacherOBJ);
 	}
 
 	@Override

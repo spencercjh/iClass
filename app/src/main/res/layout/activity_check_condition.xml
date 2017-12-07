@@ -92,13 +92,13 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button_student_info"
+            android:id="@+id/button_student_list"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15sp"
             android:background="@drawable/background_button_div"
-            android:text="@string/查看已到学生信息" />
+            android:text="@string/查看学生列表" />
 
         <Button
             android:id="@+id/button_seat"
@@ -108,17 +108,6 @@
             android:layout_marginTop="15sp"
             android:background="@drawable/background_button_div"
             android:text="@string/查看签到座位表" />
-
-        <Button
-            android:id="@+id/allstudent"
-            android:layout_width="150sp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/background_button_div"
-            android:text="@string/查看本班所有学生"
-            android:layout_marginTop="15sp"
-            tools:layout_editor_absoluteX="105dp"
-            tools:layout_editor_absoluteY="417dp" />
 
         <Button
             android:id="@+id/button_end_check"

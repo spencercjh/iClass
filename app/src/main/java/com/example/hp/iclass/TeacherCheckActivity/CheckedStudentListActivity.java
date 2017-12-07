@@ -91,7 +91,7 @@ public class CheckedStudentListActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_switch_list, menu);
+        getMenuInflater().inflate(R.menu.menu_only_fresh, menu);
         return true;
     }
 
@@ -104,31 +104,6 @@ public class CheckedStudentListActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        } else if (id == R.id.app_bar_switch) {
-            System.out.println("123456");
-            SwitchCompat change = (SwitchCompat) findViewById(R.id.app_bar_switch);
-            change.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (b) {
-                        Toast.makeText(CheckedStudentListActivity.this, "true", Toast.LENGTH_SHORT).show();
-                        setContentView(R.layout.activity_checked_student_list);
-                        try {
-                            Teacher_FillCheckInfoList();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Toast.makeText(CheckedStudentListActivity.this, "false", Toast.LENGTH_SHORT).show();
-                        setContentView(R.layout.activity_check_all_student_list);
-                        try {
-                            Teacher_FillAllStudentList();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
         }
         return super.onOptionsItemSelected(item);
     }
