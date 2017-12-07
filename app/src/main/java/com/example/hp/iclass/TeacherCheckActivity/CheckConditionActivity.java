@@ -288,6 +288,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         it.putExtra("teacherOBJ", teacherOBJ);
         it.putExtra("user", "teacher");
         startActivity(it);
+        finish();
     }
 
     private void endcheck() {

@@ -238,7 +238,6 @@ public class AllStudentListActivity extends AppCompatActivity {
         it.putExtra("teacherOBJ", teacherOBJ);
         it.putExtra("subjectOBJ", subjectOBJ);
         startActivity(it);
-//        clear_memory();
         finish();
         System.gc();
     }

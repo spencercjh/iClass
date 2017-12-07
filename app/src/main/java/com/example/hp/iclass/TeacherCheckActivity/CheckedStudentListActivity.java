@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -66,7 +67,7 @@ public class CheckedStudentListActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+ /*   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
@@ -86,9 +87,9 @@ public class CheckedStudentListActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
-  /*  @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_switch_list, menu);
         return true;
@@ -103,33 +104,34 @@ public class CheckedStudentListActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        } else if (id == R.id.switch_list) {
-            Switch change = (Switch) findViewById(R.id.switch_list);
+        } else if (id == R.id.app_bar_switch) {
+            System.out.println("123456");
+            SwitchCompat change = (SwitchCompat) findViewById(R.id.app_bar_switch);
             change.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if (b) {
                         Toast.makeText(CheckedStudentListActivity.this, "true", Toast.LENGTH_SHORT).show();
                         setContentView(R.layout.activity_checked_student_list);
-                        *//*try {
+                        try {
                             Teacher_FillCheckInfoList();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
-                        }*//*
+                        }
                     } else {
                         Toast.makeText(CheckedStudentListActivity.this, "false", Toast.LENGTH_SHORT).show();
                         setContentView(R.layout.activity_check_all_student_list);
-                        *//*try {
+                        try {
                             Teacher_FillAllStudentList();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
-                        }*//*
+                        }
                     }
                 }
             });
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
 
     private void Teacher_FillCheckInfoList() throws InterruptedException {
@@ -384,7 +386,6 @@ public class CheckedStudentListActivity extends AppCompatActivity {
         it.putExtra("teacherOBJ", teacherOBJ);
         it.putExtra("subjectOBJ", subjectOBJ);
         startActivity(it);
-//        clear_memory();
         finish();
         System.gc();
     }
