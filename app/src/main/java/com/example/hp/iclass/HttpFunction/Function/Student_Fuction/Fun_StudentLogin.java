@@ -1,5 +1,6 @@
 package com.example.hp.iclass.HttpFunction.Function.Student_Fuction;
 
+import com.example.hp.iclass.HttpFunction.Function.IPCondition;
 import com.example.hp.iclass.HttpFunction.Thread.Student_Thread.LoginStudent;
 
 /**
@@ -12,7 +13,8 @@ public class Fun_StudentLogin {
     private final static String failed = "200";
 
     public static int http_LoginStudent(String student_id, String student_password) throws InterruptedException {
-        String url = "http://192.168.3.17:8080/iClass_Sever/LoginStudent";
+        String ip = IPCondition.server_ip;
+        String url = ip + "iClass_Sever/LoginStudent";
         LoginStudent thread = new LoginStudent(url, student_id, student_password);
         thread.start();
         thread.join();

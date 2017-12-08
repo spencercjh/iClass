@@ -1,5 +1,6 @@
 package com.example.hp.iclass.HttpFunction.Function.Common_Function;
 
+import com.example.hp.iclass.HttpFunction.Function.IPCondition;
 import com.example.hp.iclass.HttpFunction.Thread.Common_Thread.GetTeacherName;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 
@@ -11,7 +12,8 @@ import com.example.hp.iclass.OBJ.TeacherOBJ;
 public class Fun_GetTeacherName {
 
     public static String http_GetTeacherName(TeacherOBJ teacherOBJ) throws InterruptedException {
-        String url = "http://192.168.3.17:8080/iClass_Sever/GetTeacherName";
+        String ip = IPCondition.server_ip;
+        String url = ip + "iClass_Sever/GetTeacherName";
         GetTeacherName thread = new GetTeacherName(url, teacherOBJ.getTeacher_id());
         thread.start();
         thread.join();
@@ -23,7 +25,8 @@ public class Fun_GetTeacherName {
     }
 
     public static String http_GetTeacherName(String teahcer_id) throws InterruptedException {
-        String url = "http://192.168.3.17:8080/iClass_Sever/GetTeacherName";
+        String ip = IPCondition.server_ip;
+        String url = ip + "iClass_Sever/GetTeacherName";
         GetTeacherName thread = new GetTeacherName(url, teahcer_id);
         thread.start();
         thread.join();

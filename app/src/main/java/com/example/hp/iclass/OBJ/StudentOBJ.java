@@ -113,4 +113,26 @@ public class StudentOBJ implements Serializable {
         this.student_college = student_college;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((student_id == null) ? 0 : student_id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        StudentOBJ other = (StudentOBJ) obj;
+        if (student_id.equals(other.student_id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

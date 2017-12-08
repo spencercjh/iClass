@@ -1,5 +1,6 @@
 package com.example.hp.iclass.HttpFunction.Function.Common_Function;
 
+import com.example.hp.iclass.HttpFunction.Function.IPCondition;
 import com.example.hp.iclass.HttpFunction.Thread.Common_Thread.GetSubjectClassType;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 
@@ -10,7 +11,8 @@ import com.example.hp.iclass.OBJ.SubjectOBJ;
 
 public class Fun_GetSubjectClassType {
     public static int http_GetSubjectClassType(SubjectOBJ subjectOBJ) throws InterruptedException {
-        String url = "http://192.168.3.17:8080/iClass_Sever/GetSubjectClassType";
+        String ip = IPCondition.server_ip;
+        String url = ip + "iClass_Sever/GetSubjectClassType";
         GetSubjectClassType thread = new GetSubjectClassType(url, subjectOBJ.getSubject_id());
         thread.start();
         thread.join();

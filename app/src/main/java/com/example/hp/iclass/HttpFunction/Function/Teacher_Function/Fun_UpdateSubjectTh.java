@@ -1,5 +1,6 @@
 package com.example.hp.iclass.HttpFunction.Function.Teacher_Function;
 
+import com.example.hp.iclass.HttpFunction.Function.IPCondition;
 import com.example.hp.iclass.HttpFunction.Thread.Teacher_Thread.UpdateSubjectTh;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 
@@ -11,7 +12,8 @@ import com.example.hp.iclass.OBJ.SubjectOBJ;
 public class Fun_UpdateSubjectTh {
 
     public static void http_UpdateSubjectTh(SubjectOBJ subjectOBJ) throws InterruptedException {
-        String url = "http://192.168.3.17:8080/iClass_Sever/UpdateSubjectTh";
+        String ip = IPCondition.server_ip;
+        String url = ip + "iClass_Sever/UpdateSubjectTh";
         UpdateSubjectTh thread = new UpdateSubjectTh(url, subjectOBJ.getSubject_id());
         thread.start();
         thread.join();
