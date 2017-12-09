@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         forgetkey = (TextView) findViewById(R.id.button_forget_password);
-        sp = this.getSharedPreferences("userInfo", Context.MODE_WORLD_READABLE);
+        sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         id = (EditText) findViewById(R.id.edit_id);
         pwd = (EditText) findViewById(R.id.edit_password);
         rem_pw = (CheckBox) findViewById(R.id.remember_password);
