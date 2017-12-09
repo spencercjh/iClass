@@ -24,6 +24,9 @@ public class Json_CheckedStudentList {
                 String student_id = list_item.getString("student_id");
                 String check_time = list_item.getString("check_time");
                 int ischeck = list_item.getInt("ischeck");
+                if(ischeck==0){//0代表教师插入的签到信息
+                    continue;
+                }
                 CheckOBJ checkOBJ = new CheckOBJ(student_id, Adjust_Time(check_time), ischeck);
                 list.add(checkOBJ);
             }
@@ -42,6 +45,9 @@ public class Json_CheckedStudentList {
                 String student_id = list_item.getString("student_id");
                 String check_time = list_item.getString("check_time");
                 int ischeck = list_item.getInt("ischeck");
+                if(ischeck==0){//0代表教师插入的签到信息
+                    continue;
+                }
                 int seat_index = list_item.getInt("seat_index");
                 CheckOBJ checkOBJ = new CheckOBJ(student_id, Adjust_Time(check_time), ischeck, seat_index);
                 list.add(checkOBJ);

@@ -1,4 +1,4 @@
-package com.example.hp.iclass.TeacherCheckActivity.tab;
+package com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 

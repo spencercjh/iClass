@@ -95,7 +95,7 @@ public class Seat2Activity_Student extends AppCompatActivity {
         ArrayList<CheckOBJ> seat = new ArrayList<>();
         ArrayList<CheckOBJ> check_student = new ArrayList<>();
         try {
-            check_student = Json_CheckedStudentList.parserJson(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
+            check_student = Json_CheckedStudentList.parserJson2(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

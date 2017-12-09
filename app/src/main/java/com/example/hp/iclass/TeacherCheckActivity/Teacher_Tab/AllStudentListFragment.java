@@ -1,16 +1,11 @@
-package com.example.hp.iclass.TeacherCheckActivity;
+package com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.health.SystemHealthManager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -22,7 +17,6 @@ import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStud
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentCheckNum;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllStudent;
-import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_QuaryOneSubjectTable;
 import com.example.hp.iclass.HttpFunction.Json.Json_AllStudentList;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
@@ -31,38 +25,61 @@ import com.example.hp.iclass.R;
 
 import java.util.ArrayList;
 
-public class AllStudentListActivity extends AppCompatActivity {
+public class AllStudentListFragment extends Fragment {
+    private static final String TAG = "UnCheckedStudentListFragment";
     private ListView lv;
+    protected View mView;
+    protected Context mContext;
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
-    private StudentOBJ studentOBJ = new StudentOBJ();
+    private StudentOBJ studentOBJ=new StudentOBJ();
+    private SwipeRefreshLayout srl_simple;
+
+    AllStudentListFragment() {
+
+    }
+
+    AllStudentListFragment(SubjectOBJ subjectOBJ, TeacherOBJ teacherOBJ) {
+        this.subjectOBJ = subjectOBJ;
+        this.teacherOBJ = teacherOBJ;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_all_student_list);
-        Intent intent = getIntent();
-        teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
-        subjectOBJ = (SubjectOBJ) intent.getSerializableExtra("subjectOBJ");
-
-        Toolbar tl_head = (Toolbar) findViewById(R.id.tl_head);
-        tl_head.setNavigationIcon(R.drawable.ic_back);
-        tl_head.setTitle("  本教学班全体学生信息");
-        tl_head.setTitleTextColor(Color.WHITE);
-        setSupportActionBar(tl_head);
-        tl_head.setNavigationOnClickListener(new View.OnClickListener() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mContext = getActivity();
+        mView = inflater.inflate(R.layout.fragment_all_students, container, false);
+        srl_simple = mView.findViewById(R.id.srl_simple);
+        srl_simple.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View view) {
-                goback();
+            public void onRefresh() {
+                try {
+                    Teacher_FillAllStudentList();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
-        try {
-            if (!Fun_QuaryOneSubjectTable.http_QuaryOneSubjectTable(subjectOBJ)) {
-                dialog1();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //旧版用下面的setColorScheme设置进度条颜色
+        //srl_simple.setColorScheme(R.color.red, R.color.orange, R.color.green, R.color.blue);
+        //新版用下面的setColorSchemeResources设置进度圆圈颜色
+        srl_simple.setColorSchemeResources(
+                R.color.red, R.color.orange, R.color.green, R.color.blue);
+        //旧版v4包中无下面三个方法
+//		srl_simple.setProgressBackgroundColorSchemeResource(R.color.black);
+//		srl_simple.setProgressViewOffset(true, 0, 50);
+//		srl_simple.setDistanceToTriggerSync(100);
+        return mView;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         try {
             Teacher_FillAllStudentList();
         } catch (InterruptedException e) {
@@ -70,45 +87,8 @@ public class AllStudentListActivity extends AppCompatActivity {
         }
     }
 
-    private void dialog1() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(AllStudentListActivity.this);
-        builder.setMessage("数据库中没有您这节课的全部学生名单，请联系管理员");
-        builder.setTitle("警告");
-        builder.setCancelable(false);
-        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();//关闭对话框
-                finish();
-            }
-        });
-        builder.create().show();////显示对话框
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_only_fresh, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.menu_refresh) {
-            try {
-                Teacher_FillAllStudentList();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void Teacher_FillAllStudentList() throws InterruptedException {
-        lv = (ListView) findViewById(R.id.allstudentlist);
+        lv = mView.findViewById(R.id.all_studnet_list);
         final ArrayList<StudentOBJ> AllStudentList = Json_AllStudentList.parserJson(Fun_GetAllStudent.http_GetAllStudent(subjectOBJ));
         //获取ListView,并通过Adapter把studentlist的信息显示到ListView
         //为ListView设置一个适配器,getCount()返回数据个数;getView()为每一行设置一个条目
@@ -135,7 +115,7 @@ public class AllStudentListActivity extends AppCompatActivity {
                 //对ListView的优化，convertView为空时，创建一个新视图；convertView不为空时，代表它是滚出
                 //屏幕，放入Recycler中的视图,若需要用到其他layout，则用inflate(),同一视图，用fiindViewBy()
                 if (convertView == null) {
-                    view = View.inflate(getBaseContext(), R.layout.item_all_student, null);
+                    view = View.inflate(getActivity(), R.layout.item_all_student, null);
                 } else {
                     view = convertView;
                 }
@@ -231,18 +211,5 @@ public class AllStudentListActivity extends AppCompatActivity {
                 return true;
             }
         });*/
-    }
-
-    private void goback() {
-        Intent it = new Intent(this, CheckConditionActivity.class);
-        it.putExtra("teacherOBJ", teacherOBJ);
-        it.putExtra("subjectOBJ", subjectOBJ);
-        startActivity(it);
-        finish();
-        System.gc();
-    }
-
-    public void onBackPressed() {
-        goback();
     }
 }

@@ -1,9 +1,8 @@
-package com.example.hp.iclass.TeacherCheckActivity.tab;
+package com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,9 +22,7 @@ import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
 import com.example.hp.iclass.TeacherCheckActivity.CheckedStudentDetailActivity;
-import com.example.hp.iclass.TeacherCheckActivity.CheckedStudentListActivity;
 
-import java.awt.font.TextAttribute;
 import java.util.ArrayList;
 
 public class CheckedStudentListFragment extends Fragment {

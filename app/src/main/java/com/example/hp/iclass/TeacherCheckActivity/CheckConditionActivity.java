@@ -17,12 +17,15 @@ import android.widget.TextView;
 import com.example.hp.iclass.CommonActivity.MainActivity;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetSubjectClassType;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
+import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStartTime;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountCheckStudent_AllTypes;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_InsertCheckInfo_Teacher;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_ReUpdateSubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_SetCheckSituationFalse;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_SetCheckSituationTrue;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_UpdateStartTime;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_UpdateSubjectTh;
+import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
@@ -30,7 +33,7 @@ import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat1Activity_Tea
 import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat2Activity_Teacher;
 import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat3Activity_Teacher;
 import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.SeatErrorActivity_Teacher;
-import com.example.hp.iclass.TeacherCheckActivity.tab.StudentListActivity;
+import com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab.StudentListActivity;
 
 public class CheckConditionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,6 +48,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
     private Button allstudent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -219,6 +223,14 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             }
             e.printStackTrace();
         }
+//      教师在all_check_info中插入一条签到信息
+        CheckOBJ checkOBJ = new CheckOBJ();
+        checkOBJ.setSubject_id(subjectOBJ.getSubject_id());
+        checkOBJ.setSubject_th(subjectOBJ.getSubject_th());
+        checkOBJ.setStudent_id(teacherOBJ.getTeacher_id());
+        checkOBJ.setSeat_index(999);
+        checkOBJ.setStart_time(Fun_GetStartTime.http_GetStartTime(subjectOBJ));
+        Fun_InsertCheckInfo_Teacher.http_InsertCheckInfo_Teacher(checkOBJ);
 //      显示应到人数
         String Str_student_num = String.valueOf(subjectOBJ.getStudent_num());
         should.setText(Str_student_num.trim());
@@ -306,15 +318,6 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             StudentList();
         } else if (view.getId() == R.id.button_seat) {
             CheckSeat();
-        }else if(view.getId()==R.id.allstudent){
-            AllStudentList();
         }
-    }
-
-    private void AllStudentList() {
-        Intent it = new Intent(this, AllStudentListActivity.class);
-        it.putExtra("teacherOBJ", teacherOBJ);
-        it.putExtra("subjectOBJ", subjectOBJ);
-        startActivity(it);
     }
 }

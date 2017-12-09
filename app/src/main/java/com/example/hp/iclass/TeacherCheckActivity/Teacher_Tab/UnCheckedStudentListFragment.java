@@ -1,8 +1,7 @@
-package com.example.hp.iclass.TeacherCheckActivity.tab;
+package com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -18,7 +17,9 @@ import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStud
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentCheckNum;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllStudent;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Json.Json_AllStudentList;
+import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
@@ -26,21 +27,22 @@ import com.example.hp.iclass.R;
 
 import java.util.ArrayList;
 
-public class AllStudentListFragment extends Fragment {
+public class UnCheckedStudentListFragment extends Fragment {
     private static final String TAG = "UnCheckedStudentListFragment";
-    private ListView lv;
     protected View mView;
     protected Context mContext;
+    private ListView lv;
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
-    private StudentOBJ studentOBJ=new StudentOBJ();
+    private StudentOBJ studentOBJ = new StudentOBJ();
     private SwipeRefreshLayout srl_simple;
 
-    AllStudentListFragment() {
+
+    UnCheckedStudentListFragment() {
 
     }
 
-    AllStudentListFragment(SubjectOBJ subjectOBJ, TeacherOBJ teacherOBJ) {
+    UnCheckedStudentListFragment(SubjectOBJ subjectOBJ, TeacherOBJ teacherOBJ) {
         this.subjectOBJ = subjectOBJ;
         this.teacherOBJ = teacherOBJ;
     }
@@ -48,13 +50,14 @@ public class AllStudentListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = getActivity();
-        mView = inflater.inflate(R.layout.fragment_all_students, container, false);
+        mView = inflater.inflate(R.layout.fragment_unchecked_students, container, false);
+        lv = mView.findViewById(R.id.unchecked_student_list);
         srl_simple = mView.findViewById(R.id.srl_simple);
         srl_simple.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 try {
-                    Teacher_FillAllStudentList();
+                    Teacher_FillUncheckedStudentList();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -82,17 +85,17 @@ public class AllStudentListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         try {
-            Teacher_FillAllStudentList();
+            Teacher_FillUncheckedStudentList();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private void Teacher_FillAllStudentList() throws InterruptedException {
-        lv = mView.findViewById(R.id.all_studnet_list);
+
+    private void Teacher_FillUncheckedStudentList() throws InterruptedException {
+        final ArrayList<StudentOBJ> CheckInfoList = Json_CheckedStudentList.parserJson3(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
         final ArrayList<StudentOBJ> AllStudentList = Json_AllStudentList.parserJson(Fun_GetAllStudent.http_GetAllStudent(subjectOBJ));
-        //获取ListView,并通过Adapter把studentlist的信息显示到ListView
-        //为ListView设置一个适配器,getCount()返回数据个数;getView()为每一行设置一个条目
+        AllStudentList.removeAll(CheckInfoList);
         lv.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -166,16 +169,16 @@ public class AllStudentListFragment extends Fragment {
                 TextView Tstudent_name = view.findViewById(R.id.tv_name);
                 TextView Tstudent_id = view.findViewById(R.id.tv_studentID);
                 TextView Tstudent_college = view.findViewById(R.id.tv_college);
-                TextView Tstudent_class=view.findViewById(R.id.tv_class);
-                TextView Tischeck=view.findViewById(R.id.tv_ischeck);
-                TextView Tscore=view.findViewById(R.id.tv_stuscore);
+                TextView Tstudent_class = view.findViewById(R.id.tv_class);
+                TextView Tischeck = view.findViewById(R.id.tv_ischeck);
+                TextView Tscore = view.findViewById(R.id.tv_stuscore);
                 String student_name = Tstudent_name.getText().toString().trim();
                 String student_id = Tstudent_id.getText().toString().trim();
                 String student_college = Tstudent_college.getText().toString().trim();
-                String student_class=Tstudent_class.getText().toString().trim();
+                String student_class = Tstudent_class.getText().toString().trim();
                 String ischeck = Tischeck.getText().toString().trim();
-                String score=Tscore.getText().toString().trim();
-                studentOBJ=new StudentOBJ(student_id,student_name,student_college,student_class);
+                String score = Tscore.getText().toString().trim();
+                studentOBJ = new StudentOBJ(student_id, student_name, student_college, student_class);
                /* Intent intent = new Intent(AllStudentListActivity.this, #.class);
                 intent.putExtra("subjectOBJ", subjectOBJ);
                 intent.putExtra("teacherOBJ", teacherOBJ);
@@ -214,3 +217,4 @@ public class AllStudentListFragment extends Fragment {
         });*/
     }
 }
+

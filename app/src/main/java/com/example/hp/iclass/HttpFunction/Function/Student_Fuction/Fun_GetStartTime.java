@@ -1,7 +1,7 @@
 package com.example.hp.iclass.HttpFunction.Function.Student_Fuction;
 
 import com.example.hp.iclass.HttpFunction.Function.IPCondition;
-import com.example.hp.iclass.HttpFunction.Thread.Student_Thread.GetStartTime;
+import com.example.hp.iclass.HttpFunction.Thread.Common_Thread.GetStartTime;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 
 /**

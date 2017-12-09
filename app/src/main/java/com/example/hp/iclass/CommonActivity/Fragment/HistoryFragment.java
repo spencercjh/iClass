@@ -1,7 +1,6 @@
 package com.example.hp.iclass.CommonActivity.Fragment;
 
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,7 +15,7 @@ import android.widget.Button;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
-import com.example.hp.iclass.TeacherCheckActivity.tab.StudentListActivity;
+import com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab.StudentListActivity;
 
 /**
  * Created by HP on 2017/11/21.
