@@ -20,6 +20,10 @@ public class StudentOBJ implements Serializable {
     public StudentOBJ() {
     }
 
+    public StudentOBJ(String student_id) {
+        this.student_id = student_id;
+    }
+
     //    全体学生列表中点击一个item重新构造数据结构
     public StudentOBJ(String student_id, String student_name, String student_college, String student_class) {
         this.student_id = student_id;
@@ -109,4 +113,26 @@ public class StudentOBJ implements Serializable {
         this.student_college = student_college;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = ((student_id == null) ? 0 : student_id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        StudentOBJ other = (StudentOBJ) obj;
+        if (student_id.equals(other.student_id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

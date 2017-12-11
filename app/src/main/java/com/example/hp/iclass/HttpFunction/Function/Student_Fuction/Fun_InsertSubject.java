@@ -1,5 +1,6 @@
 package com.example.hp.iclass.HttpFunction.Function.Student_Fuction;
 
+import com.example.hp.iclass.HttpFunction.Function.IPCondition;
 import com.example.hp.iclass.HttpFunction.Thread.Student_Thread.InsertSubject;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
@@ -12,7 +13,8 @@ import com.example.hp.iclass.OBJ.SubjectOBJ;
 public class Fun_InsertSubject {
 
     public static boolean http_InsertSubject(SubjectOBJ subjectOBJ, StudentOBJ studentOBJ) throws InterruptedException {
-        String url = "http://192.168.3.17:8080/iClass_Sever/InsertSubject";
+        String ip = IPCondition.server_ip;
+        String url = ip + "iClass_Sever/InsertSubject";
         InsertSubject thread = new InsertSubject(url, subjectOBJ, studentOBJ);
         thread.start();
         thread.join();

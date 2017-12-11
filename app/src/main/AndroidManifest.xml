@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hp.iclass">
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -27,13 +26,13 @@
         <activity android:name=".StudentCheckActivity.Student_Seat.Seat1Activity_Student" />
         <activity android:name=".TeacherCheckActivity.CheckConditionActivity" />
         <activity android:name=".CommonActivity.BeginningActivity.Login.ForgetkeyActivity" />
-        <activity android:name=".TeacherCheckActivity.CheckedStudentListActivity" />
         <activity android:name=".TeacherCheckActivity.CheckedStudentDetailActivity" />
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat1Activity_Teacher" />
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat2Activity_Teacher" />
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat3Activity_Teacher" />
-        <activity android:name=".history_subjectinfo_teacherActivity" />
-        <activity android:name=".history_subjectinfo_studentActivity"></activity>
+        <activity android:name=".History.history_subjectinfo_teacherActivity" />
+        <activity android:name=".History.history_subjectinfo_studentActivity" />
+        <activity android:name=".TeacherCheckActivity.Teacher_Tab.StudentListActivity" />
     </application>
 
 </manifest>

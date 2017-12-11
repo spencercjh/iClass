@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -270,7 +271,8 @@ public class Seat1Activity_Student extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_only_fresh, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_only_fresh, menu);
         return true;
     }
 

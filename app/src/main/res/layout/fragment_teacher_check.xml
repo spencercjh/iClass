@@ -68,7 +68,7 @@
             android:id="@+id/student_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50px"
+            android:layout_marginLeft="40px"
             android:text="@string/人数"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
@@ -77,8 +77,8 @@
             android:id="@+id/situation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50px"
-            android:text="@string/签到状态"
+            android:layout_marginLeft="55px"
+            android:text="状态"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
     </LinearLayout>

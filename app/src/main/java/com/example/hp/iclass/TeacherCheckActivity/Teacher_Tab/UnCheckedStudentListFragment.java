@@ -1,14 +1,11 @@
-package com.example.hp.iclass.TeacherCheckActivity;
+package com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,8 +17,9 @@ import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStud
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentCheckNum;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllStudent;
-import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_QuaryOneSubjectTable;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Json.Json_AllStudentList;
+import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
@@ -29,84 +27,75 @@ import com.example.hp.iclass.R;
 
 import java.util.ArrayList;
 
-public class AllStudentListActivity extends AppCompatActivity {
+public class UnCheckedStudentListFragment extends Fragment {
+    private static final String TAG = "UnCheckedStudentListFragment";
+    protected View mView;
+    protected Context mContext;
     private ListView lv;
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
     private StudentOBJ studentOBJ = new StudentOBJ();
+    private SwipeRefreshLayout srl_simple;
+
+
+    UnCheckedStudentListFragment() {
+
+    }
+
+    UnCheckedStudentListFragment(SubjectOBJ subjectOBJ, TeacherOBJ teacherOBJ) {
+        this.subjectOBJ = subjectOBJ;
+        this.teacherOBJ = teacherOBJ;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mContext = getActivity();
+        mView = inflater.inflate(R.layout.fragment_unchecked_students, container, false);
+        lv = mView.findViewById(R.id.unchecked_student_list);
+        srl_simple = mView.findViewById(R.id.srl_simple);
+        srl_simple.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                try {
+                    Teacher_FillUncheckedStudentList();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        //旧版用下面的setColorScheme设置进度条颜色
+        //srl_simple.setColorScheme(R.color.red, R.color.orange, R.color.green, R.color.blue);
+        //新版用下面的setColorSchemeResources设置进度圆圈颜色
+        srl_simple.setColorSchemeResources(
+                R.color.red, R.color.orange, R.color.green, R.color.blue);
+        //旧版v4包中无下面三个方法
+//		srl_simple.setProgressBackgroundColorSchemeResource(R.color.black);
+//		srl_simple.setProgressViewOffset(true, 0, 50);
+//		srl_simple.setDistanceToTriggerSync(100);
+        return mView;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_all_student_list);
-        Intent intent = getIntent();
-        teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
-        subjectOBJ = (SubjectOBJ) intent.getSerializableExtra("subjectOBJ");
+        setHasOptionsMenu(true);
+    }
 
-        Toolbar tl_head = (Toolbar) findViewById(R.id.tl_head);
-        tl_head.setNavigationIcon(R.drawable.ic_back);
-        tl_head.setTitle("  本教学班全体学生信息");
-        tl_head.setTitleTextColor(Color.WHITE);
-        tl_head.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goback();
-            }
-        });
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         try {
-            if (!Fun_QuaryOneSubjectTable.http_QuaryOneSubjectTable(subjectOBJ)) {
-                dialog1();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        try {
-            Teacher_FillAllStudentList();
+            Teacher_FillUncheckedStudentList();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private void dialog1() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(AllStudentListActivity.this);
-        builder.setMessage("数据库中没有您这节课的全部学生名单，请联系管理员");
-        builder.setTitle("警告");
-        builder.setCancelable(false);
-        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();//关闭对话框
-                finish();
-            }
-        });
-        builder.create().show();////显示对话框
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_only_fresh, menu);
-        return true;
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.menu_refresh) {
-            try {
-                Teacher_FillAllStudentList();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void Teacher_FillAllStudentList() throws InterruptedException {
-        lv = (ListView) findViewById(R.id.allstudentlist);
+    private void Teacher_FillUncheckedStudentList() throws InterruptedException {
+        final ArrayList<StudentOBJ> CheckInfoList = Json_CheckedStudentList.parserJson3(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
         final ArrayList<StudentOBJ> AllStudentList = Json_AllStudentList.parserJson(Fun_GetAllStudent.http_GetAllStudent(subjectOBJ));
-        //获取ListView,并通过Adapter把studentlist的信息显示到ListView
-        //为ListView设置一个适配器,getCount()返回数据个数;getView()为每一行设置一个条目
+        AllStudentList.removeAll(CheckInfoList);
         lv.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -130,7 +119,7 @@ public class AllStudentListActivity extends AppCompatActivity {
                 //对ListView的优化，convertView为空时，创建一个新视图；convertView不为空时，代表它是滚出
                 //屏幕，放入Recycler中的视图,若需要用到其他layout，则用inflate(),同一视图，用fiindViewBy()
                 if (convertView == null) {
-                    view = View.inflate(getBaseContext(), R.layout.item_all_student, null);
+                    view = View.inflate(getActivity(), R.layout.item_all_student, null);
                 } else {
                     view = convertView;
                 }
@@ -180,16 +169,16 @@ public class AllStudentListActivity extends AppCompatActivity {
                 TextView Tstudent_name = view.findViewById(R.id.tv_name);
                 TextView Tstudent_id = view.findViewById(R.id.tv_studentID);
                 TextView Tstudent_college = view.findViewById(R.id.tv_college);
-                TextView Tstudent_class=view.findViewById(R.id.tv_class);
-                TextView Tischeck=view.findViewById(R.id.tv_ischeck);
-                TextView Tscore=view.findViewById(R.id.tv_stuscore);
+                TextView Tstudent_class = view.findViewById(R.id.tv_class);
+                TextView Tischeck = view.findViewById(R.id.tv_ischeck);
+                TextView Tscore = view.findViewById(R.id.tv_stuscore);
                 String student_name = Tstudent_name.getText().toString().trim();
                 String student_id = Tstudent_id.getText().toString().trim();
                 String student_college = Tstudent_college.getText().toString().trim();
-                String student_class=Tstudent_class.getText().toString().trim();
+                String student_class = Tstudent_class.getText().toString().trim();
                 String ischeck = Tischeck.getText().toString().trim();
-                String score=Tscore.getText().toString().trim();
-                studentOBJ=new StudentOBJ(student_id,student_name,student_college,student_class);
+                String score = Tscore.getText().toString().trim();
+                studentOBJ = new StudentOBJ(student_id, student_name, student_college, student_class);
                /* Intent intent = new Intent(AllStudentListActivity.this, #.class);
                 intent.putExtra("subjectOBJ", subjectOBJ);
                 intent.putExtra("teacherOBJ", teacherOBJ);
@@ -227,12 +216,5 @@ public class AllStudentListActivity extends AppCompatActivity {
             }
         });*/
     }
-
-    private void goback() {
-        finish();
-    }
-
-    public void onBackPressed() {
-        finish();
-    }
 }
+

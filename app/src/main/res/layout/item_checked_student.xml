@@ -11,6 +11,13 @@
         android:layout_weight="1">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linearLayout2"
+            android:orientation="horizontal"></LinearLayout>
+
+        <LinearLayout
             android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 package com.example.hp.iclass.HttpFunction.Function.Student_Fuction;
 
+import com.example.hp.iclass.HttpFunction.Function.IPCondition;
 import com.example.hp.iclass.HttpFunction.Thread.Student_Thread.QuaryStudentPassword;
 
 /**
@@ -10,7 +11,8 @@ import com.example.hp.iclass.HttpFunction.Thread.Student_Thread.QuaryStudentPass
 public class Fun_QuaryStudentPassword {
 
     public static String http_QuaryStudentPassword(String student_id, String student_name) throws InterruptedException {
-        String url = "http://192.168.3.17:8080/iClass_Sever/QuaryStudentPassword";
+        String ip= IPCondition.server_ip;
+        String url = ip+"iClass_Sever/QuaryStudentPassword";
         QuaryStudentPassword thread = new QuaryStudentPassword(url, student_id, student_name);
         thread.start();
         thread.join();

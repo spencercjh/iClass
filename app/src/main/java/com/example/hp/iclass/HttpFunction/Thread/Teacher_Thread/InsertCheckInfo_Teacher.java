@@ -1,4 +1,6 @@
-package com.example.hp.iclass.HttpFunction.Thread.Student_Thread;
+package com.example.hp.iclass.HttpFunction.Thread.Teacher_Thread;
+
+import com.example.hp.iclass.OBJ.CheckOBJ;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,26 +11,32 @@ import java.net.URL;
 import java.net.URLDecoder;
 
 /**
- * Created by spencercjh on 2017/11/30.
+ * Created by spencercjh on 2017/12/9.
  * iClass
  */
 
-public class GetStartTime extends Thread {
+public class InsertCheckInfo_Teacher extends Thread {
     private boolean flag;
     private String url;
-    private String subject_id;
-    private String start_time;
+    private CheckOBJ checkOBJ = new CheckOBJ();
+    private String state = "";
 
-    public GetStartTime(String url, String subject_id) {
+    public InsertCheckInfo_Teacher(String url, CheckOBJ checkOBJ) {
         // TODO Auto-generated constructor stub
         this.url = url;
-        this.subject_id = subject_id;
+        this.checkOBJ = checkOBJ;
     }
 
     private void doGet() throws IOException {
         /*将username和password传给Tomcat服务器*/
-        url = url + "?subject_id=" + subject_id;
+        url = url + "?subject_id=" + checkOBJ.getSubject_id()
+                + "&subject_th=" + checkOBJ.getSubject_th()
+                + "&teacher_id=" + checkOBJ.getStudent_id()
+                + "&seat_index=" + checkOBJ.getSeat_index()
+                + "&start_time=" + checkOBJ.getStart_time();
+//        System.out.println("URL:        "+url);
         try {
+//            URLEncoder.encode(URLEncoder.encode(url));
             URL httpUrl = new URL(url);
             /*获取网络连接*/
             HttpURLConnection conn = (HttpURLConnection) httpUrl.openConnection();
@@ -47,12 +55,12 @@ public class GetStartTime extends Thread {
                 while ((line = in.readLine()) != null) {
                     buffer.append(line);
                 }
-                start_time = buffer.toString();
-                start_time = URLDecoder.decode(start_time, "UTF-8");
+                state = buffer.toString();
+                state = URLDecoder.decode(state, "UTF-8");
             }
             //把服务端返回的数据打印出来
-            System.out.println("result:" + start_time);
-            if (start_time.equals("get start_time failed")) {
+            System.out.println("result:" + state);
+            if (state.equals("insert check_info failed")) {
                 setFlag(false);
             } else {
                 setFlag(true);
@@ -71,8 +79,8 @@ public class GetStartTime extends Thread {
         this.flag = flag;
     }
 
-    public String getStart_time() {
-        return start_time;
+    public String getstate() {
+        return state.trim();
     }
 
     /*在run中调用doGet*/

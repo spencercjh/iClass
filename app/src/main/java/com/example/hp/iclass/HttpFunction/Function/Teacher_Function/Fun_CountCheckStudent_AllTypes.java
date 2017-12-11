@@ -1,5 +1,6 @@
 package com.example.hp.iclass.HttpFunction.Function.Teacher_Function;
 
+import com.example.hp.iclass.HttpFunction.Function.IPCondition;
 import com.example.hp.iclass.HttpFunction.Thread.Teacher_Thread.CountCheckStudent_AllTypes;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 
@@ -11,7 +12,8 @@ import com.example.hp.iclass.OBJ.SubjectOBJ;
 public class Fun_CountCheckStudent_AllTypes {
 
     public static String http_CountCheckStudent_AllTypes(SubjectOBJ subjectOBJ) throws InterruptedException {
-        String url = "http://192.168.3.17:8080/iClass_Sever/CountCheckStudent_AllTypes";
+        String ip = IPCondition.server_ip;
+        String url = ip + "iClass_Sever/CountCheckStudent_AllTypes";
         CountCheckStudent_AllTypes thread = new CountCheckStudent_AllTypes(url, subjectOBJ.getSubject_id(), subjectOBJ.getSubject_th());
         thread.start();
         thread.join();

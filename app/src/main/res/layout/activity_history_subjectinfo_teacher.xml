@@ -18,6 +18,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.121" />
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@color/blue_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:navigationIcon="@drawable/ic_back" />
+
     <LinearLayout
         android:id="@+id/loginPanel"
         android:layout_width="276dp"
@@ -38,7 +52,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.605">
+        app:layout_constraintVertical_bias="0.615">
 
         <LinearLayout
             android:layout_width="250sp"
@@ -97,16 +111,15 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.00"
+                android:layout_width="95sp"
+                android:layout_height="match_parent"
                 android:text="开始时间: "
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tv_starttime"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -133,38 +146,13 @@
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15sp"
             android:background="@drawable/background_button_div"
             android:text="@string/查看本班所有学生"
-            android:layout_marginTop="15sp"
             tools:layout_editor_absoluteX="105dp"
             tools:layout_editor_absoluteY="417dp" />
 
     </LinearLayout>
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@color/blue_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:navigationIcon="@drawable/ic_back" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tips包括各种异常签到的同学"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
 
     <!--android:text="查看签到座位表" />-->
 </android.support.constraint.ConstraintLayout>

@@ -1,7 +1,9 @@
-package com.example.hp.iclass;
+package com.example.hp.iclass.History;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.hp.iclass.R;
 
 public class history_subjectinfo_studentActivity extends AppCompatActivity {
 

@@ -1,5 +1,6 @@
 package com.example.hp.iclass.HttpFunction.Function.Student_Fuction;
 
+import com.example.hp.iclass.HttpFunction.Function.IPCondition;
 import com.example.hp.iclass.HttpFunction.Thread.Student_Thread.QuaryCheckSituation;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 
@@ -11,7 +12,8 @@ import com.example.hp.iclass.OBJ.SubjectOBJ;
 public class Fun_QuaryCheckSituation {
 
     public static int http_QuaryCheckSituation(SubjectOBJ subjectOBJ) throws InterruptedException {
-        String url = "http://192.168.3.17:8080/iClass_Sever/QuaryCheckSituation";
+        String ip = IPCondition.server_ip;
+        String url = ip + "iClass_Sever/QuaryCheckSituation";
         QuaryCheckSituation thread = new QuaryCheckSituation(url, subjectOBJ.getSubject_id());
         thread.start();
         thread.join();

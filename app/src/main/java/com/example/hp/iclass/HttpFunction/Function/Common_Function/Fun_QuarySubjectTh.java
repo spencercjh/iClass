@@ -1,5 +1,6 @@
 package com.example.hp.iclass.HttpFunction.Function.Common_Function;
 
+import com.example.hp.iclass.HttpFunction.Function.IPCondition;
 import com.example.hp.iclass.HttpFunction.Thread.Common_Thread.QuarySubjectTh;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 
@@ -11,7 +12,8 @@ import com.example.hp.iclass.OBJ.SubjectOBJ;
 public class Fun_QuarySubjectTh {
 
     public static int http_QuarySubjectTh(SubjectOBJ subjectOBJ) throws InterruptedException {
-        String url = "http://192.168.3.17:8080/iClass_Sever/QuarySubjectTh";
+        String ip = IPCondition.server_ip;
+        String url = ip + "iClass_Sever/QuarySubjectTh";
         QuarySubjectTh thread = new QuarySubjectTh(url, subjectOBJ.getSubject_id());
         thread.start();
         thread.join();
