@@ -81,10 +81,10 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             //      显示应到人数
             String Str_student_num = String.valueOf(subjectOBJ.getStudent_num());
             should.setText(Str_student_num.trim());
-            present.setText(R.string.右上角打call);
+            //present.setText(R.string.右上角打call);
             button_end_check.setEnabled(false);
-            button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
-            button_end_check.setText("本节课程签到已结束！");
+           // button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
+            button_end_check.setText("开始签到！");
         } else if (subjectOBJ.getCheck_situation() == 1) {
             tl_head.setTitle(" 正在签到中");
             tl_head.setTitleTextColor(Color.WHITE);
@@ -144,7 +144,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             }
             tl_head.setTitle(" 正在签到中");
             button_end_check.setEnabled(true);
-            button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div2));
+//            button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div2));
             button_end_check.setText("结束本次签到");
         } else if (id == R.id.menu_reupdate) {
             tl_head.setTitle("  签到未开启");
@@ -183,8 +183,8 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
                 }
                 tl_head.setTitle("  签到未开启");
                 button_end_check.setEnabled(false);
-                button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
-                button_end_check.setText("本节课程签到已结束！");
+//                button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
+                button_end_check.setText("开始签到！");
             }
         });
 
@@ -256,7 +256,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         Fun_DeleteCheckInfo_Teacher.http_DeleteCheckInfo_Teacher(subjectOBJ.getSubject_id(),subjectOBJ.getSubject_th(),teacherOBJ.getTeacher_id());
         button_end_check.setEnabled(false);
         button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
-        button_end_check.setText("本节课程签到已结束！");
+        button_end_check.setText("开始签到！");
     }
 
     private void StudentList() {
