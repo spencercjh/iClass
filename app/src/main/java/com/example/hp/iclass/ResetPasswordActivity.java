@@ -39,21 +39,15 @@ public class ResetPasswordActivity extends AppCompatActivity {
         tl_head.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gotomain();
+                gotolast();
 
             }
         });
     }
-    private void gotomain() {
-        Intent it = new Intent(this, MainActivity.class);
-        if (choice_user == 1) {
-            it.putExtra("user", "teacher");
-            it.putExtra("teacherOBJ", teacherOBJ);
-        } else if (choice_user == 0) {
-            it.putExtra("user", "student");
-            it.putExtra("studentOBJ", studentOBJ);
-        }
+    private void gotolast() {
+        Intent it = new Intent(this,PersonSecurityActivity.class);
+
         startActivity(it);
-        finish();
+
     }
 }

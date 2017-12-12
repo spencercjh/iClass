@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.example.hp.iclass.CommonActivity.Fragment.PersonFragment;
 import com.example.hp.iclass.CommonActivity.MainActivity;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
@@ -31,27 +32,21 @@ public class PersonSecurityActivity extends AppCompatActivity {
         tl_head.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gotomain();
+                gotolast();
 
             }
         });
     }
-    private void gotomain() {
-        Intent it = new Intent(this, MainActivity.class);
-        if (choice_user == 1) {
-            it.putExtra("user", "teacher");
-            it.putExtra("teacherOBJ", teacherOBJ);
-        } else if (choice_user == 0) {
-            it.putExtra("user", "student");
-            it.putExtra("studentOBJ", studentOBJ);
-        }
+    private void gotolast() {
+        Intent it = new Intent(this, PersonFragment.class);
+
         startActivity(it);
-        finish();
+
     }
     public void resetkey(View view) {
         Intent intent=new Intent(this,ResetPasswordActivity.class);
         startActivity(intent);
-        finish();
+
 
     }
 
