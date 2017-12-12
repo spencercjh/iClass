@@ -36,7 +36,6 @@ public class CheckedStudentListFragment extends Fragment {
     private SwipeRefreshLayout srl_simple;
 
     CheckedStudentListFragment() {
-
     }
 
     CheckedStudentListFragment(SubjectOBJ subjectOBJ, TeacherOBJ teacherOBJ) {
@@ -57,6 +56,7 @@ public class CheckedStudentListFragment extends Fragment {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                srl_simple.setRefreshing(false);
             }
         });
         //旧版用下面的setColorScheme设置进度条颜色
@@ -90,7 +90,6 @@ public class CheckedStudentListFragment extends Fragment {
     private void Teacher_FillCheckInfoList() throws InterruptedException {
         lv = mView.findViewById(R.id.checked_students_list);
         final ArrayList<CheckOBJ> CheckInfoList = Json_CheckedStudentList.parserJson(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
-
         //获取ListView,并通过Adapter把studentlist的信息显示到ListView
         //为ListView设置一个适配器,getCount()返回数据个数;getView()为每一行设置一个条目
         lv.setAdapter(new BaseAdapter() {
@@ -141,7 +140,9 @@ public class CheckedStudentListFragment extends Fragment {
                     Tischeck.setText(R.string.Ninety分钟内签到);
                 } else if (checkOBJ.getIscheck() == 4) {
                     Tischeck.setText(R.string.Ninety分钟后签到);
-                } else {
+                }else if (checkOBJ.getIscheck()==5){
+                    Tischeck.setText(R.string.教师代签);
+                }else{
                     Tischeck.setText("系统错误");
                 }
                 return view;

@@ -1,6 +1,7 @@
 package com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,13 +12,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentScore;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentCheckNum;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllStudent;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Json.Json_AllStudentList;
+import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
+import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
@@ -27,16 +32,15 @@ import java.util.ArrayList;
 
 public class AllStudentListFragment extends Fragment {
     private static final String TAG = "UnCheckedStudentListFragment";
-    private ListView lv;
     protected View mView;
     protected Context mContext;
+    private ListView lv;
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
-    private StudentOBJ studentOBJ=new StudentOBJ();
+    private StudentOBJ studentOBJ = new StudentOBJ();
     private SwipeRefreshLayout srl_simple;
 
     AllStudentListFragment() {
-
     }
 
     AllStudentListFragment(SubjectOBJ subjectOBJ, TeacherOBJ teacherOBJ) {
@@ -57,6 +61,7 @@ public class AllStudentListFragment extends Fragment {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                srl_simple.setRefreshing(false);
             }
         });
         //旧版用下面的setColorScheme设置进度条颜色
@@ -90,6 +95,8 @@ public class AllStudentListFragment extends Fragment {
     private void Teacher_FillAllStudentList() throws InterruptedException {
         lv = mView.findViewById(R.id.all_studnet_list);
         final ArrayList<StudentOBJ> AllStudentList = Json_AllStudentList.parserJson(Fun_GetAllStudent.http_GetAllStudent(subjectOBJ));
+        final ArrayList<String> CheckInfoList = Json_CheckedStudentList.parserJson4(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
+
         //获取ListView,并通过Adapter把studentlist的信息显示到ListView
         //为ListView设置一个适配器,getCount()返回数据个数;getView()为每一行设置一个条目
         lv.setAdapter(new BaseAdapter() {
@@ -155,36 +162,52 @@ public class AllStudentListFragment extends Fragment {
                     score = -1;
                 }
                 Tscore.setText(String.valueOf(score));
+                /*if (!CheckInfoList.contains(studentOBJ.getStudent_id())) { bug
+                    Tstudent_name.setTextColor(Color.parseColor("#ffffff"));
+                    Tstudent_id.setTextColor(Color.parseColor("#ffffff"));
+                    Tstudent_college.setTextColor(Color.parseColor("#ffffff"));
+                    Tstudent_class.setTextColor(Color.parseColor("#ffffff"));
+                    Tischeck.setTextColor(Color.parseColor("#ffffff"));
+                    Tscore.setTextColor(Color.parseColor("#ffffff"));
+                    Tstudent_name.setTextColor(Color.parseColor("#ff0000"));
+                    Tstudent_id.setTextColor(Color.parseColor("#ff0000"));
+                    Tstudent_college.setTextColor(Color.parseColor("#ff0000"));
+                    Tstudent_class.setTextColor(Color.parseColor("#ff0000"));
+                    Tischeck.setTextColor(Color.parseColor("#ff0000"));
+                    Tscore.setTextColor(Color.parseColor("#ff0000"));
+                    RelativeLayout relativeLayout=view.findViewById(R.id.back);
+                    relativeLayout.setBackgroundColor(Color.parseColor("#ff0000"));
+                }*/
                 return view;
             }
         });
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+     /*   lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 //                RelativeLayout item = (RelativeLayout) view;
                 TextView Tstudent_name = view.findViewById(R.id.tv_name);
                 TextView Tstudent_id = view.findViewById(R.id.tv_studentID);
                 TextView Tstudent_college = view.findViewById(R.id.tv_college);
-                TextView Tstudent_class=view.findViewById(R.id.tv_class);
-                TextView Tischeck=view.findViewById(R.id.tv_ischeck);
-                TextView Tscore=view.findViewById(R.id.tv_stuscore);
+                TextView Tstudent_class = view.findViewById(R.id.tv_class);
+                TextView Tischeck = view.findViewById(R.id.tv_ischeck);
+                TextView Tscore = view.findViewById(R.id.tv_stuscore);
                 String student_name = Tstudent_name.getText().toString().trim();
                 String student_id = Tstudent_id.getText().toString().trim();
                 String student_college = Tstudent_college.getText().toString().trim();
-                String student_class=Tstudent_class.getText().toString().trim();
+                String student_class = Tstudent_class.getText().toString().trim();
                 String ischeck = Tischeck.getText().toString().trim();
-                String score=Tscore.getText().toString().trim();
-                studentOBJ=new StudentOBJ(student_id,student_name,student_college,student_class);
-               /* Intent intent = new Intent(AllStudentListActivity.this, #.class);
+                String score = Tscore.getText().toString().trim();
+                studentOBJ = new StudentOBJ(student_id, student_name, student_college, student_class);
+               *//* Intent intent = new Intent(AllStudentListActivity.this, #.class);
                 intent.putExtra("subjectOBJ", subjectOBJ);
                 intent.putExtra("teacherOBJ", teacherOBJ);
                 intent.putExtra("studentOBJ", studentOBJ);
                 intent.putExtra("ischeck",ischeck);
                 intent.putExtra("score",score);
                 intent.putExtra("user", "teacher");
-                startActivity(intent);*/
+                startActivity(intent);*//*
             }
-        });
+        });*/
 /*        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long id) {

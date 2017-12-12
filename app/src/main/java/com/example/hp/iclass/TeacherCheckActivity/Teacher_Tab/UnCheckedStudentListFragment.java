@@ -1,10 +1,12 @@
 package com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +14,18 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentScore;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
+import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStartTime;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentCheckNum;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllStudent;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_InsertCheckInfo_Teacher_Help;
 import com.example.hp.iclass.HttpFunction.Json.Json_AllStudentList;
 import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
+import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
@@ -39,7 +45,6 @@ public class UnCheckedStudentListFragment extends Fragment {
 
 
     UnCheckedStudentListFragment() {
-
     }
 
     UnCheckedStudentListFragment(SubjectOBJ subjectOBJ, TeacherOBJ teacherOBJ) {
@@ -60,7 +65,9 @@ public class UnCheckedStudentListFragment extends Fragment {
                     Teacher_FillUncheckedStudentList();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    srl_simple.setRefreshing(false);
                 }
+                srl_simple.setRefreshing(false);
             }
         });
         //旧版用下面的setColorScheme设置进度条颜色
@@ -95,11 +102,11 @@ public class UnCheckedStudentListFragment extends Fragment {
     private void Teacher_FillUncheckedStudentList() throws InterruptedException {
         final ArrayList<StudentOBJ> CheckInfoList = Json_CheckedStudentList.parserJson3(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
         final ArrayList<StudentOBJ> AllStudentList = Json_AllStudentList.parserJson(Fun_GetAllStudent.http_GetAllStudent(subjectOBJ));
-        AllStudentList.removeAll(CheckInfoList);
+        final ArrayList<StudentOBJ> UnCheckedStudentList = GetUnCheckedStudnetList(CheckInfoList, AllStudentList);
         lv.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
-                return AllStudentList.size();
+                return UnCheckedStudentList.size();
             }
 
             @Override
@@ -119,12 +126,12 @@ public class UnCheckedStudentListFragment extends Fragment {
                 //对ListView的优化，convertView为空时，创建一个新视图；convertView不为空时，代表它是滚出
                 //屏幕，放入Recycler中的视图,若需要用到其他layout，则用inflate(),同一视图，用fiindViewBy()
                 if (convertView == null) {
-                    view = View.inflate(getActivity(), R.layout.item_all_student, null);
+                    view = View.inflate(getActivity(), R.layout.item_unchecked_student, null);
                 } else {
                     view = convertView;
                 }
                 //从subjectlist中取出一行数据，position相当于数组下标,可以实现逐行取数据
-                StudentOBJ studentOBJ = AllStudentList.get(position);
+                StudentOBJ studentOBJ = UnCheckedStudentList.get(position);
                 TextView Tstudent_name = view.findViewById(R.id.tv_name);
                 Tstudent_name.setText(studentOBJ.getStudent_name());
                 TextView Tstudent_id = view.findViewById(R.id.tv_studentID);
@@ -165,28 +172,11 @@ public class UnCheckedStudentListFragment extends Fragment {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-//                RelativeLayout item = (RelativeLayout) view;
                 TextView Tstudent_name = view.findViewById(R.id.tv_name);
                 TextView Tstudent_id = view.findViewById(R.id.tv_studentID);
-                TextView Tstudent_college = view.findViewById(R.id.tv_college);
-                TextView Tstudent_class = view.findViewById(R.id.tv_class);
-                TextView Tischeck = view.findViewById(R.id.tv_ischeck);
-                TextView Tscore = view.findViewById(R.id.tv_stuscore);
                 String student_name = Tstudent_name.getText().toString().trim();
                 String student_id = Tstudent_id.getText().toString().trim();
-                String student_college = Tstudent_college.getText().toString().trim();
-                String student_class = Tstudent_class.getText().toString().trim();
-                String ischeck = Tischeck.getText().toString().trim();
-                String score = Tscore.getText().toString().trim();
-                studentOBJ = new StudentOBJ(student_id, student_name, student_college, student_class);
-               /* Intent intent = new Intent(AllStudentListActivity.this, #.class);
-                intent.putExtra("subjectOBJ", subjectOBJ);
-                intent.putExtra("teacherOBJ", teacherOBJ);
-                intent.putExtra("studentOBJ", studentOBJ);
-                intent.putExtra("ischeck",ischeck);
-                intent.putExtra("score",score);
-                intent.putExtra("user", "teacher");
-                startActivity(intent);*/
+               dialog1(student_name,student_id);
             }
         });
 /*        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -215,6 +205,54 @@ public class UnCheckedStudentListFragment extends Fragment {
                 return true;
             }
         });*/
+    }
+
+    private void dialog1(String student_name, final String student_id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("你要为吗"+student_name+"签到吗？");
+        builder.setTitle("注意");
+        builder.setCancelable(false);
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();//关闭对话框
+                CheckOBJ checkOBJ=new CheckOBJ(subjectOBJ.getSubject_id(),subjectOBJ.getSubject_th(),student_id,999);
+                try {
+                    if(Fun_InsertCheckInfo_Teacher_Help.http_InsertCheckInfo_Teacher_Help(checkOBJ)){
+                        Toast.makeText(getContext(),"代签成功！",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getContext(),"代签失败！",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"代签失败！",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();////显示对话框
+    }
+
+    private ArrayList<StudentOBJ> GetUnCheckedStudnetList(ArrayList<StudentOBJ> CheckInfoList, ArrayList<StudentOBJ> AllStudentList) {
+        ArrayList<StudentOBJ> UnCheckedStudentList = new ArrayList<>();
+        for (StudentOBJ i : AllStudentList) {
+            boolean checked = false;
+            for (StudentOBJ j : CheckInfoList) {
+                if (j.getStudent_id().equals(i.getStudent_id())) {
+                    checked = true;
+                    break;
+                }
+            }
+            if (!checked) {
+                UnCheckedStudentList.add(i);
+            }
+        }
+        return UnCheckedStudentList;
     }
 }
 

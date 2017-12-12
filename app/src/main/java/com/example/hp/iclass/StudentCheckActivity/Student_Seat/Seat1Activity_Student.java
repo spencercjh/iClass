@@ -42,6 +42,7 @@ import java.util.ArrayList;
 public class Seat1Activity_Student extends AppCompatActivity {
 
     final private int seatnum = 45;
+    final private int enable_seat = (int) (seatnum * 0.85);
     private GridView gridView;
     private View view;
     private MyAdapter myAdapter;
@@ -286,6 +287,20 @@ public class Seat1Activity_Student extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void dialog3() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Seat1Activity_Student.this);
+        builder.setMessage("教室的最后15%的座位不能坐！");
+        builder.setTitle("抱歉！");
+        builder.setCancelable(false);
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();//关闭对话框
+            }
+        });
+        builder.create().show();////显示对话框
+    }
+
     private class MyAdapter extends BaseAdapter {
         ArrayList<CheckOBJ> arrayList;
         Context context;
@@ -342,7 +357,11 @@ public class Seat1Activity_Student extends AppCompatActivity {
             }
             if (selectItem == arg0) {
                 if (checkOBJ.getStudent_id() == null) { //座位为空，能坐下
-                    dialog1(selectItem);
+                    if (selectItem <= enable_seat) {
+                        dialog1(selectItem);
+                    } else {
+                        dialog3();
+                    }
                 } else {  //座位被占
                     dialog2();
                 }

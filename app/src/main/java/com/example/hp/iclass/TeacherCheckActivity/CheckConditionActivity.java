@@ -19,6 +19,7 @@ import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetSubjec
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStartTime;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountCheckStudent_AllTypes;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_DeleteCheckInfo_Teacher;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_InsertCheckInfo_Teacher;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_ReUpdateSubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_SetCheckSituationFalse;
@@ -47,7 +48,6 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
     private TextView Tsubject_th;
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
-    private Button allstudent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,6 +230,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         checkOBJ.setStudent_id(teacherOBJ.getTeacher_id());
         checkOBJ.setSeat_index(999);
         checkOBJ.setStart_time(Fun_GetStartTime.http_GetStartTime(subjectOBJ));
+
         Fun_InsertCheckInfo_Teacher.http_InsertCheckInfo_Teacher(checkOBJ);
 //      显示应到人数
         String Str_student_num = String.valueOf(subjectOBJ.getStudent_num());
@@ -251,7 +252,8 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         } else if (subjectOBJ.getSubject_th() == 0) {
             Fun_SetCheckSituationFalse.http_SetCheckSituationFalse(subjectOBJ);
             subjectOBJ.setCheck_situation(0);
-        }
+        }//把老师插入的签到信息删掉
+        Fun_DeleteCheckInfo_Teacher.http_DeleteCheckInfo_Teacher(subjectOBJ.getSubject_id(),subjectOBJ.getSubject_th(),teacherOBJ.getTeacher_id());
         button_end_check.setEnabled(false);
         button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
         button_end_check.setText("本节课程签到已结束！");
