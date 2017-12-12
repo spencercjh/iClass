@@ -38,6 +38,7 @@ public class CheckedStudentListFragment extends Fragment {
     CheckedStudentListFragment() {
     }
 
+
     CheckedStudentListFragment(SubjectOBJ subjectOBJ, TeacherOBJ teacherOBJ) {
         this.subjectOBJ = subjectOBJ;
         this.teacherOBJ = teacherOBJ;
