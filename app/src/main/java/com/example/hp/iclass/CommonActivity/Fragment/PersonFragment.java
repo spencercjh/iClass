@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.hp.iclass.CommonActivity.BeginningActivity.Login.LoginActivity;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
+import com.example.hp.iclass.PersonSecurityActivity;
 import com.example.hp.iclass.R;
 import com.example.hp.iclass.SettingActivity;
 
@@ -26,6 +27,7 @@ import com.example.hp.iclass.SettingActivity;
 
 public class PersonFragment extends Fragment {
     private RelativeLayout re_setting;
+    private RelativeLayout re_infosecurity;
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private StudentOBJ studentOBJ = new StudentOBJ();
     private int choice_user;
@@ -58,6 +60,18 @@ public class PersonFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         re_setting = getActivity().findViewById(R.id.re_setting);
+        re_infosecurity=getActivity().findViewById(R.id.re_infosecurity);
+        re_infosecurity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),
+                        PersonSecurityActivity.class);
+                //Toast.makeText(getActivity(), "退出成功", Toast.LENGTH_LONG).show();
+                //intent.putExtra("exit", "exit");
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
         re_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
