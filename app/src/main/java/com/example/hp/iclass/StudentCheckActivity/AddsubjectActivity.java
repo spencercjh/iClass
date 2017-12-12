@@ -57,6 +57,7 @@ public class AddsubjectActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onClick(View view) {
                 gotomain();
+                finish();
             }
         });
         if (choice_user == 1) {

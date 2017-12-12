@@ -10,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.hp.iclass.CommonActivity.BeginningActivity.Login.LoginActivity;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
+import com.example.hp.iclass.SettingActivity;
 
 /**
  * Created by HP on 2017/11/21.
@@ -23,7 +25,7 @@ import com.example.hp.iclass.R;
  */
 
 public class PersonFragment extends Fragment {
-    private Button outlogin;
+    private RelativeLayout re_setting;
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private StudentOBJ studentOBJ = new StudentOBJ();
     private int choice_user;
@@ -55,14 +57,14 @@ public class PersonFragment extends Fragment {
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        outlogin = getActivity().findViewById(R.id.button_search);
-        outlogin.setOnClickListener(new View.OnClickListener() {
+        re_setting = getActivity().findViewById(R.id.re_setting);
+        re_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),
-                        LoginActivity.class);
-                Toast.makeText(getActivity(), "退出成功", Toast.LENGTH_LONG).show();
-                intent.putExtra("exit", "exit");
+                        SettingActivity.class);
+                //Toast.makeText(getActivity(), "退出成功", Toast.LENGTH_LONG).show();
+                //intent.putExtra("exit", "exit");
                 startActivity(intent);
                 getActivity().finish();
             }
