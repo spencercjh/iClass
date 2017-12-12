@@ -31,6 +31,7 @@ public class PersonFragment extends Fragment {
     public PersonFragment() {
     }
 
+
     public PersonFragment(TeacherOBJ OBJ, int user) {
         teacherOBJ = OBJ;
         choice_user = user;
