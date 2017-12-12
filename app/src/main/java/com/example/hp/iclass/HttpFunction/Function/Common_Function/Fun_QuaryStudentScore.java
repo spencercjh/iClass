@@ -21,7 +21,7 @@ public class Fun_QuaryStudentScore {
         if (thread.getFlag()) {
             return thread.getScore();
         } else {
-            return 0;
+            return -1;
         }
     }
 
@@ -34,7 +34,7 @@ public class Fun_QuaryStudentScore {
         if (thread.getFlag()) {
             return thread.getScore();
         } else {
-            return 0;
+            return -1;
         }
     }
 }
