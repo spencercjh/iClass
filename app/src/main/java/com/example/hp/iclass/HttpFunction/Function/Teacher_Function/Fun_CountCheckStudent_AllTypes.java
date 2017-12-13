@@ -1,5 +1,7 @@
 package com.example.hp.iclass.HttpFunction.Function.Teacher_Function;
 
+import android.support.annotation.NonNull;
+
 import com.example.hp.iclass.HttpFunction.Function.IPCondition;
 import com.example.hp.iclass.HttpFunction.Thread.Teacher_Thread.CountCheckStudent_AllTypes;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
@@ -10,7 +12,7 @@ import com.example.hp.iclass.OBJ.SubjectOBJ;
  */
 
 public class Fun_CountCheckStudent_AllTypes {
-
+    @NonNull
     public static String http_CountCheckStudent_AllTypes(SubjectOBJ subjectOBJ) throws InterruptedException {
         String ip = IPCondition.server_ip;
         String url = ip + "iClass_Sever/CountCheckStudent_AllTypes";

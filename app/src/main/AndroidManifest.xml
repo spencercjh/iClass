@@ -31,16 +31,18 @@
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat1Activity_Teacher" />
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat2Activity_Teacher" />
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat3Activity_Teacher" />
-        <activity android:name=".History.history_subjectinfo_teacherActivity" />
-        <activity android:name=".History.history_subjectinfo_studentActivity" />
+        <activity android:name=".HistoryActivity.History_SubjectInfo_TeacherActivity" />
+        <activity android:name=".HistoryActivity.History_SubjectInfo_StudentActivity" />
         <activity android:name=".TeacherCheckActivity.Teacher_Tab.StudentListActivity" />
         <activity android:name=".PersonCenter.SettingActivity" />
         <activity android:name=".PersonCenter.ResetPasswordActivity" />
         <activity android:name=".PersonCenter.PersonSecurityActivity" />
         <activity android:name=".PersonCenter.PersonDetailActivity" />
-        <activity android:name=".ResetSexActivity" />
-        <activity android:name=".ResetCollegeActivity" />
-        <activity android:name=".ResetClassActivity"></activity>
+        <activity android:name=".PersonCenter.ResetSexActivity" />
+        <activity android:name=".PersonCenter.ResetCollegeActivity" />
+        <activity android:name=".PersonCenter.ResetClassActivity" />
+        <activity android:name=".HistoryActivity.ChooseTimeActivity" />
+
     </application>
 
 </manifest>

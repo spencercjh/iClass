@@ -1,12 +1,11 @@
-package com.example.hp.iclass.History;
+package com.example.hp.iclass.HistoryActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.hp.iclass.R;
 
-public class history_subjectinfo_studentActivity extends AppCompatActivity {
-
+public class History_SubjectInfo_StudentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

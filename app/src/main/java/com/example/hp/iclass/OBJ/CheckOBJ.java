@@ -20,14 +20,22 @@ public class CheckOBJ implements Serializable {
 
     public CheckOBJ() {
     }
+
+    //从servlet中获取历史课程时间信息
+    public CheckOBJ(String check_time, int subject_th) {
+        this.check_time = check_time;
+        this.subject_th = subject_th;
+    }
+
     //教师代签
-    public CheckOBJ(String subject_id, int subject_th, String student_id, int ischeck,int seat_index) {
+    public CheckOBJ(String subject_id, int subject_th, String student_id, int ischeck, int seat_index) {
         this.subject_id = subject_id;
         this.subject_th = subject_th;
         this.student_id = student_id;
         this.ischeck = ischeck;
-        this.seat_index=seat_index;
+        this.seat_index = seat_index;
     }
+
     //学生签到
     public CheckOBJ(String subject_id, int subject_th, String student_id, int seat_index, String start_time) {
         this.subject_id = subject_id;

@@ -182,31 +182,5 @@ public class CheckedStudentListFragment extends Fragment {
                 startActivity(intent);
             }
         });
-/*        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long id) {
-                RelativeLayout item = (RelativeLayout) view;
-                final TextView Tsubject_id = item.findViewById(R.id.text_subject_id);
-                final TextView Tsubject_name = item.findViewById(R.id.text_subject_name);
-                final String subject_id = Tsubject_id.getText().toString().trim();
-                final String subject_name = Tsubject_name.getText().toString().trim();
-                // Use an Alert dialog to confirm delete operation
-                new AlertDialog.Builder(CheckedStudentListActivity.this)
-                        .setMessage("你确认要删除 " + subject_name + " 这门课程吗？")
-                        .setPositiveButton("删除",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-                                        //根据subject_id从数据库中删除课程，记得补2017年11月27日23:13:52
-                                        try {
-                                            Teacher_FillCheckInfoList();
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                }).show();
-                return true;
-            }
-        });*/
     }
 }

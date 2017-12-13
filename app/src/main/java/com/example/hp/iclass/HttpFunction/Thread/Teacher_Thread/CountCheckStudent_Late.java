@@ -9,18 +9,18 @@ import java.net.URL;
 import java.net.URLDecoder;
 
 /**
- * Created by spencercjh on 2017/11/21.
+ * Created by spencercjh on 2017/12/14.
  * iClass
  */
 
-public class CountCheckStudent_AllTypes extends Thread {
+public class CountCheckStudent_Late extends Thread {
     private boolean flag;
     private String url;
     private String subject_id;
     private int subject_th;
-    private String present_check_student_num;
+    private String late_check_student_num;
 
-    public CountCheckStudent_AllTypes(String url, String subject_id, int subject_th) {
+    public CountCheckStudent_Late(String url, String subject_id, int subject_th) {
         // TODO Auto-generated constructor stub
         this.url = url;
         this.subject_id = subject_id;
@@ -50,12 +50,12 @@ public class CountCheckStudent_AllTypes extends Thread {
                 while ((line = in.readLine()) != null) {
                     buffer.append(line);
                 }
-                present_check_student_num = buffer.toString();
-                present_check_student_num = URLDecoder.decode(present_check_student_num, "UTF-8");
+                late_check_student_num = buffer.toString();
+                late_check_student_num = URLDecoder.decode(late_check_student_num, "UTF-8");
             }
             //把服务端返回的数据打印出来
-            System.out.println("result:" + present_check_student_num);
-            if (present_check_student_num.equals("count failed")) {
+            System.out.println("result:" + late_check_student_num);
+            if (late_check_student_num.equals("count failed")) {
                 setFlag(false);
             } else {
                 setFlag(true);
@@ -74,8 +74,8 @@ public class CountCheckStudent_AllTypes extends Thread {
         this.flag = flag;
     }
 
-    public String getPresent_check_student_num() {
-        return present_check_student_num;
+    public String getLate_check_student_num() {
+        return late_check_student_num;
     }
 
     /*在run中调用doGet*/
@@ -89,3 +89,4 @@ public class CountCheckStudent_AllTypes extends Thread {
         }
     }
 }
+

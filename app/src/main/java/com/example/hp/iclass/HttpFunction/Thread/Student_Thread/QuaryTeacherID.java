@@ -1,4 +1,4 @@
-package com.example.hp.iclass.HttpFunction.Thread.Teacher_Thread;
+package com.example.hp.iclass.HttpFunction.Thread.Student_Thread;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,32 +7,31 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 /**
- * Created by spencercjh on 2017/11/21.
+ * Created by spencercjh on 2017/12/14.
  * iClass
  */
 
-public class CountCheckStudent_AllTypes extends Thread {
+public class QuaryTeacherID extends Thread{
     private boolean flag;
     private String url;
     private String subject_id;
-    private int subject_th;
-    private String present_check_student_num;
+    private String teacher_id;
 
-    public CountCheckStudent_AllTypes(String url, String subject_id, int subject_th) {
+    public QuaryTeacherID(String url,String subject_id) {
         // TODO Auto-generated constructor stub
         this.url = url;
-        this.subject_id = subject_id;
-        this.subject_th = subject_th;
+        this.subject_id= subject_id;
     }
 
     private void doGet() throws IOException {
         /*将username和password传给Tomcat服务器*/
-        url = url + "?subject_id=" + subject_id + "&subject_th=" + subject_th;
+        url = url + "?subject_id="+subject_id;
         try {
+//            URLEncoder.encode(URLEncoder.encode(url));
             URL httpUrl = new URL(url);
-//            URLEncoder.encode(url);
             /*获取网络连接*/
             HttpURLConnection conn = (HttpURLConnection) httpUrl.openConnection();
             /*设置请求方法为GET方法*/
@@ -50,12 +49,12 @@ public class CountCheckStudent_AllTypes extends Thread {
                 while ((line = in.readLine()) != null) {
                     buffer.append(line);
                 }
-                present_check_student_num = buffer.toString();
-                present_check_student_num = URLDecoder.decode(present_check_student_num, "UTF-8");
+                teacher_id = buffer.toString();
+                teacher_id = URLDecoder.decode(teacher_id, "UTF-8");
             }
             //把服务端返回的数据打印出来
-            System.out.println("result:" + present_check_student_num);
-            if (present_check_student_num.equals("count failed")) {
+            System.out.println("result:" + teacher_id);
+            if (teacher_id.equals("quary failed")) {
                 setFlag(false);
             } else {
                 setFlag(true);
@@ -74,8 +73,8 @@ public class CountCheckStudent_AllTypes extends Thread {
         this.flag = flag;
     }
 
-    public String getPresent_check_student_num() {
-        return present_check_student_num;
+    public String getTeacher_id() {
+        return teacher_id;
     }
 
     /*在run中调用doGet*/

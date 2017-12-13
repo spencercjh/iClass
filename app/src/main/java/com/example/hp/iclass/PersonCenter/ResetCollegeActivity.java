@@ -1,4 +1,4 @@
-package com.example.hp.iclass;
+package com.example.hp.iclass.PersonCenter;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.hp.iclass.PersonCenter.PersonDetailActivity;
+import com.example.hp.iclass.R;
 
 public class ResetCollegeActivity extends AppCompatActivity {
 private Toolbar tl_head;

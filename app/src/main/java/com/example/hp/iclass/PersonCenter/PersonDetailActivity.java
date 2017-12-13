@@ -10,9 +10,6 @@ import android.widget.TextView;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
-import com.example.hp.iclass.ResetClassActivity;
-import com.example.hp.iclass.ResetCollegeActivity;
-import com.example.hp.iclass.ResetSexActivity;
 
 public class PersonDetailActivity extends AppCompatActivity {
     private StudentOBJ studentOBJ = new StudentOBJ();

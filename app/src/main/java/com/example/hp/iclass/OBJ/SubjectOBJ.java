@@ -22,6 +22,14 @@ public class SubjectOBJ implements Serializable {
     public SubjectOBJ() {
     }
 
+    //从history teacher subject list中恢复数据结构
+    public SubjectOBJ(String subject_id, String subject_name, String classroom, int student_num) {
+        this.subject_id = subject_id;
+        this.subject_name = subject_name;
+        this.classroom = classroom;
+        this.student_num = student_num;
+    }
+
     //学生用的subjectOBJ对象
     public SubjectOBJ(String subject_id, String subject_name, String teacher_name, String classroom) {
         this.subject_id = subject_id;
