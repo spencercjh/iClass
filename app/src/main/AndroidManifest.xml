@@ -37,7 +37,10 @@
         <activity android:name=".PersonCenter.SettingActivity" />
         <activity android:name=".PersonCenter.ResetPasswordActivity" />
         <activity android:name=".PersonCenter.PersonSecurityActivity" />
-        <activity android:name=".PersonCenter.PersonDetailActivity"></activity>
+        <activity android:name=".PersonCenter.PersonDetailActivity" />
+        <activity android:name=".ResetSexActivity" />
+        <activity android:name=".ResetCollegeActivity" />
+        <activity android:name=".ResetClassActivity"></activity>
     </application>
 
 </manifest>
