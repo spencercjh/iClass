@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="languages">
+        <item>信息学院</item>
+        <item>水产与生命学院</item>
+        <item>食品学院</item>
+        <item>海洋科学学院</item>
+        <item>海洋生态与环境学院</item>
+        <item>爱恩学院</item>
+        <item>经济管理学院</item>
+        <item>工程学院</item>
+        <item>海洋文化与法律学院</item>
+        <item>外国语学院学院</item>
+        <item>国际文化交流学院</item>
+        <item>体育部</item>
+    </string-array>
+</resources>

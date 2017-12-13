@@ -6,6 +6,59 @@
     android:layout_height="match_parent"
     android:background="@color/colorlogin"
     tools:context="com.example.hp.iclass.ResetClassActivity">
+
+    <LinearLayout
+        android:id="@+id/loginPanel"
+        android:layout_width="319dp"
+        android:layout_height="155dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginLeft="8sp"
+        android:layout_marginRight="8sp"
+
+        android:layout_marginStart="8sp"
+        android:layout_marginTop="8sp"
+        android:background="@drawable/background_login_div"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.472"
+        app:layout_constraintHorizontal_bias="0.52">
+
+        <EditText
+            android:id="@+id/edit_id"
+            android:layout_width="280dp"
+            android:layout_height="50sp"
+            android:layout_marginLeft="50sp"
+            android:layout_marginRight="50sp"
+            android:layout_marginTop="15sp"
+            android:background="@drawable/qq_edit_login"
+            android:ems="10"
+            android:hint="例:16计算机科学与技术2班"
+            android:inputType="none"
+            android:maxLines="1"
+            android:selectAllOnFocus="false">
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/button_search"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20sp"
+            android:background="@drawable/background_button_div"
+            android:onClick="Login"
+            android:text="@string/确认" />
+
+    </LinearLayout>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/tl_head"
         android:layout_width="368dp"
@@ -19,4 +72,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:navigationIcon="@drawable/ic_back" />
+
 </android.support.constraint.ConstraintLayout>
