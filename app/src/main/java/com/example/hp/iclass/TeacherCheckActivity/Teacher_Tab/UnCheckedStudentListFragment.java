@@ -216,10 +216,11 @@ public class UnCheckedStudentListFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();//关闭对话框
-                CheckOBJ checkOBJ=new CheckOBJ(subjectOBJ.getSubject_id(),subjectOBJ.getSubject_th(),student_id,999);
+                CheckOBJ checkOBJ=new CheckOBJ(subjectOBJ.getSubject_id(),subjectOBJ.getSubject_th(),student_id,5,999);
                 try {
                     if(Fun_InsertCheckInfo_Teacher_Help.http_InsertCheckInfo_Teacher_Help(checkOBJ)){
                         Toast.makeText(getContext(),"代签成功！",Toast.LENGTH_SHORT).show();
+                        Teacher_FillUncheckedStudentList();
                     }else{
                         Toast.makeText(getContext(),"代签失败！",Toast.LENGTH_SHORT).show();
                     }

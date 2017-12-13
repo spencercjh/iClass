@@ -20,14 +20,15 @@ public class CheckOBJ implements Serializable {
 
     public CheckOBJ() {
     }
-
-    public CheckOBJ(String subject_id, int subject_th, String student_id, int ischeck) {
+    //教师代签
+    public CheckOBJ(String subject_id, int subject_th, String student_id, int ischeck,int seat_index) {
         this.subject_id = subject_id;
         this.subject_th = subject_th;
         this.student_id = student_id;
         this.ischeck = ischeck;
+        this.seat_index=seat_index;
     }
-
+    //学生签到
     public CheckOBJ(String subject_id, int subject_th, String student_id, int seat_index, String start_time) {
         this.subject_id = subject_id;
         this.subject_th = subject_th;

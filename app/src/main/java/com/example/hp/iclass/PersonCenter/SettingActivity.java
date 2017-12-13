@@ -1,7 +1,9 @@
-package com.example.hp.iclass;
+package com.example.hp.iclass.PersonCenter;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.hp.iclass.R;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -9,5 +11,13 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+    }
+
+    public void onBackPressed() {
+        gotomain();
+    }
+
+    private void gotomain() {
+        finish();
     }
 }
