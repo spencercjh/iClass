@@ -56,13 +56,36 @@
         <LinearLayout
             android:layout_width="291dp"
             android:layout_height="73dp"
-            android:orientation="vertical"
             android:layout_marginTop="15dp"
-            android:layout_weight="0.01">
+            android:layout_weight="0.41"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
+                android:layout_height="32sp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="65sp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="0.01"
+                    android:text="@string/性别"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_sex"
+                    android:layout_width="223dp"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="32sp"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -85,7 +108,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
+                android:layout_height="32sp"
                 android:orientation="horizontal"
                 android:weightSum="1">
 

@@ -25,11 +25,12 @@ import view.PhotoText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private int select_tab = 0;
     private String checked = "";
     private String choice_user = "";
-    private PhotoText dataTab;
-    private PhotoText settingTab;
-    private PhotoText userTab;
+    private PhotoText CheckTab;
+    private PhotoText PersonCenterTab;
+    private PhotoText HistoryTab;
     private FragmentManager fm;
     private ViewPager viewPager;
     private ArrayList<Fragment> fragmentsList;
@@ -74,10 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fragmentsList.add(new HistoryFragment(studentOBJ, 0));
             fragmentsList.add(new PersonFragment(studentOBJ, 0));
         }
-
-        dataTab = (PhotoText) findViewById(R.id.data_tab);
-        settingTab = (PhotoText) findViewById(R.id.setting_tab);
-        userTab = (PhotoText) findViewById(R.id.setting_tab1);
+        CheckTab = (PhotoText) findViewById(R.id.check_tab);
+        PersonCenterTab = (PhotoText) findViewById(R.id.person_center_tab);
+        HistoryTab = (PhotoText) findViewById(R.id.history_tab);
         viewPager = (ViewPager) findViewById(R.id.content);
         FragmentPagerAdapter pagerAdapter = new FragmentPagerAdapter(fm) {
             @Override
@@ -109,10 +109,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-        dataTab.setOnClickListener(this);
-        settingTab.setOnClickListener(this);
-        userTab.setOnClickListener(this);
-        selectTab(0);
+        CheckTab.setOnClickListener(this);
+        PersonCenterTab.setOnClickListener(this);
+        HistoryTab.setOnClickListener(this);
+        /*Intent intent = getIntent();
+        try{
+            String back_to_check=(String)intent.getSerializableExtra("to_check");
+            if(back_to_check.equals("true")){
+                select_tab=0;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            select_tab=0;
+        }
+        try {
+            String back_to_history=(String)intent.getSerializableExtra("to_history");
+            if(back_to_history.equals("true")){
+                select_tab=1;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            select_tab=0;
+        }
+        try {
+            String back_to_person_center = (String) intent.getSerializableExtra("to_person_center");
+            if (back_to_person_center.equals("true")) {
+                select_tab = 2;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            select_tab = 0;
+        }*/
+        selectTab(select_tab);
     }
 
     /*
@@ -122,19 +150,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void selectTab(int tab) {
         switch (tab) {
             case 0:
-                dataTab.setSelected(true);
-                settingTab.setSelected(false);
-                userTab.setSelected(false);
+                CheckTab.setSelected(true);
+                PersonCenterTab.setSelected(false);
+                HistoryTab.setSelected(false);
                 break;
             case 1:
-                dataTab.setSelected(false);
-                userTab.setSelected(true);
-                settingTab.setSelected(false);
+                CheckTab.setSelected(false);
+                HistoryTab.setSelected(true);
+                PersonCenterTab.setSelected(false);
                 break;
             case 2:
-                dataTab.setSelected(false);
-                userTab.setSelected(false);
-                settingTab.setSelected(true);
+                CheckTab.setSelected(false);
+                HistoryTab.setSelected(false);
+                PersonCenterTab.setSelected(true);
                 break;
         }
     }
@@ -142,13 +170,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.data_tab:
+            case R.id.check_tab:
                 viewPager.setCurrentItem(0);
                 break;
-            case R.id.setting_tab1:
+            case R.id.history_tab:
                 viewPager.setCurrentItem(1);
                 break;
-            case R.id.setting_tab:
+            case R.id.person_center_tab:
                 viewPager.setCurrentItem(2);
                 break;
         }

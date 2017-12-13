@@ -15,7 +15,7 @@
             android:layout_height="10sp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/linearLayout2"
-            android:orientation="horizontal"></LinearLayout>
+            android:orientation="horizontal" />
 
         <LinearLayout
             android:id="@+id/linearLayout1"
@@ -39,7 +39,8 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:lines="1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/RosyBrown"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -54,7 +55,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:lines="1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/RosyBrown"/>
         </LinearLayout>
 
 
@@ -79,7 +81,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/RosyBrown"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -94,9 +97,8 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:lines="1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/RosyBrown"/>
         </LinearLayout>
     </RelativeLayout>
-
-
 </LinearLayout>

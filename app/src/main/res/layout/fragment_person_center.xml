@@ -125,7 +125,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/re_xiangce"
+        app:layout_constraintTop_toBottomOf="@+id/re_infosecurity"
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView

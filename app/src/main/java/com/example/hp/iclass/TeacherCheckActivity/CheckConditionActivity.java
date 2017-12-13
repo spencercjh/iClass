@@ -18,6 +18,7 @@ import com.example.hp.iclass.CommonActivity.MainActivity;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetSubjectClassType;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStartTime;
+import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_QuaryCheckSituation;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountCheckStudent_AllTypes;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_DeleteCheckInfo_Teacher;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_InsertCheckInfo_Teacher;
@@ -74,7 +75,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             e.printStackTrace();
         }
         if (subjectOBJ.getCheck_situation() == 0) {
-            tl_head.setTitle(" 签到未开启");
+            tl_head.setTitle("签到未开启");
             tl_head.setTitleTextColor(Color.WHITE);
             tl_head.setNavigationIcon(R.drawable.ic_back);
             setSupportActionBar(tl_head);
@@ -82,11 +83,11 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             String Str_student_num = String.valueOf(subjectOBJ.getStudent_num());
             should.setText(Str_student_num.trim());
             //present.setText(R.string.右上角打call);
-            button_end_check.setEnabled(false);
-           // button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
+            button_end_check.setEnabled(true);
+            // button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
             button_end_check.setText("开始签到！");
         } else if (subjectOBJ.getCheck_situation() == 1) {
-            tl_head.setTitle(" 正在签到中");
+            tl_head.setTitle("正在签到中");
             tl_head.setTitleTextColor(Color.WHITE);
             tl_head.setNavigationIcon(R.drawable.ic_back);
             setSupportActionBar(tl_head);
@@ -99,6 +100,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            button_end_check.setEnabled(true);
         }
         tl_head.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +108,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
                 gotomain();
             }
         });
+        FreshPresentStudentNum();
     }
 
     @Override
@@ -119,21 +122,11 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_refresh) {
-            try {
-                Tsubject_th.setText(subject_th_tips + String.valueOf(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ)) + getString(R.string.大节));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            try {
-                subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
-                present.setText(Fun_CountCheckStudent_AllTypes.http_CountCheckStudent_AllTypes(subjectOBJ));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            FreshPresentStudentNum();
             return true;
         } else if (id == R.id.menu_check) {
             try {
-                StartCheck();
+                UpdateSubject_th();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -142,12 +135,9 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            tl_head.setTitle(" 正在签到中");
-            button_end_check.setEnabled(true);
-//            button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div2));
-            button_end_check.setText("结束本次签到");
+            FreshPresentStudentNum();
         } else if (id == R.id.menu_reupdate) {
-            tl_head.setTitle("  签到未开启");
+            tl_head.setTitle("签到未开启");
             try {
                 ReupdateCheck();
             } catch (InterruptedException e) {
@@ -158,6 +148,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            FreshPresentStudentNum();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -181,8 +172,8 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                tl_head.setTitle("  签到未开启");
-                button_end_check.setEnabled(false);
+                tl_head.setTitle("签到未开启");
+//                button_end_check.setEnabled(false);
 //                button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
                 button_end_check.setText("开始签到！");
             }
@@ -200,12 +191,6 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
     private void StartCheck() throws InterruptedException {
         //      更新开始签到时间
         Fun_UpdateStartTime.http_UpdateStartTime(subjectOBJ);
-        //      更新课程节数
-        try {
-            Fun_UpdateSubjectTh.http_UpdateSubjectTh(subjectOBJ);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         //      更改签到状态，允许学生签到
         Fun_SetCheckSituationTrue.http_SetCheckSituationTrue(subjectOBJ);
         subjectOBJ.setCheck_situation(1);
@@ -213,9 +198,8 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         try {
             subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
         } catch (InterruptedException e) {
-//          签到失败,把+1过的subject_th减回去，把签到状态改回去
+//          签到失败,把签到状态改回去
             try {
-                Fun_ReUpdateSubjectTh.http_ReUpdateSubjectTh(subjectOBJ);
                 Fun_SetCheckSituationFalse.http_SetCheckSituationFalse(subjectOBJ);
                 subjectOBJ.setCheck_situation(0);
             } catch (InterruptedException e1) {
@@ -230,7 +214,6 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         checkOBJ.setStudent_id(teacherOBJ.getTeacher_id());
         checkOBJ.setSeat_index(999);
         checkOBJ.setStart_time(Fun_GetStartTime.http_GetStartTime(subjectOBJ));
-
         Fun_InsertCheckInfo_Teacher.http_InsertCheckInfo_Teacher(checkOBJ);
 //      显示应到人数
         String Str_student_num = String.valueOf(subjectOBJ.getStudent_num());
@@ -238,6 +221,17 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
 //      获取当前签到人数并显示
         try {
             present.setText(Fun_CountCheckStudent_AllTypes.http_CountCheckStudent_AllTypes(subjectOBJ));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void UpdateSubject_th() throws InterruptedException {
+        //      更新开始签到时间
+        Fun_UpdateStartTime.http_UpdateStartTime(subjectOBJ);
+        //      更新课程节数
+        try {
+            Fun_UpdateSubjectTh.http_UpdateSubjectTh(subjectOBJ);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -253,9 +247,9 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             Fun_SetCheckSituationFalse.http_SetCheckSituationFalse(subjectOBJ);
             subjectOBJ.setCheck_situation(0);
         }//把老师插入的签到信息删掉
-        Fun_DeleteCheckInfo_Teacher.http_DeleteCheckInfo_Teacher(subjectOBJ.getSubject_id(),subjectOBJ.getSubject_th(),teacherOBJ.getTeacher_id());
+        Fun_DeleteCheckInfo_Teacher.http_DeleteCheckInfo_Teacher(subjectOBJ.getSubject_id(), subjectOBJ.getSubject_th(), teacherOBJ.getTeacher_id());
         button_end_check.setEnabled(false);
-        button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
+//        button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
         button_end_check.setText("开始签到！");
     }
 
@@ -300,22 +294,74 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         Intent it = new Intent(this, MainActivity.class);
         it.putExtra("teacherOBJ", teacherOBJ);
         it.putExtra("user", "teacher");
+        it.putExtra("to_check","true");
         startActivity(it);
         finish();
     }
 
-    private void endcheck() {
-        dialog();
+    private void EndOrStartCheck() throws InterruptedException {
+        if (Fun_QuaryCheckSituation.http_QuaryCheckSituation(subjectOBJ) == 1) {
+            dialog();
+        } else if (Fun_QuaryCheckSituation.http_QuaryCheckSituation(subjectOBJ) == 0) {
+            dialog2();
+        }
+    }
+
+    private void dialog2() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CheckConditionActivity.this);
+        builder.setMessage("确认开始签到吗？");
+        builder.setTitle("警告！");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();//关闭对话框
+                try {
+                    StartCheck();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                tl_head.setTitle("正在签到中");
+//                button_end_check.setEnabled(false);
+//                button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
+                button_end_check.setText("结束本次签到");
+            }
+        });
+
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();//显示对话框
     }
 
     public void onBackPressed() {
         gotomain();
     }
 
+    private void FreshPresentStudentNum() {
+        try {
+            Tsubject_th.setText(subject_th_tips + String.valueOf(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ)) + getString(R.string.大节));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
+            present.setText(Fun_CountCheckStudent_AllTypes.http_CountCheckStudent_AllTypes(subjectOBJ));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.button_end_check) {
-            endcheck();
+            try {
+                EndOrStartCheck();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } else if (view.getId() == R.id.button_student_list) {
             StudentList();
         } else if (view.getId() == R.id.button_seat) {

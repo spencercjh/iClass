@@ -58,4 +58,5 @@
     <string name="班级">班级:</string>
     <string name="查看学生列表">查看学生列表</string>
     <string name="教师代签">教师代签</string>
+    <string name="性别">性别：</string>
 </resources>

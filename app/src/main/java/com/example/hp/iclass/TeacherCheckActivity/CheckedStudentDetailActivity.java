@@ -10,8 +10,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
+import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentClass;
+import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentCollege;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentScore;
+import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentSex;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_UpdateStudentScore;
 import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
@@ -26,6 +30,9 @@ public class CheckedStudentDetailActivity extends AppCompatActivity {
     private CheckOBJ checkOBJ = new CheckOBJ();
     private Toolbar toolbar;
     private RatingBar ratingBar;
+    private TextView Tcollege;
+    private TextView Tclass;
+    private TextView Tsex;
     private int score;
 
     @Override
@@ -45,6 +52,9 @@ public class CheckedStudentDetailActivity extends AppCompatActivity {
             score = 0;
         }
         checkOBJ.setScore(score);
+        Tcollege = (TextView) findViewById(R.id.tv_college);
+        Tclass = (TextView) findViewById(R.id.tv_class);
+        Tsex = (TextView) findViewById(R.id.tv_sex);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         toolbar.setNavigationIcon(R.drawable.ic_back);
@@ -68,11 +78,48 @@ public class CheckedStudentDetailActivity extends AppCompatActivity {
                 }
             }
         });
+        FreshDetail();
     }
+
+    private void FreshDetail() {
+        try {
+            String college = Fun_QuaryStudentCollege.http_QuaryStudentCollege(checkOBJ.getStudent_id());
+            if (college.equals("failed")) {
+                Tcollege.setText("未填写");
+            } else {
+                Tcollege.setText(college);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            String Class = Fun_QuaryStudentClass.http_QuaryStudentClass(checkOBJ.getStudent_id());
+            if (Class.equals("failed")) {
+                Tclass.setText("未填写");
+            } else {
+                Tclass.setText(Class);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            int sex = Fun_QuaryStudentSex.http_QuaryStudentSex(checkOBJ.getStudent_id());
+            if (sex == 1) {
+                Tsex.setText("女");
+            } else if (sex == 0) {
+                Tsex.setText("男");
+            } else if (sex == -1) {
+                Tsex.setText("未填写");
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public boolean onMenuOpened(int featureId, Menu menu) {
         if (menu != null) {
-            if(menu.getClass().getSimpleName().equalsIgnoreCase("MenuBuilder")) {
+            if (menu.getClass().getSimpleName().equalsIgnoreCase("MenuBuilder")) {
                 try {
                     Method method = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
                     method.setAccessible(true);
@@ -99,6 +146,7 @@ public class CheckedStudentDetailActivity extends AppCompatActivity {
         if (id == R.id.menu_refresh) {
             try {
                 score = Fun_QuaryStudentScore.http_QuaryStudentScore(checkOBJ);
+                FreshDetail();
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 score = 0;

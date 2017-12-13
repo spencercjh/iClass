@@ -47,6 +47,7 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
     private Toolbar tl_head;
+    private int help_check_num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +80,17 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
             }
         });
         Teacher_FillSeatView();
+        try {
+            tl_head.setTitle(getString(R.string.已到) + Fun_CountCheckStudent_AllTypes.http_CountCheckStudent_AllTypes(subjectOBJ) + getString(R.string.人) + "其中教师代签" + help_check_num + getString(R.string.人));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            tl_head.setTitle(R.string.系统错误);
+        }
     }
 
 
     private void Teacher_FillSeatView() {
+        help_check_num=0;
         final ArrayList<CheckOBJ> seat = new ArrayList<>();
         ArrayList<CheckOBJ> check_student = new ArrayList<>();
         try {
@@ -94,8 +102,12 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
         CheckOBJ hash[] = new CheckOBJ[seatnum];
         boolean exist[] = new boolean[seatnum];
         for (CheckOBJ i : check_student) {
-            hash[i.getSeat_index()] = i;
-            exist[i.getSeat_index()] = true;
+            if(i.getSeat_index()<=seatnum){
+                hash[i.getSeat_index()] = i;
+                exist[i.getSeat_index()] = true;
+            }else{
+                help_check_num++;
+            }
         }
         for (int i = 0; i < seatnum; i++) {
             if (exist[i]) {

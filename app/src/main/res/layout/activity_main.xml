@@ -13,7 +13,7 @@
         android:orientation="horizontal">
 
         <view.PhotoText
-            android:id="@+id/data_tab"
+            android:id="@+id/check_tab"
             android:layout_width="30dp"
             android:layout_height="60dp"
             android:layout_weight="1"
@@ -23,7 +23,7 @@
             custom:mphoto="@drawable/data_tab_selected" />
 
         <view.PhotoText
-            android:id="@+id/setting_tab1"
+            android:id="@+id/history_tab"
             android:layout_width="127dp"
             android:layout_height="match_parent"
             custom:mText="@string/历史信息"
@@ -31,7 +31,7 @@
             custom:mphoto="@drawable/user_tab_selected" />
 
         <view.PhotoText
-            android:id="@+id/setting_tab"
+            android:id="@+id/person_center_tab"
             android:layout_width="30dp"
             android:layout_height="60dp"
             android:layout_weight="1"

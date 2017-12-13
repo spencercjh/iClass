@@ -34,9 +34,10 @@
         <activity android:name=".History.history_subjectinfo_teacherActivity" />
         <activity android:name=".History.history_subjectinfo_studentActivity" />
         <activity android:name=".TeacherCheckActivity.Teacher_Tab.StudentListActivity" />
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".PersonSecurityActivity"></activity>
+        <activity android:name=".PersonCenter.SettingActivity" />
+        <activity android:name=".PersonCenter.ResetPasswordActivity" />
+        <activity android:name=".PersonCenter.PersonSecurityActivity" />
+        <activity android:name=".PersonCenter.PersonDetailActivity"></activity>
     </application>
 
 </manifest>
