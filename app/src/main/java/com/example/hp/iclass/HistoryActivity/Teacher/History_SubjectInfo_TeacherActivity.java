@@ -39,20 +39,20 @@ public class History_SubjectInfo_TeacherActivity extends AppCompatActivity imple
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_subjectinfo_teacher);
         tl_head = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tl_head);
         tl_head.setTitleTextColor(Color.WHITE);
-        tl_head.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goback();
-            }
-        });
         Intent intent = getIntent();
         teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
         subjectOBJ = (SubjectOBJ) intent.getSerializableExtra("subjectOBJ");
         checkOBJ = (CheckOBJ) intent.getSerializableExtra("checkOBJ");
         subjectOBJ.setSubject_th(checkOBJ.getSubject_th());
         tl_head.setTitle("第" + checkOBJ.getSubject_th() + "节" + subjectOBJ.getSubject_name());
+        setSupportActionBar(tl_head);
+        tl_head.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goback();
+            }
+        });
         should = (TextView) findViewById(R.id.text_should);
         present = (TextView) findViewById(R.id.text_present);
         start_time = (TextView) findViewById(R.id.tv_starttime);

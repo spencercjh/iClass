@@ -58,13 +58,15 @@
 
                 android:gravity="center"
                 android:text="@string/应到"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:layout_weight="2.87" />
 
             <TextView
                 android:id="@+id/text_should"
                 android:layout_width="145dp"
                 android:layout_height="75dp"
                 android:gravity="center"
+                android:text="123"
                 android:textSize="30sp" />
 
         </LinearLayout>
@@ -91,15 +93,17 @@
                 android:layout_width="145dp"
                 android:layout_height="75dp"
                 android:gravity="center"
+                android:text="123"
                 android:textSize="30sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="255dp"
+            android:layout_width="260sp"
             android:layout_height="39dp"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="95sp"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -108,8 +112,10 @@
 
             <TextView
                 android:id="@+id/tv_starttime"
-                android:layout_width="match_parent"
+                android:layout_width="174dp"
                 android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="123"
                 android:textSize="18sp" />
         </LinearLayout>
 

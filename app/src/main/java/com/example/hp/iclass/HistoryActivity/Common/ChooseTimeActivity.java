@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.hp.iclass.CommonActivity.MainActivity;
 import com.example.hp.iclass.HistoryActivity.Student.History_SubjectInfo_StudentActivity;
 import com.example.hp.iclass.HistoryActivity.Teacher.History_SubjectInfo_TeacherActivity;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetHistorySubjectTimeandTh;
@@ -42,9 +43,9 @@ public class ChooseTimeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choosetime);
         tl_head = (Toolbar) findViewById(R.id.tl_head);
-        setSupportActionBar(tl_head);
         tl_head.setTitle("  请选择具体时间");
         tl_head.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(tl_head);
         tl_head.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,6 +157,16 @@ public class ChooseTimeActivity extends AppCompatActivity {
     }
 
     private void gotomain() {
+        Intent intent = new Intent(ChooseTimeActivity.this, MainActivity.class);
+        if (choice_user == 1) {
+            intent.putExtra("teacherOBJ", teacherOBJ);
+            intent.putExtra("user", "teacher");
+        } else if (choice_user == 0) {
+            intent.putExtra("studentOBJ", studentOBJ);
+            intent.putExtra("user", "student");
+        }
+        intent.putExtra("to_history", "true");
+        startActivity(intent);
         finish();
     }
 

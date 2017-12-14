@@ -1,12 +1,19 @@
 package com.example.hp.iclass.PersonCenter.PersonInfo;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.hp.iclass.CommonActivity.MainActivity;
+import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStudentProperty;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetTeacherProperty;
 import com.example.hp.iclass.HttpFunction.Json.Json_StudentProperty;
@@ -33,6 +40,7 @@ public class PersonDetailActivity extends AppCompatActivity {
     private RelativeLayout re_sex;
     private String user = "";
     private int choice_user;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +51,28 @@ public class PersonDetailActivity extends AppCompatActivity {
             choice_user = 1;
             setContentView(R.layout.activity_person_detail_teacher);
             teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
+        } else if (user.equals("student")) {
+            choice_user = 0;
+            setContentView(R.layout.activity_person_detail_student);
+            studentOBJ = (StudentOBJ) intent.getSerializableExtra("studentOBJ");
+        }
+        fill_info();
+        toolbar = (Toolbar) findViewById(R.id.tl_head);
+        toolbar.setNavigationIcon(R.drawable.ic_back);
+        toolbar.setTitle("       个人资料");
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationIcon(R.drawable.ic_back);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotomain();
+            }
+        });
+    }
+
+    private void fill_info() {
+        if (choice_user == 1) {
             tv_name = (TextView) findViewById(R.id.tv_name);
             tv_id = (TextView) findViewById(R.id.tv_id);
             tv_sex = (TextView) findViewById(R.id.tv_sex);
@@ -52,12 +82,12 @@ public class PersonDetailActivity extends AppCompatActivity {
             } catch (JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
-            if (teacherOBJ.getTeacher_name().length() < 1 || teacherOBJ.getTeacher_name().equals("null")) {
+            if (teacherOBJ.getTeacher_name() == null || teacherOBJ.getTeacher_name().equals("null")) {
                 tv_name.setText("未填写");
             } else {
                 tv_name.setText(teacherOBJ.getTeacher_name());
             }
-            if (teacherOBJ.getTeacher_id().length() < 1 || teacherOBJ.getTeacher_id().equals("null")) {
+            if (teacherOBJ.getTeacher_id() == null || teacherOBJ.getTeacher_id().equals("null")) {
                 tv_id.setText("未填写");
             } else {
                 tv_id.setText(teacherOBJ.getTeacher_id());
@@ -69,15 +99,12 @@ public class PersonDetailActivity extends AppCompatActivity {
             } else if (teacherOBJ.getTeacher_sex() == 0) {
                 tv_sex.setText("男");
             }
-            if (teacherOBJ.getTeacher_college().length() < 1 || teacherOBJ.getTeacher_college().equals("null")) {
+            if (teacherOBJ.getTeacher_college() == null || teacherOBJ.getTeacher_college().equals("null")) {
                 tv_college.setText("未填写");
             } else {
                 tv_college.setText(teacherOBJ.getTeacher_college());
             }
-        } else if (user.equals("student")) {
-            choice_user = 0;
-            setContentView(R.layout.activity_person_detail_student);
-            studentOBJ = (StudentOBJ) intent.getSerializableExtra("studentOBJ");
+        } else if (choice_user == 0) {
             tv_name = (TextView) findViewById(R.id.tv_name);
             tv_id = (TextView) findViewById(R.id.tv_id);
             tv_sex = (TextView) findViewById(R.id.tv_sex);
@@ -88,12 +115,12 @@ public class PersonDetailActivity extends AppCompatActivity {
             } catch (JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
-            if (studentOBJ.getStudent_name().length() < 1 || studentOBJ.getStudent_name().equals("null")) {
+            if (studentOBJ.getStudent_name() == null || studentOBJ.getStudent_name().equals("null")) {
                 tv_name.setText("未填写");
             } else {
                 tv_name.setText(studentOBJ.getStudent_name());
             }
-            if (studentOBJ.getStudent_id().length() < 1 || studentOBJ.getStudent_id().equals("null")) {
+            if (studentOBJ.getStudent_id() == null || studentOBJ.getStudent_id().equals("null")) {
                 tv_id.setText("未填写");
             } else {
                 tv_id.setText(studentOBJ.getStudent_id());
@@ -105,18 +132,33 @@ public class PersonDetailActivity extends AppCompatActivity {
             } else if (studentOBJ.getStudent_sex() == 0) {
                 tv_sex.setText("男");
             }
-            if (studentOBJ.getStudent_college().length() < 1 || studentOBJ.getStudent_college().equals("null")) {
+            if (studentOBJ.getStudent_college() == null || studentOBJ.getStudent_college().equals("null")) {
                 tv_college.setText("未填写");
             } else {
                 tv_college.setText(studentOBJ.getStudent_college());
             }
-            if (studentOBJ.getStudent_class().length() < 1 || studentOBJ.getStudent_class().equals("null")) {
+            if (studentOBJ.getStudent_class() == null || studentOBJ.getStudent_class().equals("null")) {
                 tv_class.setText("未填写");
             } else {
                 tv_class.setText(studentOBJ.getStudent_class());
             }
         }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_only_fresh, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_refresh) {
+            fill_info();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onBackPressed() {
@@ -124,6 +166,16 @@ public class PersonDetailActivity extends AppCompatActivity {
     }
 
     private void gotomain() {
+        Intent intent = new Intent(PersonDetailActivity.this, MainActivity.class);
+        if (choice_user == 1) {
+            intent.putExtra("user", "teacher");
+            intent.putExtra("teacherOBJ", teacherOBJ);
+        } else if (choice_user == 0) {
+            intent.putExtra("user", "student");
+            intent.putExtra("studentOBJ", studentOBJ);
+        }
+        intent.putExtra("to_person_center", "true");
+        startActivity(intent);
         finish();
     }
 
