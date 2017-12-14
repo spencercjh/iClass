@@ -49,10 +49,28 @@ public class PersonDetailActivity extends AppCompatActivity {
             } catch (JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
-            tv_name.setText(teacherOBJ.getTeacher_name());
-            tv_id.setText(teacherOBJ.getTeacher_id());
-            tv_sex.setText(teacherOBJ.getTeacher_sex());
-            tv_college.setText(teacherOBJ.getTeacher_college());
+            if (teacherOBJ.getTeacher_name().length() < 1 || teacherOBJ.getTeacher_name().equals("null")) {
+                tv_name.setText("未填写");
+            } else {
+                tv_name.setText(teacherOBJ.getTeacher_name());
+            }
+            if (teacherOBJ.getTeacher_id().length() < 1 || teacherOBJ.getTeacher_id().equals("null")) {
+                tv_id.setText("未填写");
+            } else {
+                tv_id.setText(teacherOBJ.getTeacher_id());
+            }
+            if (teacherOBJ.getTeacher_sex() == -1) {
+                tv_sex.setText("未填写");
+            } else if (teacherOBJ.getTeacher_sex() == 1) {
+                tv_sex.setText("女");
+            } else if (teacherOBJ.getTeacher_sex() == 0) {
+                tv_sex.setText("男");
+            }
+            if (teacherOBJ.getTeacher_college().length() < 1 || teacherOBJ.getTeacher_college().equals("null")) {
+                tv_college.setText("未填写");
+            } else {
+                tv_college.setText(teacherOBJ.getTeacher_college());
+            }
         } else if (user.equals("student")) {
             choice_user = 0;
             setContentView(R.layout.activity_person_detail_student);
@@ -67,11 +85,33 @@ public class PersonDetailActivity extends AppCompatActivity {
             } catch (JSONException | InterruptedException e) {
                 e.printStackTrace();
             }
-            tv_name.setText(studentOBJ.getStudent_name());
-            tv_id.setText(studentOBJ.getStudent_id());
-            tv_sex.setText(studentOBJ.getStudent_sex());
-            tv_college.setText(studentOBJ.getStudent_college());
-            tv_class.setText(studentOBJ.getStudent_class());
+            if (studentOBJ.getStudent_name().length() < 1 || studentOBJ.getStudent_name().equals("null")) {
+                tv_name.setText("未填写");
+            } else {
+                tv_name.setText(studentOBJ.getStudent_name());
+            }
+            if (studentOBJ.getStudent_id().length() < 1 || studentOBJ.getStudent_id().equals("null")) {
+                tv_id.setText("未填写");
+            } else {
+                tv_id.setText(studentOBJ.getStudent_id());
+            }
+            if (studentOBJ.getStudent_sex() == -1) {
+                tv_sex.setText("未填写");
+            } else if (studentOBJ.getStudent_sex() == 1) {
+                tv_sex.setText("女");
+            } else if (studentOBJ.getStudent_sex() == 0) {
+                tv_sex.setText("男");
+            }
+            if (studentOBJ.getStudent_college().length() < 1 || studentOBJ.getStudent_college().equals("null")) {
+                tv_college.setText("未填写");
+            } else {
+                tv_college.setText(studentOBJ.getStudent_college());
+            }
+            if (studentOBJ.getStudent_class().length() < 1 || studentOBJ.getStudent_class().equals("null")) {
+                tv_class.setText("未填写");
+            } else {
+                tv_class.setText(studentOBJ.getStudent_class());
+            }
         }
 
     }
