@@ -47,7 +47,7 @@
 
 
         <TextView
-            android:id="@+id/teacher_id"
+            android:id="@+id/student_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50px"

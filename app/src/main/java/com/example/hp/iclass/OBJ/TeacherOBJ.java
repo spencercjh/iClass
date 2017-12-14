@@ -12,7 +12,7 @@ public class TeacherOBJ implements Serializable {
     private String teacher_id;
     private String teacher_name;
     private String teacher_password;
-    private String teacher_sex;
+    private int teacher_sex;
     private String teacher_college;
 
     public TeacherOBJ() {
@@ -31,11 +31,11 @@ public class TeacherOBJ implements Serializable {
         this.teacher_college = teacher_college;
     }
 
-    public String getTeacher_sex() {
+    public int getTeacher_sex() {
         return teacher_sex;
     }
 
-    public void setTeacher_sex(String teacher_sex) {
+    public void setTeacher_sex(int teacher_sex) {
         this.teacher_sex = teacher_sex;
     }
 

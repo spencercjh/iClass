@@ -2,6 +2,8 @@ package com.example.hp.iclass.PersonCenter;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -26,6 +28,13 @@ public class ResetSexActivity extends AppCompatActivity implements View.OnClickL
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private String user = "";
     private int choice_user;
+    private Handler handler = new Handler() {   //修改成功后延迟1秒返回前一活动
+        @Override
+        public void handleMessage(Message msg) {
+            gotolast();
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,10 +89,7 @@ public class ResetSexActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void gotolast() {
-        Intent it = new Intent(this, PersonDetailActivity.class);
-        startActivity(it);
         finish();
-
     }
 
     @Override
@@ -95,19 +101,29 @@ public class ResetSexActivity extends AppCompatActivity implements View.OnClickL
             } else if (select_sex.equals("女")) {
                 sex = 1;
             }
-            if(choice_user==1){
+            if (choice_user == 1) {
                 try {
-                    Fun_UpdateTeacherSex.http_UpdateTeacherSex(teacherOBJ.getTeacher_id(),sex);
+                    if (Fun_UpdateTeacherSex.http_UpdateTeacherSex(teacherOBJ.getTeacher_id(), sex)) {
+                        Toast.makeText(ResetSexActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                        handler.sendEmptyMessageDelayed(0, 1000);
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }else if(choice_user==0){
+            } else if (choice_user == 0) {
                 try {
-                    Fun_UpdateStudentSex.http_UpdateStudentSex(studentOBJ.getStudent_id(),sex);
+                    if (Fun_UpdateStudentSex.http_UpdateStudentSex(studentOBJ.getStudent_id(), sex)) {
+                        Toast.makeText(ResetSexActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                        handler.sendEmptyMessageDelayed(0, 1000);
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    public void onBackPressed() {
+        gotolast();
     }
 }

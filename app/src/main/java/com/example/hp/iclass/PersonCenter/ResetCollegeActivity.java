@@ -2,6 +2,8 @@ package com.example.hp.iclass.PersonCenter;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +26,13 @@ public class ResetCollegeActivity extends AppCompatActivity implements View.OnCl
     private String user = "";
     private int choice_user;
     private String select_college;
+    private Handler handler = new Handler() {   //修改成功后延迟1秒返回前一活动
+        @Override
+        public void handleMessage(Message msg) {
+            gotolast();
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +84,7 @@ public class ResetCollegeActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void gotolast() {
-        Intent it = new Intent(this, PersonDetailActivity.class);
-        startActivity(it);
         finish();
-
     }
 
     @Override
@@ -86,17 +92,27 @@ public class ResetCollegeActivity extends AppCompatActivity implements View.OnCl
         if (view.getId() == R.id.button2) {
             if (choice_user == 1) {
                 try {
-                    Fun_UpdateTeacherCollege.http_UpdateTeacherCollege(teacherOBJ.getTeacher_id(), select_college);
+                    if (Fun_UpdateTeacherCollege.http_UpdateTeacherCollege(teacherOBJ.getTeacher_id(), select_college)) {
+                        Toast.makeText(ResetCollegeActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                        handler.sendEmptyMessageDelayed(0, 1000);
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             } else if (choice_user == 0) {
                 try {
-                    Fun_UpdateStudentCollege.http_UpdateStudentCollege(studentOBJ.getStudent_id(), select_college);
+                    if (Fun_UpdateStudentCollege.http_UpdateStudentCollege(studentOBJ.getStudent_id(), select_college)) {
+                        Toast.makeText(ResetCollegeActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                        handler.sendEmptyMessageDelayed(0, 1000);
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    public void onBackPressed() {
+        gotolast();
     }
 }

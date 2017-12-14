@@ -7,9 +7,15 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStudentProperty;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetTeacherProperty;
+import com.example.hp.iclass.HttpFunction.Json.Json_StudentProperty;
+import com.example.hp.iclass.HttpFunction.Json.Json_TeacherProperty;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
+
+import org.json.JSONException;
 
 public class PersonDetailActivity extends AppCompatActivity {
     private StudentOBJ studentOBJ = new StudentOBJ();
@@ -38,14 +44,34 @@ public class PersonDetailActivity extends AppCompatActivity {
             tv_id = (TextView) findViewById(R.id.tv_id);
             tv_sex = (TextView) findViewById(R.id.tv_sex);
             tv_college = (TextView) findViewById(R.id.tv_college);
+            try {
+                teacherOBJ = Json_TeacherProperty.pareJson(Fun_GetTeacherProperty.http_GetTeacherProperty(teacherOBJ.getTeacher_id()));
+            } catch (JSONException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            tv_name.setText(teacherOBJ.getTeacher_name());
+            tv_id.setText(teacherOBJ.getTeacher_id());
+            tv_sex.setText(teacherOBJ.getTeacher_sex());
+            tv_college.setText(teacherOBJ.getTeacher_college());
         } else if (user.equals("student")) {
             choice_user = 0;
             setContentView(R.layout.activity_person_detail_student);
+            studentOBJ = (StudentOBJ) intent.getSerializableExtra("studentOBJ");
             tv_name = (TextView) findViewById(R.id.tv_name);
             tv_id = (TextView) findViewById(R.id.tv_id);
             tv_sex = (TextView) findViewById(R.id.tv_sex);
             tv_college = (TextView) findViewById(R.id.tv_college);
-            tv_class=(TextView)findViewById(R.id.tv_class);
+            tv_class = (TextView) findViewById(R.id.tv_class);
+            try {
+                studentOBJ = Json_StudentProperty.pareJson(Fun_GetStudentProperty.http_GetStudentProperty(studentOBJ.getStudent_id()));
+            } catch (JSONException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            tv_name.setText(studentOBJ.getStudent_name());
+            tv_id.setText(studentOBJ.getStudent_id());
+            tv_sex.setText(studentOBJ.getStudent_sex());
+            tv_college.setText(studentOBJ.getStudent_college());
+            tv_class.setText(studentOBJ.getStudent_class());
         }
 
     }

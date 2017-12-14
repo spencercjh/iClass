@@ -39,7 +39,7 @@
             android:layout_marginTop="15sp"
             android:background="@drawable/qq_edit_login"
             android:ems="10"
-            android:hint="例:16计算机科学与技术2班"
+            android:hint="@string/例16计科3班"
             android:inputType="none"
             android:maxLines="1"
             android:selectAllOnFocus="false">
@@ -54,7 +54,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20sp"
             android:background="@drawable/background_button_div"
-            android:onClick="Login"
             android:text="@string/确认" />
 
     </LinearLayout>
