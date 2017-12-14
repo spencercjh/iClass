@@ -14,29 +14,40 @@ import com.example.hp.iclass.R;
 public class PersonDetailActivity extends AppCompatActivity {
     private StudentOBJ studentOBJ = new StudentOBJ();
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
-    private String user = "";
-    private int choice_user;
     private TextView tv_name;
     private TextView tv_id;
-    private  TextView tv_sex;
-    private  TextView tv_college;
-    private  TextView tv_class;
+    private TextView tv_sex;
+    private TextView tv_college;
+    private TextView tv_class;
     private RelativeLayout re_college;
     private RelativeLayout re_class;
     private RelativeLayout re_sex;
+    private String user = "";
+    private int choice_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_detail);
-        tv_name=(TextView)findViewById(R.id.tv_name);
-        tv_id=(TextView)findViewById(R.id.tv_id);
-        tv_sex=(TextView)findViewById(R.id.tv_sex);
-        tv_college=(TextView)findViewById(R.id.tv_college);
-        tv_class=(TextView)findViewById(R.id.tv_class);
-        re_class=(RelativeLayout)findViewById(R.id.re_class);
-        re_college=(RelativeLayout)findViewById(R.id.re_college);
-        re_sex=(RelativeLayout)findViewById(R.id.re_sex);
+        Intent intent = getIntent();
+        user = (String) intent.getSerializableExtra("user");
+        if (user.equals("teacher")) {
+            choice_user = 1;
+            setContentView(R.layout.activity_person_detail_teacher);
+            teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
+            tv_name = (TextView) findViewById(R.id.tv_name);
+            tv_id = (TextView) findViewById(R.id.tv_id);
+            tv_sex = (TextView) findViewById(R.id.tv_sex);
+            tv_college = (TextView) findViewById(R.id.tv_college);
+        } else if (user.equals("student")) {
+            choice_user = 0;
+            setContentView(R.layout.activity_person_detail_student);
+            tv_name = (TextView) findViewById(R.id.tv_name);
+            tv_id = (TextView) findViewById(R.id.tv_id);
+            tv_sex = (TextView) findViewById(R.id.tv_sex);
+            tv_college = (TextView) findViewById(R.id.tv_college);
+            tv_class=(TextView)findViewById(R.id.tv_class);
+        }
+
     }
 
     public void onBackPressed() {
@@ -46,6 +57,7 @@ public class PersonDetailActivity extends AppCompatActivity {
     private void gotomain() {
         finish();
     }
+
     public void resetsex(View view) {
         Intent intent = new Intent(this, ResetSexActivity.class);
         if (choice_user == 1) {
@@ -58,6 +70,7 @@ public class PersonDetailActivity extends AppCompatActivity {
         startActivity(intent);
 //        finish();
     }
+
     public void resetcollege(View view) {
         Intent intent = new Intent(this, ResetCollegeActivity.class);
         if (choice_user == 1) {
@@ -70,15 +83,11 @@ public class PersonDetailActivity extends AppCompatActivity {
         startActivity(intent);
 //        finish();
     }
+
     public void resetclass(View view) {
         Intent intent = new Intent(this, ResetClassActivity.class);
-        if (choice_user == 1) {
-            intent.putExtra("teacherOBJ", teacherOBJ);
-            intent.putExtra("user", "teacher");
-        } else if (choice_user == 0) {
-            intent.putExtra("studentOBJ", studentOBJ);
-            intent.putExtra("user", "student");
-        }
+        intent.putExtra("studentOBJ", studentOBJ);
+        intent.putExtra("user", "student");
         startActivity(intent);
 //        finish();
     }

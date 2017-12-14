@@ -12,6 +12,8 @@ public class TeacherOBJ implements Serializable {
     private String teacher_id;
     private String teacher_name;
     private String teacher_password;
+    private String teacher_sex;
+    private String teacher_college;
 
     public TeacherOBJ() {
     }
@@ -19,6 +21,22 @@ public class TeacherOBJ implements Serializable {
     public TeacherOBJ(String teacher_id, String teacher_password) {
         this.teacher_id = teacher_id;
         this.teacher_password = teacher_password;
+    }
+
+    public String getTeacher_college() {
+        return teacher_college;
+    }
+
+    public void setTeacher_college(String teacher_college) {
+        this.teacher_college = teacher_college;
+    }
+
+    public String getTeacher_sex() {
+        return teacher_sex;
+    }
+
+    public void setTeacher_sex(String teacher_sex) {
+        this.teacher_sex = teacher_sex;
     }
 
     public String getTeacher_id() {

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
@@ -30,6 +31,7 @@ public class PersonFragment extends Fragment {
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private StudentOBJ studentOBJ = new StudentOBJ();
     private int choice_user;
+    private TextView tv_fxid;
 
     public PersonFragment() {
     }
@@ -60,6 +62,12 @@ public class PersonFragment extends Fragment {
         re_myinfo = getActivity().findViewById(R.id.re_myinfo);
         re_setting = getActivity().findViewById(R.id.re_setting);
         re_infosecurity = getActivity().findViewById(R.id.re_infosecurity);
+        tv_fxid = getActivity().findViewById(R.id.tv_fxid);
+        if (choice_user == 1) {
+            tv_fxid.setText("工号");
+        } else if (choice_user == 0) {
+            tv_fxid.setText("学号");
+        }
         re_myinfo.setOnClickListener(new View.OnClickListener() {
 
             @Override

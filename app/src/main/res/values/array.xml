@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="languages">
+    <string-array name="college">
         <item>信息学院</item>
         <item>水产与生命学院</item>
         <item>食品学院</item>
