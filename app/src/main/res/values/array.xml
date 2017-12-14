@@ -14,4 +14,9 @@
         <item>国际文化交流学院</item>
         <item>体育部</item>
     </string-array>
+    <string-array name="sex">
+        <item>男</item>
+        <item>女</item>
+
+    </string-array>
 </resources>
