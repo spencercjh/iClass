@@ -18,7 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.hp.iclass.HistoryActivity.ChooseTimeActivity;
+import com.example.hp.iclass.HistoryActivity.Common.ChooseTimeActivity;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStudentSubject;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetTeacherSubject;
 import com.example.hp.iclass.HttpFunction.Json.Json_StudentSubjectList;

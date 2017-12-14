@@ -35,7 +35,7 @@ import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat1Activity_Tea
 import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat2Activity_Teacher;
 import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat3Activity_Teacher;
 import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.SeatErrorActivity_Teacher;
-import com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab.StudentListActivity;
+import com.example.hp.iclass.TeacherCheckActivity.Teacher_StudentList_Tab.StudentListActivity;
 
 public class CheckConditionActivity extends AppCompatActivity implements View.OnClickListener {
 

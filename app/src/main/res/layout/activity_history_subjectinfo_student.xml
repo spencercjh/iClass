@@ -7,17 +7,6 @@
     android:background="@color/colorlogin"
     tools:context=".TeacherCheckActivity.CheckConditionActivity">
 
-    <TextView
-        android:id="@+id/text_subject_th"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/这门课已经上到第"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.154" />
-
     <LinearLayout
         android:id="@+id/loginPanel"
         android:layout_width="290dp"
@@ -59,7 +48,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/text_should"
+                android:id="@+id/text_ischeck"
                 android:layout_width="145dp"
                 android:layout_height="60dp"
                 android:layout_weight="0.94"
@@ -81,11 +70,11 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:gravity="center"
-                android:text="座位"
+                android:text="座位号"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/text_present"
+                android:id="@+id/text_seat_index"
                 android:layout_width="145dp"
                 android:layout_height="60sp"
                 android:gravity="center"
@@ -100,27 +89,19 @@
             <TextView
                 android:layout_width="95sp"
                 android:layout_height="60sp"
-                android:layout_weight="0.00"
-
-                android:text="签到时间: "
                 android:layout_gravity="center_horizontal"
+
+                android:layout_weight="0.00"
+                android:gravity="center"
+                android:text="签到时间: "
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/tv_starttime"
+                android:id="@+id/tv_check_time"
                 android:layout_width="match_parent"
                 android:layout_height="60sp"
                 android:textSize="18sp" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/button_seat"
-            android:layout_width="150sp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15sp"
-            android:background="@drawable/background_button_div"
-            android:text="@string/查看签到座位表" />
 
     </LinearLayout>
 

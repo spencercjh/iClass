@@ -1,4 +1,4 @@
-package com.example.hp.iclass.PersonCenter;
+package com.example.hp.iclass.PersonCenter.PersonSecurity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,13 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.hp.iclass.CommonActivity.MainActivity;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_StudentLogin;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_UpdateStudentPassword;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_TeacherLogin;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_UpdateTeacherPassword;
 import com.example.hp.iclass.OBJ.StudentOBJ;
-import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
 

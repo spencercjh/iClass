@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorlogin"
-    tools:context="com.example.hp.iclass.PersonCenter.ResetPasswordActivity">
+    tools:context="com.example.hp.iclass.PersonCenter.PersonSecurity.ResetPasswordActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tl_head"

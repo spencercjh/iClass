@@ -1,4 +1,4 @@
-package com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab;
+package com.example.hp.iclass.TeacherCheckActivity.Teacher_StudentList_Tab;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentScore;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
-import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStartTime;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentCheckNum;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllStudent;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;

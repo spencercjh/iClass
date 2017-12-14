@@ -1,12 +1,9 @@
-package com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat;
+package com.example.hp.iclass.HistoryActivity.Teacher.Teacher_History_Seat;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
@@ -24,6 +21,7 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.example.hp.iclass.HistoryActivity.Teacher.CheckedStudentHistoryDetailActivity;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetStudentName;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountCheckStudent_AllTypes;
@@ -34,8 +32,6 @@ import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
-import com.example.hp.iclass.TeacherCheckActivity.CheckConditionActivity;
-import com.example.hp.iclass.TeacherCheckActivity.CheckedStudentDetailActivity;
 
 import java.util.ArrayList;
 
@@ -159,7 +155,7 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
                                     }
                                     break;
                                 case R.id.menu_info:
-                                    Intent intent = new Intent(Seat3Activity_Teacher.this, CheckedStudentDetailActivity.class);
+                                    Intent intent = new Intent(Seat3Activity_Teacher.this, CheckedStudentHistoryDetailActivity.class);
                                     intent.putExtra("teacherOBJ", teacherOBJ);
                                     intent.putExtra("subjectOBJ", subjectOBJ);
                                     intent.putExtra("checkOBJ", seat.get(position));
@@ -179,11 +175,6 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
     }
 
     private void goback() {
-        view = null;
-        Intent it = new Intent(this, CheckConditionActivity.class);
-        it.putExtra("teacherOBJ", teacherOBJ);
-        it.putExtra("subjectOBJ", subjectOBJ);
-        startActivity(it);
         finish();
         System.gc();
     }
@@ -274,7 +265,7 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
             }
             if (selectItem == arg0) {
                 if (checkOBJ.getStudent_id() != null) {  //座位有人
-                    Intent intent = new Intent(Seat3Activity_Teacher.this, CheckedStudentDetailActivity.class);
+                    Intent intent = new Intent(Seat3Activity_Teacher.this, CheckedStudentHistoryDetailActivity.class);
                     intent.putExtra("teacherOBJ", teacherOBJ);
                     intent.putExtra("subjectOBJ", subjectOBJ);
                     intent.putExtra("checkOBJ", checkOBJ);

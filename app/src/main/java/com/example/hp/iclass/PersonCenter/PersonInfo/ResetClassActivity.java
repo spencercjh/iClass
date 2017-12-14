@@ -1,4 +1,4 @@
-package com.example.hp.iclass.PersonCenter;
+package com.example.hp.iclass.PersonCenter.PersonInfo;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_UpdateStudentClass;
-import com.example.hp.iclass.HttpFunction.Thread.Student_Thread.UpdateStudentClass;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.R;
 

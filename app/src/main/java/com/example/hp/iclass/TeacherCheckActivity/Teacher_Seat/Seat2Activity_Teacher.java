@@ -184,89 +184,12 @@ public class Seat2Activity_Teacher extends AppCompatActivity {
         it.putExtra("teacherOBJ", teacherOBJ);
         it.putExtra("subjectOBJ", subjectOBJ);
         startActivity(it);
-//        clear_memory();
         finish();
         System.gc();
     }
 
     public void onBackPressed() {
         goback();
-    }
-
-    @Override
-    public void onTrimMemory(int level) {
-        super.onTrimMemory(level);
-        switch (level) {
-            case TRIM_MEMORY_UI_HIDDEN:
-                // 进行资源释放操作
-                break;
-        }
-    }
-
-    private void clear_memory() {
-        setContentView(null);
-        BitmapDrawable bd = (BitmapDrawable) gridView.getBackground();
-        gridView.setBackgroundResource(0);
-        bd.setCallback(null);
-        bd.getBitmap().recycle();
-        gridView = null;
-    }
-
-    private void dialog1(final int seat_index) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Seat2Activity_Teacher.this);
-        builder.setMessage("你确认关闭这个座位吗？");
-        builder.setTitle("注意");
-        builder.setCancelable(false);
-        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();//关闭对话框
-                /*String start_time = "";
-                try {   //获取签到开始时间
-                    start_time = Fun_GetStartTime.http_GetStartTime(subjectOBJ);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                try {   //获取课程节数
-                    subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                CheckOBJ insert = new CheckOBJ(subjectOBJ.getSubject_id(), subjectOBJ.getSubject_th(),teacherOBJ.getTeacher_id(), seat_index, start_time);
-                try {   //尝试签到
-                    if (Fun_InsertCheckInfo.http_InsertCheckInfo(insert)) {
-                        Toast.makeText(Seat1Activity_Teacher.this, "关闭座位成功！", Toast.LENGTH_SHORT).show();
-                        Teacher_FillSeatView();//刷新界面
-                    } else {
-                        Toast.makeText(Seat1Activity_Teacher.this, "关闭座位失败！", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }*/
-            }
-        });
-
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.create().show();////显示对话框
-    }
-
-    private void dialog2() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Seat2Activity_Teacher.this);
-        builder.setMessage("这里已经有人了！");
-        builder.setTitle("抱歉！");
-        builder.setCancelable(false);
-        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();//关闭对话框
-            }
-        });
-        builder.create().show();////显示对话框
     }
 
     @Override
@@ -350,9 +273,7 @@ public class Seat2Activity_Teacher extends AppCompatActivity {
                 }
             }
             if (selectItem == arg0) {
-                if (checkOBJ.getStudent_id() == null) { //座位为空，能坐下
-                    dialog1(selectItem);
-                } else {  //座位有人
+                if (checkOBJ.getStudent_id() != null) {  //座位有人
                     Intent intent = new Intent(Seat2Activity_Teacher.this, CheckedStudentDetailActivity.class);
                     intent.putExtra("teacherOBJ", teacherOBJ);
                     intent.putExtra("subjectOBJ", subjectOBJ);

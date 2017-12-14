@@ -1,4 +1,4 @@
-package com.example.hp.iclass.HistoryActivity;
+package com.example.hp.iclass.HistoryActivity.Common;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +15,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.hp.iclass.HistoryActivity.Student.History_SubjectInfo_StudentActivity;
+import com.example.hp.iclass.HistoryActivity.Teacher.History_SubjectInfo_TeacherActivity;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetHistorySubjectTimeandTh;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_QuaryTeacherID;
 import com.example.hp.iclass.HttpFunction.Json.Json_HistorySubjectTimeList;

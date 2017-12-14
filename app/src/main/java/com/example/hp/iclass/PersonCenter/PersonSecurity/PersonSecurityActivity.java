@@ -1,4 +1,4 @@
-package com.example.hp.iclass.PersonCenter;
+package com.example.hp.iclass.PersonCenter.PersonSecurity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -6,9 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.RelativeLayout;
 
-import com.example.hp.iclass.CommonActivity.MainActivity;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;

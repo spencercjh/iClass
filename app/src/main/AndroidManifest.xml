@@ -31,17 +31,17 @@
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat1Activity_Teacher" />
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat2Activity_Teacher" />
         <activity android:name=".TeacherCheckActivity.Teacher_Seat.Seat3Activity_Teacher" />
-        <activity android:name=".HistoryActivity.History_SubjectInfo_TeacherActivity" />
-        <activity android:name=".HistoryActivity.History_SubjectInfo_StudentActivity" />
-        <activity android:name=".TeacherCheckActivity.Teacher_Tab.StudentListActivity" />
+        <activity android:name=".HistoryActivity.Teacher.History_SubjectInfo_TeacherActivity" />
+        <activity android:name=".HistoryActivity.Student.History_SubjectInfo_StudentActivity" />
+        <activity android:name=".TeacherCheckActivity.Teacher_StudentList_Tab.StudentListActivity" />
         <activity android:name=".PersonCenter.SettingActivity" />
-        <activity android:name=".PersonCenter.ResetPasswordActivity" />
-        <activity android:name=".PersonCenter.PersonSecurityActivity" />
-        <activity android:name=".PersonCenter.PersonDetailActivity" />
-        <activity android:name=".PersonCenter.ResetSexActivity" />
-        <activity android:name=".PersonCenter.ResetCollegeActivity" />
-        <activity android:name=".PersonCenter.ResetClassActivity" />
-        <activity android:name=".HistoryActivity.ChooseTimeActivity" />
+        <activity android:name=".PersonCenter.PersonSecurity.ResetPasswordActivity" />
+        <activity android:name=".PersonCenter.PersonSecurity.PersonSecurityActivity" />
+        <activity android:name=".PersonCenter.PersonInfo.PersonDetailActivity" />
+        <activity android:name=".PersonCenter.PersonInfo.ResetSexActivity" />
+        <activity android:name=".PersonCenter.PersonInfo.ResetCollegeActivity" />
+        <activity android:name=".PersonCenter.PersonInfo.ResetClassActivity" />
+        <activity android:name=".HistoryActivity.Common.ChooseTimeActivity" />
 
     </application>
 

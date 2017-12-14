@@ -12,12 +12,16 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetStudentName;
+import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetTeacherName;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
-import com.example.hp.iclass.PersonCenter.PersonDetailActivity;
-import com.example.hp.iclass.PersonCenter.PersonSecurityActivity;
+import com.example.hp.iclass.PersonCenter.PersonInfo.PersonDetailActivity;
+import com.example.hp.iclass.PersonCenter.PersonSecurity.PersonSecurityActivity;
 import com.example.hp.iclass.R;
 import com.example.hp.iclass.PersonCenter.SettingActivity;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by HP on 2017/11/21.
@@ -32,6 +36,7 @@ public class PersonFragment extends Fragment {
     private StudentOBJ studentOBJ = new StudentOBJ();
     private int choice_user;
     private TextView tv_fxid;
+    private TextView tv_name;
 
     public PersonFragment() {
     }
@@ -63,10 +68,21 @@ public class PersonFragment extends Fragment {
         re_setting = getActivity().findViewById(R.id.re_setting);
         re_infosecurity = getActivity().findViewById(R.id.re_infosecurity);
         tv_fxid = getActivity().findViewById(R.id.tv_fxid);
+        tv_name=getActivity().findViewById(R.id.tv_name);
         if (choice_user == 1) {
-            tv_fxid.setText("工号");
+            tv_fxid.setText(teacherOBJ.getTeacher_id());
+            try {
+                tv_name.setText(Fun_GetTeacherName.http_GetTeacherName(teacherOBJ));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } else if (choice_user == 0) {
-            tv_fxid.setText("学号");
+            tv_fxid.setText(studentOBJ.getStudent_id());
+            try {
+                tv_name.setText(Fun_GetStudentName.http_GetStudentName(studentOBJ));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         re_myinfo.setOnClickListener(new View.OnClickListener() {
 

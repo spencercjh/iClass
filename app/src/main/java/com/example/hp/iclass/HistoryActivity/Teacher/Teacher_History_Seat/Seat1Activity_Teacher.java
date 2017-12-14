@@ -1,12 +1,9 @@
-package com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat;
+package com.example.hp.iclass.HistoryActivity.Teacher.Teacher_History_Seat;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
@@ -24,6 +21,7 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.example.hp.iclass.HistoryActivity.Teacher.CheckedStudentHistoryDetailActivity;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetStudentName;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountCheckStudent_AllTypes;
@@ -34,13 +32,11 @@ import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
-import com.example.hp.iclass.TeacherCheckActivity.CheckConditionActivity;
-import com.example.hp.iclass.TeacherCheckActivity.CheckedStudentDetailActivity;
 
 import java.util.ArrayList;
 
-public class Seat3Activity_Teacher extends AppCompatActivity {
-    final private int seatnum = 117;
+public class Seat1Activity_Teacher extends AppCompatActivity {
+    final private int seatnum = 45;
     private GridView gridView;
     private View view;
     private MyAdapter myAdapter;
@@ -134,7 +130,7 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
             public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int position, long l) {
                 if (seat.get(position).getStudent_id() != null) {
                     //创建弹出式菜单对象（最低版本11）
-                    PopupMenu popup = new PopupMenu(Seat3Activity_Teacher.this, view);//第二个参数是绑定的那个view
+                    PopupMenu popup = new PopupMenu(Seat1Activity_Teacher.this, view);//第二个参数是绑定的那个view
                     //获取菜单填充器
                     final MenuInflater inflater = popup.getMenuInflater();
                     //填充菜单
@@ -159,7 +155,7 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
                                     }
                                     break;
                                 case R.id.menu_info:
-                                    Intent intent = new Intent(Seat3Activity_Teacher.this, CheckedStudentDetailActivity.class);
+                                    Intent intent = new Intent(Seat1Activity_Teacher.this, CheckedStudentHistoryDetailActivity.class);
                                     intent.putExtra("teacherOBJ", teacherOBJ);
                                     intent.putExtra("subjectOBJ", subjectOBJ);
                                     intent.putExtra("checkOBJ", seat.get(position));
@@ -179,11 +175,6 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
     }
 
     private void goback() {
-        view = null;
-        Intent it = new Intent(this, CheckConditionActivity.class);
-        it.putExtra("teacherOBJ", teacherOBJ);
-        it.putExtra("subjectOBJ", subjectOBJ);
-        startActivity(it);
         finish();
         System.gc();
     }
@@ -194,7 +185,8 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_only_fresh, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_only_fresh, menu);
         return true;
     }
 
@@ -274,7 +266,7 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
             }
             if (selectItem == arg0) {
                 if (checkOBJ.getStudent_id() != null) {  //座位有人
-                    Intent intent = new Intent(Seat3Activity_Teacher.this, CheckedStudentDetailActivity.class);
+                    Intent intent = new Intent(Seat1Activity_Teacher.this, CheckedStudentHistoryDetailActivity.class);
                     intent.putExtra("teacherOBJ", teacherOBJ);
                     intent.putExtra("subjectOBJ", subjectOBJ);
                     intent.putExtra("checkOBJ", checkOBJ);

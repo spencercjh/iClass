@@ -1,4 +1,4 @@
-package com.example.hp.iclass.PersonCenter;
+package com.example.hp.iclass.PersonCenter.PersonInfo;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +13,9 @@ import com.example.hp.iclass.HttpFunction.Json.Json_StudentProperty;
 import com.example.hp.iclass.HttpFunction.Json.Json_TeacherProperty;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
+import com.example.hp.iclass.PersonCenter.PersonInfo.ResetClassActivity;
+import com.example.hp.iclass.PersonCenter.PersonInfo.ResetCollegeActivity;
+import com.example.hp.iclass.PersonCenter.PersonInfo.ResetSexActivity;
 import com.example.hp.iclass.R;
 
 import org.json.JSONException;

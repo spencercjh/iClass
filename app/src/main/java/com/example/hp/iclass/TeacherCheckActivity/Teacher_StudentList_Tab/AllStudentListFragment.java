@@ -1,7 +1,6 @@
-package com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab;
+package com.example.hp.iclass.TeacherCheckActivity.Teacher_StudentList_Tab;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,10 +8,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentScore;
@@ -22,7 +19,6 @@ import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllSt
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Json.Json_AllStudentList;
 import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
-import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;

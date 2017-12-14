@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorlogin"
-    tools:context="com.example.hp.iclass.PersonCenter.ResetSexActivity">
+    tools:context="com.example.hp.iclass.PersonCenter.PersonInfo.ResetSexActivity">
 
     <Button
         android:id="@+id/button"

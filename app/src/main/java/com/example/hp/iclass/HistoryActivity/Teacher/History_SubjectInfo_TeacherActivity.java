@@ -1,4 +1,4 @@
-package com.example.hp.iclass.HistoryActivity;
+package com.example.hp.iclass.HistoryActivity.Teacher;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.hp.iclass.HistoryActivity.Common.ChooseTimeActivity;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetSubjectClassType;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountCheckStudent_Good;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountCheckStudent_Late;
@@ -16,11 +17,11 @@ import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
-import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat1Activity_Teacher;
-import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat2Activity_Teacher;
-import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat3Activity_Teacher;
-import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.SeatErrorActivity_Teacher;
-import com.example.hp.iclass.TeacherCheckActivity.Teacher_Tab.StudentListActivity;
+import com.example.hp.iclass.HistoryActivity.Teacher.Teacher_History_Seat.Seat1Activity_Teacher;
+import com.example.hp.iclass.HistoryActivity.Teacher.Teacher_History_Seat.Seat2Activity_Teacher;
+import com.example.hp.iclass.HistoryActivity.Teacher.Teacher_History_Seat.Seat3Activity_Teacher;
+import com.example.hp.iclass.HistoryActivity.Teacher.Teacher_History_Seat.SeatErrorActivity_Teacher;
+import com.example.hp.iclass.HistoryActivity.Teacher.Teacher_History_StudentList_Tab.StudentListActivity;
 
 public class History_SubjectInfo_TeacherActivity extends AppCompatActivity implements View.OnClickListener {
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
@@ -90,7 +91,6 @@ public class History_SubjectInfo_TeacherActivity extends AppCompatActivity imple
             intent.putExtra("teacherOBJ", teacherOBJ);
             intent.putExtra("subjectOBJ", subjectOBJ);
             startActivity(intent);
-            finish();
         } else if (view.getId() == R.id.button_seat) {
             CheckSeat();
         }
