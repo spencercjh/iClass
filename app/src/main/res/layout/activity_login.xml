@@ -48,7 +48,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15sp"
             android:text="@string/welcome_to_iclass_system"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textView2"

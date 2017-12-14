@@ -40,7 +40,7 @@
             android:id="@+id/subject_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50px"
+            android:layout_marginLeft="90px"
             android:text="@string/课程"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
@@ -50,7 +50,7 @@
             android:id="@+id/student_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50px"
+            android:layout_marginLeft="80px"
             android:text="@string/课程号"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
@@ -68,7 +68,7 @@
             android:id="@+id/teacher_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50px"
+            android:layout_marginLeft="60px"
             android:text="@string/教师"
             android:textColor="@android:color/black"
             android:textSize="20sp" />

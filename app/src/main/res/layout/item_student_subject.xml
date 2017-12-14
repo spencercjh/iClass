@@ -7,11 +7,12 @@
 
     <TextView
         android:id="@+id/text_subject_name"
-        android:layout_width="61sp"
-        android:layout_height="45sp"
+        android:layout_width="85sp"
+        android:layout_height="60sp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:gravity="left"
+        android:layout_marginStart="9dp"
+        android:gravity="left|center_vertical|center_horizontal"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -22,11 +23,12 @@
 
     <TextView
         android:id="@+id/text_subject_id"
-        android:layout_width="61sp"
-        android:layout_height="45sp"
+        android:layout_width="75sp"
+        android:layout_height="60sp"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="17dp"
         android:layout_toEndOf="@+id/text_subject_name"
-        android:gravity="left"
+        android:gravity="left|center_vertical|center_horizontal"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.352"
@@ -38,10 +40,11 @@
     <TextView
         android:id="@+id/text_classroom"
         android:layout_width="50sp"
-        android:layout_height="45sp"
+        android:layout_height="60sp"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="13dp"
         android:layout_toEndOf="@+id/text_subject_id"
-        android:gravity="top|center"
+        android:gravity="center_vertical|center_horizontal"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.704"
@@ -53,10 +56,11 @@
     <TextView
         android:id="@+id/text_teacher_name"
         android:layout_width="61sp"
-        android:layout_height="45sp"
+        android:layout_height="60sp"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
         android:layout_toEndOf="@+id/text_classroom"
-        android:gravity="top|center"
+        android:gravity="center_vertical|center_horizontal|center"
         android:textSize="18sp" />
 
 

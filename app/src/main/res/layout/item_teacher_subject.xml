@@ -7,11 +7,11 @@
 
     <TextView
         android:id="@+id/text_subject_name"
-        android:layout_width="73sp"
-        android:layout_height="45sp"
+        android:layout_width="84sp"
+        android:layout_height="70sp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:gravity="left|top"
+        android:gravity="center_vertical|center_horizontal"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -22,11 +22,11 @@
 
     <TextView
         android:id="@+id/text_subject_id"
-        android:layout_width="73sp"
-        android:layout_height="45sp"
-        android:layout_alignParentTop="true"
+        android:layout_width="85sp"
+        android:layout_height="70sp"
         android:layout_toEndOf="@+id/text_subject_name"
-        android:gravity="left|top"
+
+        android:gravity="left|center_vertical|center_horizontal"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.352"
@@ -37,11 +37,11 @@
 
     <TextView
         android:id="@+id/text_classroom"
-        android:layout_width="50sp"
-        android:layout_height="45sp"
+        android:layout_width="72sp"
+        android:layout_height="70sp"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/text_subject_id"
-        android:gravity="left|top"
+        android:gravity="left|center_vertical|center_horizontal"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.704"
@@ -52,12 +52,12 @@
 
     <TextView
         android:id="@+id/text_student_num"
-        android:layout_width="50sp"
-        android:layout_height="45sp"
+        android:layout_width="55sp"
+        android:layout_height="70sp"
         android:layout_alignBottom="@+id/text_classroom"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/text_classroom"
-        android:gravity="left|top"
+        android:gravity="left|center_vertical|center_horizontal"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -69,11 +69,11 @@
     <TextView
         android:id="@+id/text_check_situation"
         android:layout_width="85sp"
-        android:layout_height="45sp"
+        android:layout_height="70sp"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/text_student_num"
-        android:gravity="left"
-        android:textSize="18sp" />
+        android:gravity="left|center_vertical|center_horizontal"
+        android:textSize="19sp" />
 
 
 </RelativeLayout>

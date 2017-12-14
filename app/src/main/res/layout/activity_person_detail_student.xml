@@ -157,45 +157,44 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/re_class"
+        android:id="@+id/re_sex"
         android:layout_width="0dp"
         android:layout_height="48dp"
-
+        android:layout_marginBottom="0dp"
         android:background="@drawable/btn_list_item_bg"
         android:clickable="true"
-        android:onClick="resetclass"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:onClick="resetsex"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintVertical_bias="0.813">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/re_fxid"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/tv5"
+            android:id="@+id/tv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:text="@string/班级"
+            android:text="性别:"
             android:textColor="#353535"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_class"
+            android:id="@+id/tv_sex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:layout_toRightOf="@id/tv5"
+            android:layout_toRightOf="@id/tv3"
             android:ellipsize="end"
             android:gravity="right"
             android:singleLine="true"
-            android:text="填充班级"
+            android:text="男"
             android:textColor="#AAAAAA"
             android:textSize="14sp" />
 
@@ -218,7 +217,7 @@
         android:clickable="true"
         android:onClick="resetcollege"
         app:layout_constraintBottom_toTopOf="@+id/re_class"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -254,44 +253,45 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/re_sex"
+        android:id="@+id/re_class"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="0dp"
-        android:layout_marginTop="0dp"
+
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/btn_list_item_bg"
         android:clickable="true"
-        android:onClick="resetsex"
+        android:onClick="resetclass"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.618">
+        app:layout_constraintVertical_bias="0.783">
 
         <TextView
-            android:id="@+id/tv3"
+            android:id="@+id/tv5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:text="性别:"
+            android:text="@string/班级"
             android:textColor="#353535"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_sex"
+            android:id="@+id/tv_class"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:layout_toRightOf="@id/tv3"
+            android:layout_toRightOf="@id/tv5"
             android:ellipsize="end"
             android:gravity="right"
             android:singleLine="true"
-            android:text="男"
+            android:text="填充班级"
             android:textColor="#AAAAAA"
             android:textSize="14sp" />
 
