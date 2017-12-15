@@ -32,20 +32,20 @@ public class History_SubjectInfo_StudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_subjectinfo_student);
         tl_head = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tl_head);
         tl_head.setTitleTextColor(Color.WHITE);
+        Intent intent = getIntent();
+        studentOBJ = (StudentOBJ) intent.getSerializableExtra("studentOBJ");
+        subjectOBJ = (SubjectOBJ) intent.getSerializableExtra("subjectOBJ");
+        checkOBJ = (CheckOBJ) intent.getSerializableExtra("checkOBJ");
+        subjectOBJ.setSubject_th(checkOBJ.getSubject_th());
+        tl_head.setTitle("第" + checkOBJ.getSubject_th() + "节" + subjectOBJ.getSubject_name());
+        setSupportActionBar(tl_head);
         tl_head.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goback();
             }
         });
-        Intent intent = getIntent();
-        studentOBJ = (StudentOBJ) intent.getSerializableExtra("teacherOBJ");
-        subjectOBJ = (SubjectOBJ) intent.getSerializableExtra("subjectOBJ");
-        checkOBJ = (CheckOBJ) intent.getSerializableExtra("checkOBJ");
-        subjectOBJ.setSubject_th(checkOBJ.getSubject_th());
-        tl_head.setTitle("第" + checkOBJ.getSubject_th() + "节" + subjectOBJ.getSubject_name());
         CheckOBJ student_check_info = new CheckOBJ();
         try {
             student_check_info = Json_StudentCheckInfo
@@ -71,7 +71,7 @@ public class History_SubjectInfo_StudentActivity extends AppCompatActivity {
         } else {
             seat_index.setText(String.valueOf(student_check_info.getSeat_index()));
         }
-        if (student_check_info.getCheck_time().length() < 1) {
+        if (student_check_info.getCheck_time()==null) {
             check_time.setText("系统错误");
         } else {
             check_time.setText(student_check_info.getCheck_time());
@@ -81,7 +81,7 @@ public class History_SubjectInfo_StudentActivity extends AppCompatActivity {
     private void goback() {
         Intent intent = new Intent(History_SubjectInfo_StudentActivity.this, ChooseTimeActivity.class);
         intent.putExtra("user", "student");
-        intent.putExtra("student", studentOBJ);
+        intent.putExtra("studentOBJ", studentOBJ);
         intent.putExtra("subjectOBJ", subjectOBJ);
         startActivity(intent);
         finish();

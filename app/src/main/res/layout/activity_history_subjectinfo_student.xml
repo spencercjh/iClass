@@ -75,14 +75,14 @@
 
             <TextView
                 android:id="@+id/text_seat_index"
-                android:layout_width="145dp"
+                android:layout_width="match_parent"
                 android:layout_height="60sp"
                 android:gravity="center"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="250dp"
+            android:layout_width="260sp"
             android:layout_height="60dp"
             android:orientation="horizontal">
 
@@ -98,8 +98,10 @@
 
             <TextView
                 android:id="@+id/tv_check_time"
-                android:layout_width="match_parent"
+                android:layout_width="174dp"
                 android:layout_height="60sp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="123"
                 android:textSize="18sp" />
         </LinearLayout>
 

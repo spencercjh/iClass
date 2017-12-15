@@ -49,7 +49,7 @@ public class CheckFragment extends Fragment {
     private Toolbar tl_head;
     private TeacherOBJ teacherOBJ;
     private StudentOBJ studentOBJ;
-    private int choice_user;
+    private int choice_user=-1;
 
     public CheckFragment(TeacherOBJ OBJ, int user) {
         teacherOBJ = OBJ;

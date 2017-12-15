@@ -42,7 +42,11 @@
         <activity android:name=".PersonCenter.PersonInfo.ResetCollegeActivity" />
         <activity android:name=".PersonCenter.PersonInfo.ResetClassActivity" />
         <activity android:name=".HistoryActivity.Common.ChooseTimeActivity" />
-
+        <activity android:name=".HistoryActivity.Teacher.Teacher_History_StudentList_Tab.StudentListActivity" />
+        <activity android:name=".HistoryActivity.Teacher.Teacher_History_Seat.Seat1Activity_Teacher" />
+        <activity android:name=".HistoryActivity.Teacher.Teacher_History_Seat.Seat2Activity_Teacher" />
+        <activity android:name=".HistoryActivity.Teacher.Teacher_History_Seat.Seat3Activity_Teacher" />
+        <activity android:name=".HistoryActivity.Teacher.Teacher_History_Seat.SeatErrorActivity_Teacher" />
     </application>
 
 </manifest>

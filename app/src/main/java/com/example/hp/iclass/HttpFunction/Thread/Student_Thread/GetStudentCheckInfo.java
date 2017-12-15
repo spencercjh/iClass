@@ -32,8 +32,8 @@ public class GetStudentCheckInfo extends Thread {
     private void doGet() throws IOException {
         /*将username和password传给Tomcat服务器*/
         url = url + "?student_id=" + student_id
-                + "&subject_id" + subject_id
-                + "&subject_th" + subject_th;
+                + "&subject_id=" + subject_id
+                + "&subject_th=" + subject_th;
         try {
             URL httpUrl = new URL(url);
             /*获取网络连接*/

@@ -68,7 +68,7 @@ public class PersonFragment extends Fragment {
         re_setting = getActivity().findViewById(R.id.re_setting);
         re_infosecurity = getActivity().findViewById(R.id.re_infosecurity);
         tv_fxid = getActivity().findViewById(R.id.tv_fxid);
-        tv_name=getActivity().findViewById(R.id.tv_name);
+        tv_name = getActivity().findViewById(R.id.tv_name);
         if (choice_user == 1) {
             tv_fxid.setText(teacherOBJ.getTeacher_id());
             try {
@@ -97,7 +97,7 @@ public class PersonFragment extends Fragment {
                     intent.putExtra("user", "student");
                 }
                 startActivity(intent);
-//                getActivity().finish();
+                getActivity().finish();
             }
         });
         re_infosecurity.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +112,7 @@ public class PersonFragment extends Fragment {
                     intent.putExtra("user", "student");
                 }
                 startActivity(intent);
-//                getActivity().finish();
+                getActivity().finish();
             }
         });
         re_setting.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +127,7 @@ public class PersonFragment extends Fragment {
                     intent.putExtra("user", "student");
                 }
                 startActivity(intent);
-//                getActivity().finish();
+                getActivity().finish();
             }
         });
     }

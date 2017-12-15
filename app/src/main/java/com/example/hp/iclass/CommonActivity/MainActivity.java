@@ -3,10 +3,14 @@ package com.example.hp.iclass.CommonActivity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private StudentOBJ studentOBJ = new StudentOBJ();
     private long lastPressTime = 0;
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         fm = getFragmentManager();
         fragmentsList = new ArrayList<>();
+        sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        if (sp.getBoolean("first_open", true)) {
+            sp.edit().putBoolean("first_open", false).apply();
+            dialog();
+        }
+    }
+
+    private void dialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("请前往个人中心修改自己的密码和个人信息");
+        builder.setTitle("警告");
+        builder.setCancelable(false);
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();//关闭对话框
+                    }
+                }
+        );
+        builder.create().show();////显示对话框
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();    //用户组 教师为1 学生为0
         Intent intent = getIntent();
         choice_user = (String) intent.getSerializableExtra("user");
         if (choice_user.equals("teacher")) {
@@ -61,11 +91,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();    //用户组 教师为1 学生为0
         if (choice_user.equals("teacher")) {
             fragmentsList.add(new CheckFragment(teacherOBJ, 1));
             fragmentsList.add(new HistoryFragment(teacherOBJ, 1));
@@ -112,24 +137,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CheckTab.setOnClickListener(this);
         PersonCenterTab.setOnClickListener(this);
         HistoryTab.setOnClickListener(this);
-        /*Intent intent = getIntent();
-        try{
-            String back_to_check=(String)intent.getSerializableExtra("to_check");
-            if(back_to_check.equals("true")){
-                select_tab=0;
+//        Intent intent = getIntent();
+        try {
+            String back_to_check = (String) intent.getSerializableExtra("to_check");
+            if (back_to_check.equals("true")) {
+                select_tab = 0;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            select_tab=0;
+            select_tab = 0;
         }
         try {
-            String back_to_history=(String)intent.getSerializableExtra("to_history");
-            if(back_to_history.equals("true")){
-                select_tab=1;
+            String back_to_history = (String) intent.getSerializableExtra("to_history");
+            if (back_to_history.equals("true")) {
+                select_tab = 1;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            select_tab=0;
+            select_tab = 0;
         }
         try {
             String back_to_person_center = (String) intent.getSerializableExtra("to_person_center");
@@ -139,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (Exception e) {
             e.printStackTrace();
             select_tab = 0;
-        }*/
+        }
         selectTab(select_tab);
     }
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.hp.iclass.CommonActivity.MainActivity;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
@@ -45,8 +46,7 @@ public class PersonSecurityActivity extends AppCompatActivity {
     }
 
     private void gotomain() {
-  /*      Intent intent = new Intent(this, MainActivity.class);
-
+        Intent intent = new Intent(PersonSecurityActivity.this, MainActivity.class);
         if(choice_user==1){
             intent.putExtra("teacherOBJ",teacherOBJ);
             intent.putExtra("user","teacher");
@@ -55,7 +55,7 @@ public class PersonSecurityActivity extends AppCompatActivity {
             intent.putExtra("user","student");
         }
         intent.putExtra("to_person_center","true");
-        startActivity(intent);*/
+        startActivity(intent);
         finish();
     }
 

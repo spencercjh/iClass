@@ -61,7 +61,7 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         tl_head = view.findViewById(R.id.tl_head);
-        tl_head.setTitle("  请选择一门课查看历史信息");
+        tl_head.setTitle("    请选择一门课查看历史信息");
         tl_head.setTitleTextColor(Color.WHITE);
         myview = view;
         return view;
@@ -268,6 +268,7 @@ public class HistoryFragment extends Fragment {
                     intent.putExtra("user", "student");
                 }
                 startActivity(intent);
+                getActivity().finish();
             }
         });
     }

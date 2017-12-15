@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class ResetCollegeActivity extends AppCompatActivity implements View.OnCl
     private String user = "";
     private int choice_user;
     private String select_college;
+    private Button button;
     private Handler handler = new Handler() {   //修改成功后延迟1秒返回前一活动
         @Override
         public void handleMessage(Message msg) {
@@ -45,8 +47,10 @@ public class ResetCollegeActivity extends AppCompatActivity implements View.OnCl
             teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
         } else if (user.equals("student")) {
             choice_user = 0;
-            studentOBJ = (StudentOBJ) intent.getSerializableExtra("student");
+            studentOBJ = (StudentOBJ) intent.getSerializableExtra("studentOBJ");
         }
+        button=(Button)findViewById(R.id.button2);
+        button.setOnClickListener(this);
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         tl_head = (Toolbar) findViewById(R.id.tl_head);
         tl_head.setNavigationIcon(R.drawable.ic_back);
