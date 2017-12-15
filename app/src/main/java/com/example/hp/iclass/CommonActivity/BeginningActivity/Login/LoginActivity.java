@@ -24,6 +24,7 @@ import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_StudentLo
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_TeacherLogin;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
+import com.example.hp.iclass.PersonCenter.SettingActivity;
 import com.example.hp.iclass.R;
 
 import java.util.Date;
