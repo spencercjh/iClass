@@ -40,21 +40,20 @@ public class PersonSecurityActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 gotomain();
-
             }
         });
     }
 
     private void gotomain() {
         Intent intent = new Intent(PersonSecurityActivity.this, MainActivity.class);
-        if(choice_user==1){
-            intent.putExtra("teacherOBJ",teacherOBJ);
-            intent.putExtra("user","teacher");
-        }else if(choice_user==0){
-            intent.putExtra("studentOBJ",studentOBJ);
-            intent.putExtra("user","student");
+        if (choice_user == 1) {
+            intent.putExtra("teacherOBJ", teacherOBJ);
+            intent.putExtra("user", "teacher");
+        } else if (choice_user == 0) {
+            intent.putExtra("studentOBJ", studentOBJ);
+            intent.putExtra("user", "student");
         }
-        intent.putExtra("to_person_center","true");
+        intent.putExtra("to_person_center", "true");
         startActivity(intent);
         finish();
     }

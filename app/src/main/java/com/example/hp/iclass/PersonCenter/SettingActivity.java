@@ -60,7 +60,7 @@ public class SettingActivity extends AppCompatActivity {
         tl_head.setTitleTextColor(Color.WHITE);
         tl_head.setNavigationIcon(R.drawable.ic_back);
         setSupportActionBar(tl_head);
-        tl_head.setNavigationOnClickListener(new View.OnClickListener() {
+        tl_head.setNavigationOnClickListener(   new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 gotomain();
