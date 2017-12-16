@@ -45,7 +45,7 @@
         android:background="@drawable/btn_list_item_bg"
         android:clickable="true"
         android:padding="10dip"
-        android:onClick="gotologin"
+        android:onClick="exit_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -95,17 +95,17 @@
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="10dip"
-            android:text="上课自动静音"
+            android:text="上课自动静音（默认为开）"
             android:textColor="#353535"
-            android:textSize="16sp"
-            android:id="@+id/textView" />
+            android:textSize="16sp" />
 
         <Switch
-            android:id="@+id/sw_auto"
+            android:id="@+id/sw_muted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

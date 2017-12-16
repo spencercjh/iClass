@@ -1,10 +1,20 @@
 package com.example.hp.iclass.TeacherCheckActivity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.v13.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hp.iclass.CommonActivity.MainActivity;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetSubjectClassType;
@@ -36,6 +47,13 @@ import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat2Activity_Tea
 import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.Seat3Activity_Teacher;
 import com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat.SeatErrorActivity_Teacher;
 import com.example.hp.iclass.TeacherCheckActivity.Teacher_StudentList_Tab.StudentListActivity;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 public class CheckConditionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -188,6 +206,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         builder.create().show();//显示对话框
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     private void StartCheck() throws InterruptedException {
         //      更新开始签到时间
         Fun_UpdateStartTime.http_UpdateStartTime(subjectOBJ);
@@ -224,6 +243,80 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        if (if_set_muted()) {
+            int require = Build.VERSION_CODES.M;
+            int present = Integer.parseInt(Build.VERSION.SDK);
+            if (present >= require) {
+                set_silent_higher();
+            } else if (present < require) {
+                set_silen_lower();
+            }
+        }
+    }
+
+    private boolean if_set_muted() {
+        Properties prop = loadConfig(getApplicationContext(), "/mnt/sdcard/config.properties");
+        if (prop == null) {
+            // 配置文件不存在的时候创建配置文件 初始化配置信息
+            prop = new Properties();
+            prop.put("muted", "true");
+            saveConfig(getApplicationContext(), "/mnt/sdcard/config.properties", prop);
+        }
+        if (prop.get("muted") == null) {
+            prop.put("muted", "true");
+        }
+        String muted = (String) prop.get("muted");
+        if (muted.equals("true")) {
+            return true;
+        } else if (muted.equals("false")) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean saveConfig(Context context, String file, Properties properties) {
+        try {
+            File fil = new File(file);
+            if (!fil.exists())
+                fil.createNewFile();
+            FileOutputStream s = new FileOutputStream(fil);
+            properties.store(s, "");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public Properties loadConfig(Context context, String file) {
+        Properties properties = new Properties();
+        try {
+            FileInputStream s = new FileInputStream(file);
+            properties.load(s);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return properties;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void set_silent_higher() {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        int previous_notification_interrupt_setting = notificationManager.getCurrentInterruptionFilter();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            previous_notification_interrupt_setting = notificationManager.getCurrentInterruptionFilter();
+            notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
+        }
+        AudioManager audio = (AudioManager) CheckConditionActivity.this.getSystemService(Context.AUDIO_SERVICE);
+        audio.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+        Toast.makeText(CheckConditionActivity.this, "已为您将手机调整为静音！", Toast.LENGTH_SHORT).show();
+    }
+
+    private void set_silen_lower() {
+        AudioManager audio = (AudioManager) CheckConditionActivity.this.getSystemService(Context.AUDIO_SERVICE);
+        audio.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+        Toast.makeText(CheckConditionActivity.this, "已为您将手机调整为静音！", Toast.LENGTH_SHORT).show();
     }
 
     private void UpdateSubject_th() throws InterruptedException {
@@ -294,7 +387,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         Intent it = new Intent(this, MainActivity.class);
         it.putExtra("teacherOBJ", teacherOBJ);
         it.putExtra("user", "teacher");
-        it.putExtra("to_check","true");
+        it.putExtra("to_check", "true");
         startActivity(it);
         finish();
     }
