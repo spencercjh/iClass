@@ -92,7 +92,6 @@ public class AllStudentListFragment extends Fragment {
         lv = mView.findViewById(R.id.all_studnet_list);
         final ArrayList<StudentOBJ> AllStudentList = Json_AllStudentList.parserJson(Fun_GetAllStudent.http_GetAllStudent(subjectOBJ));
         final ArrayList<String> CheckInfoList = Json_CheckedStudentList.parserJson4(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
-
         //获取ListView,并通过Adapter把studentlist的信息显示到ListView
         //为ListView设置一个适配器,getCount()返回数据个数;getView()为每一行设置一个条目
         lv.setAdapter(new BaseAdapter() {

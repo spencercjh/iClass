@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.hp.iclass.HistoryActivity.Teacher.CheckedStudentHistoryDetailActivity;
+import com.example.hp.iclass.HistoryActivity.Teacher.OutputExcel.ExcelUtil;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetStudentName;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
@@ -91,6 +92,11 @@ public class CheckedStudentListFragment extends Fragment {
     private void Teacher_FillCheckInfoList() throws InterruptedException {
         lv = mView.findViewById(R.id.checked_students_list);
         final ArrayList<CheckOBJ> CheckInfoList = Json_CheckedStudentList.parserJson(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
+        try {
+            ExcelUtil.writeExcel(getContext(),CheckInfoList,"test");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //获取ListView,并通过Adapter把studentlist的信息显示到ListView
         //为ListView设置一个适配器,getCount()返回数据个数;getView()为每一行设置一个条目
         lv.setAdapter(new BaseAdapter() {

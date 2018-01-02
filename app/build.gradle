@@ -34,5 +34,6 @@ dependencies {
     compile 'com.yanzhenjie:fragment:1.0.0'
     compile 'com.android.support:design:25.1.0'
     testCompile 'junit:junit:4.12'
+    compile files('libs/jxl.jar')
 }
 //compile 'com.android.support:design:25.1.0'

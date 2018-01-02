@@ -50,6 +50,7 @@
         <activity android:name=".HistoryActivity.Teacher.Teacher_History_Seat.Seat2Activity_Teacher" />
         <activity android:name=".HistoryActivity.Teacher.Teacher_History_Seat.Seat3Activity_Teacher" />
         <activity android:name=".HistoryActivity.Teacher.Teacher_History_Seat.SeatErrorActivity_Teacher" />
+        <activity android:name=".HistoryActivity.Teacher.CheckedStudentHistoryDetailActivity" />
     </application>
 
 </manifest>
