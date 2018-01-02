@@ -152,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (back_to_history.equals("true")) {
                 select_tab = 1;
                 viewPager.setAdapter(pagerAdapter);
-//                viewPager.setCurrentItem(R.layout.fragment_history);
                 viewPager.setCurrentItem(1);
             }
         } catch (Exception e) {
@@ -163,7 +162,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (back_to_person_center.equals("true")) {
                 select_tab = 2;
                 viewPager.setAdapter(pagerAdapter);
-//                viewPager.setCurrentItem(R.layout.fragment_person_center);
                 viewPager.setCurrentItem(2);
             }
         } catch (Exception e) {
