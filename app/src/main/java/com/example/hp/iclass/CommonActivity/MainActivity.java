@@ -137,33 +137,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CheckTab.setOnClickListener(this);
         PersonCenterTab.setOnClickListener(this);
         HistoryTab.setOnClickListener(this);
-//        Intent intent = getIntent();
         try {
             String back_to_check = (String) intent.getSerializableExtra("to_check");
             if (back_to_check.equals("true")) {
                 select_tab = 0;
+                viewPager.setAdapter(pagerAdapter);
+                viewPager.setCurrentItem(0);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            select_tab = 0;
         }
         try {
             String back_to_history = (String) intent.getSerializableExtra("to_history");
             if (back_to_history.equals("true")) {
                 select_tab = 1;
+                viewPager.setAdapter(pagerAdapter);
+//                viewPager.setCurrentItem(R.layout.fragment_history);
+                viewPager.setCurrentItem(1);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            select_tab = 0;
         }
         try {
             String back_to_person_center = (String) intent.getSerializableExtra("to_person_center");
             if (back_to_person_center.equals("true")) {
                 select_tab = 2;
+                viewPager.setAdapter(pagerAdapter);
+//                viewPager.setCurrentItem(R.layout.fragment_person_center);
+                viewPager.setCurrentItem(2);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            select_tab = 0;
         }
         selectTab(select_tab);
     }
