@@ -20,7 +20,6 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hp.iclass.CommonActivity.MainActivity;
@@ -29,12 +28,16 @@ import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_CountStud
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStartTime;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_InsertCheckInfo;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_QuaryCheckSituation;
+import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_QuaryClassroom;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
 import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.R;
+import com.example.hp.iclass.StudentCheckActivity.ElectricBarrier.BuildingLocation;
+import com.example.hp.iclass.StudentCheckActivity.ElectricBarrier.GetLocation;
+import com.example.hp.iclass.StudentCheckActivity.ElectricBarrier.Judge;
 
 import java.util.ArrayList;
 
@@ -42,7 +45,8 @@ import java.util.ArrayList;
 public class Seat2Activity_Student extends AppCompatActivity {
 
     final private int seatnum = 81;
-    final private int enable_seat = (int) (seatnum * 0.85);
+    final private double ban = 0.15;
+    final private int enable_seat = (int) (seatnum * (1 - ban));
     private GridView gridView;
     private View view;
     private MyAdapter myAdapter;
@@ -237,11 +241,16 @@ public class Seat2Activity_Student extends AppCompatActivity {
                         }
                         CheckOBJ insert = new CheckOBJ(subjectOBJ.getSubject_id(), subjectOBJ.getSubject_th(), studentOBJ.getStudent_id(), seat_index, start_time);
                         try {   //尝试签到
-                            if (Fun_InsertCheckInfo.http_InsertCheckInfo(insert)) {
-                                Toast.makeText(Seat2Activity_Student.this, "签到成功！", Toast.LENGTH_SHORT).show();
-                                Student_FillSeatView();//刷新界面
+                            if (Judge.pointInPolygon(GetLocation.getLocation(Seat2Activity_Student.this,Seat2Activity_Student.this),
+                                    BuildingLocation.ChooseClassroomBuilding(Fun_QuaryClassroom.http_QuaryClassroom(subjectOBJ)))) {
+                                if (Fun_InsertCheckInfo.http_InsertCheckInfo(insert)) {
+                                    Toast.makeText(Seat2Activity_Student.this, "签到成功！", Toast.LENGTH_SHORT).show();
+                                    Student_FillSeatView();//刷新界面
+                                } else {
+                                    Toast.makeText(Seat2Activity_Student.this, "签到失败！", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
-                                Toast.makeText(Seat2Activity_Student.this, "签到失败！", Toast.LENGTH_SHORT).show();
+                                dialog4();
                             }
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -295,8 +304,22 @@ public class Seat2Activity_Student extends AppCompatActivity {
 
     private void dialog3() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Seat2Activity_Student.this);
-        builder.setMessage("教室的最后15%的座位不能坐！");
+        builder.setMessage("教室的最后"+ban*100+"%的座位不能坐！");
         builder.setTitle("抱歉！");
+        builder.setCancelable(false);
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();//关闭对话框
+            }
+        });
+        builder.create().show();////显示对话框
+    }
+
+    private void dialog4() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Seat2Activity_Student.this);
+        builder.setMessage("你不在这门课所在的教学楼内！");
+        builder.setTitle("警告！");
         builder.setCancelable(false);
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
@@ -354,11 +377,11 @@ public class Seat2Activity_Student extends AppCompatActivity {
             checkOBJ = (CheckOBJ) getItem(arg0);
             if (checkOBJ.getStudent_id() == null) {
                 FrameLayout frameLayout = view.findViewById(R.id.mylayout);
-                frameLayout.setBackgroundColor(Color.parseColor("#56abe4"));
+                frameLayout.setBackground(getResources().getDrawable(R.drawable.whitechair));
             } else {
                 if (checkOBJ.getStudent_id().equals(studentOBJ.getStudent_id())) {
-                    TextView textView = view.findViewById(R.id.seat_name);
-                    textView.setText("你");
+                    FrameLayout frameLayout = view.findViewById(R.id.mylayout);
+                    frameLayout.setBackground(getResources().getDrawable(R.drawable.greenchair));
                 }
             }
             if (selectItem == arg0) {

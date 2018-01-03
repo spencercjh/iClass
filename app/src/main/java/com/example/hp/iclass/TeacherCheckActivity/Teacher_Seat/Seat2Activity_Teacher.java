@@ -1,12 +1,9 @@
 package com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
@@ -261,8 +258,10 @@ public class Seat2Activity_Teacher extends AppCompatActivity {
             checkOBJ = (CheckOBJ) getItem(arg0);
             if (checkOBJ.getStudent_id() == null) {
                 FrameLayout frameLayout = view.findViewById(R.id.mylayout);
-                frameLayout.setBackgroundColor(Color.parseColor("#56abe4"));
+                frameLayout.setBackground(getResources().getDrawable(R.drawable.whitechair));
             } else {
+                FrameLayout frameLayout = view.findViewById(R.id.mylayout);
+                frameLayout.setBackground(getResources().getDrawable(R.drawable.bluechair));
                 TextView textView = view.findViewById(R.id.seat_name);
                 try {
                     checkOBJ.setStudent_name(Fun_GetStudentName.http_GetStudentName(checkOBJ.getStudent_id()));

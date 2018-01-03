@@ -252,8 +252,10 @@ public class Seat3Activity_Teacher extends AppCompatActivity {
             checkOBJ = (CheckOBJ) getItem(arg0);
             if (checkOBJ.getStudent_id() == null) {
                 FrameLayout frameLayout = view.findViewById(R.id.mylayout);
-                frameLayout.setBackgroundColor(Color.parseColor("#56abe4"));
+                frameLayout.setBackground(getResources().getDrawable(R.drawable.whitechair));
             } else {
+                FrameLayout frameLayout = view.findViewById(R.id.mylayout);
+                frameLayout.setBackground(getResources().getDrawable(R.drawable.bluechair));
                 TextView textView = view.findViewById(R.id.seat_name);
                 try {
                     checkOBJ.setStudent_name(Fun_GetStudentName.http_GetStudentName(checkOBJ.getStudent_id()));

@@ -7,33 +7,27 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 /**
- * Created by spencercjh on 2017/12/14.
+ * Created by spencercjh on 2018/1/3.
  * iClass
  */
 
-public class UpdateStudentCollege extends Thread {
+public class QuaryClassroom extends Thread{
     private boolean flag;
     private String url;
-    private String student_id;
-    private String student_college;
-    private String upadate_state;
+    private String subject_id;
+    private String classroom;
 
-    public UpdateStudentCollege(String url, String teacher_id, String student_college) {
+    public QuaryClassroom(String url, String subject_id) {
         // TODO Auto-generated constructor stub
         this.url = url;
-        this.student_id = teacher_id;
-        this.student_college = student_college;
+        this.subject_id = subject_id;
     }
 
     private void doGet() throws IOException {
-        student_college = URLEncoder.encode(student_college, "UTF-8");
-        student_college = URLEncoder.encode(student_college, "UTF-8");
         /*将username和password传给Tomcat服务器*/
-        url = url + "?student_id=" +student_id
-                + "&student_college=" + student_college;
+        url = url + "?subject_id=" + subject_id;
         try {
             URL httpUrl = new URL(url);
             /*获取网络连接*/
@@ -53,12 +47,12 @@ public class UpdateStudentCollege extends Thread {
                 while ((line = in.readLine()) != null) {
                     buffer.append(line);
                 }
-                upadate_state = buffer.toString();
-                upadate_state = URLDecoder.decode(upadate_state, "UTF-8");
+                classroom = buffer.toString();
+                classroom = URLDecoder.decode(classroom, "UTF-8");
             }
             //把服务端返回的数据打印出来
-            System.out.println("result:" + upadate_state);
-            if (getUpadate_state().equals("update student_college failed")) {
+            System.out.println("result:" + classroom);
+            if (classroom.equals("quary check_situation failed")) {
                 setFlag(false);
             } else {
                 setFlag(true);
@@ -77,10 +71,9 @@ public class UpdateStudentCollege extends Thread {
         this.flag = flag;
     }
 
-    private String getUpadate_state() {
-        return upadate_state;
+    public String getClassroom() {
+        return classroom;
     }
-
 
     /*在run中调用doGet*/
     @Override

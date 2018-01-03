@@ -98,7 +98,7 @@ public class ResetCollegeActivity extends AppCompatActivity implements View.OnCl
                 try {
                     if (Fun_UpdateTeacherCollege.http_UpdateTeacherCollege(teacherOBJ.getTeacher_id(), select_college)) {
                         Toast.makeText(ResetCollegeActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                        handler.sendEmptyMessageDelayed(0, 1000);
+                        handler.sendEmptyMessageDelayed(0, 500);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -107,7 +107,7 @@ public class ResetCollegeActivity extends AppCompatActivity implements View.OnCl
                 try {
                     if (Fun_UpdateStudentCollege.http_UpdateStudentCollege(studentOBJ.getStudent_id(), select_college)) {
                         Toast.makeText(ResetCollegeActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                        handler.sendEmptyMessageDelayed(0, 1000);
+                        handler.sendEmptyMessageDelayed(0, 500);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();

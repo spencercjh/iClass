@@ -64,7 +64,7 @@ public class ResetClassActivity extends AppCompatActivity implements View.OnClic
                 try {
                     if (Fun_UpdateStudentClass.http_UpdateStudentClass(studentOBJ.getStudent_id(), student_class)) {
                         Toast.makeText(ResetClassActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                        handler.sendEmptyMessageDelayed(0, 1000);
+                        handler.sendEmptyMessageDelayed(0, 500);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
