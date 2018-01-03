@@ -3,11 +3,9 @@ package com.example.hp.iclass.StudentCheckActivity.ElectricBarrier;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 
 /**
@@ -18,20 +16,6 @@ import android.support.v4.app.ActivityCompat;
 public class GetLocation {
     public static Point getLocation(final Activity activity, Context context) {
         LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-        if (!locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-           /* AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-            dialog.setMessage("GPS未打开，是否打开?");
-            dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {*/
-                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    // 设置完成后返回到原来的界面
-                    activity.startActivityForResult(intent, 0);
-      /*          }
-            });
-            dialog.show();*/
-        }
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED) {
