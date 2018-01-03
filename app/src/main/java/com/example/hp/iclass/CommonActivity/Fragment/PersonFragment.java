@@ -1,5 +1,6 @@
 package com.example.hp.iclass.CommonActivity.Fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,16 +19,14 @@ import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.PersonCenter.PersonInfo.PersonDetailActivity;
 import com.example.hp.iclass.PersonCenter.PersonSecurity.PersonSecurityActivity;
-import com.example.hp.iclass.R;
 import com.example.hp.iclass.PersonCenter.SettingActivity;
-
-import org.w3c.dom.Text;
+import com.example.hp.iclass.R;
 
 /**
  * Created by HP on 2017/11/21.
  * iClass
  */
-
+@SuppressLint("ValidFragment")
 public class PersonFragment extends Fragment {
     private RelativeLayout re_setting;
     private RelativeLayout re_infosecurity;

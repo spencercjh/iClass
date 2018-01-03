@@ -20,7 +20,6 @@ import com.example.hp.iclass.R;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-
 public class StudentListActivity extends AppCompatActivity implements OnTabSelectedListener {
     private final static String TAG = "StudentListActivity";
     private Toolbar tl_head;

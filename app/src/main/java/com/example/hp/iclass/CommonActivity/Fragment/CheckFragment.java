@@ -1,5 +1,6 @@
 package com.example.hp.iclass.CommonActivity.Fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
@@ -42,7 +43,7 @@ import java.util.ArrayList;
 /**
  * Created by HP on 2017/11/21.
  */
-
+@SuppressLint("ValidFragment")
 public class CheckFragment extends Fragment {
     private ListView lv;
     private View myview;

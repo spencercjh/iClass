@@ -1,5 +1,6 @@
 package com.example.hp.iclass.HistoryActivity.Teacher.Teacher_History_StudentList_Tab;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
 
 import java.util.ArrayList;
-
+@SuppressLint("ValidFragment")
 public class CheckedStudentListFragment extends Fragment {
     private static final String TAG = "CheckedStudentListFragment";
     protected View mView;
