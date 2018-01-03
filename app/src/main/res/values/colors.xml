@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#80ddff</color>
     <color name="colorAccent">#FF4081</color>
     <color name="blue_tab">#56abe4</color>
     <color name="gray_tab">#a9b7b7</color>
@@ -23,4 +23,6 @@
     <color name="tab_text_normal">#7597b3</color>
     <color name="DarkVoilet">#9400D3</color>
     <color name="RosyBrown">#BC8F8F</color>
+    <color name="bgc">#80ddff</color>
+    <color name="bgc1">#EFEFF4</color>
 </resources>

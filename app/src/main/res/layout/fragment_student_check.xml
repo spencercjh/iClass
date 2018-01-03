@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorlogin"
+    android:background="@color/white"
     tools:context=".CommonActivity.BeginningActivity.Login.LoginActivity">
 
     <android.support.v7.widget.Toolbar
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
 
-        android:background="@color/blue_light"
+        android:background="@color/bgc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -77,8 +77,8 @@
 
     <ListView
         android:id="@+id/lv"
-        android:layout_width="344dp"
-        android:layout_height="474dp"
+        android:layout_width="357dp"
+        android:layout_height="473dp"
         android:cacheColorHint="#00000000"
         android:divider="@drawable/list_divider"
         android:dividerHeight="1.5dp"
@@ -86,6 +86,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.967" />
+        app:layout_constraintVertical_bias="0.967"
+        tools:layout_editor_absoluteY="91dp"
+        tools:layout_editor_absoluteX="-5dp" />
 
 </android.support.constraint.ConstraintLayout>

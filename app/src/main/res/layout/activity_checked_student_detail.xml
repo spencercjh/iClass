@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorlogin"
+    android:background="@color/bgc1"
     tools:context="com.example.hp.iclass.TeacherCheckActivity.CheckedStudentDetailActivity">
 
     <android.support.v7.widget.Toolbar
@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@color/blue_light"
+        android:background="@color/bgc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorlogin"
+    android:background="@color/white"
     tools:context="com.example.hp.iclass.HistoryActivity.Common.ChooseTimeActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/tl_head"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
-        android:background="@color/blue_light"
+        android:background="@color/bgc"
         app:navigationIcon="@drawable/ic_back"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,7 +42,8 @@
             android:layout_height="40dp"
             android:gravity="center"
             android:text="日期"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/sub_num"
@@ -51,7 +52,8 @@
             android:layout_marginLeft="50px"
             android:gravity="center"
             android:text="节数"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
     </LinearLayout>
 
     <ListView

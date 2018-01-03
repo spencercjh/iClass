@@ -40,7 +40,7 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:textSize="18sp"
-                android:textColor="@color/RosyBrown"/>
+                android:textColor="@color/black"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
                 android:layout_weight="1"
                 android:lines="1"
                 android:textSize="18sp"
-                android:textColor="@color/RosyBrown"/>
+                android:textColor="@color/black"/>
         </LinearLayout>
 
 
@@ -82,7 +82,7 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:textSize="18sp"
-                android:textColor="@color/RosyBrown"/>
+                android:textColor="@color/black"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:textSize="18sp"
-                android:textColor="@color/RosyBrown"/>
+                android:textColor="@color/black"/>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

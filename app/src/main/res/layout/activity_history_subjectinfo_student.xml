@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorlogin"
+    android:background="@color/bgc1"
     tools:context=".TeacherCheckActivity.CheckConditionActivity">
 
     <LinearLayout
@@ -45,7 +45,8 @@
 
                 android:gravity="center"
                 android:text="状态"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/text_ischeck"
@@ -71,7 +72,8 @@
                 android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:text="座位号"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/text_seat_index"
@@ -94,7 +96,8 @@
                 android:layout_weight="0.00"
                 android:gravity="center"
                 android:text="签到时间: "
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/tv_check_time"
@@ -112,7 +115,7 @@
         android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@color/blue_light"
+        android:background="@color/bgc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
