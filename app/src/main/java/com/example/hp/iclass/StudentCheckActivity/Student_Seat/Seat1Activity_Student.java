@@ -21,7 +21,6 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hp.iclass.CommonActivity.MainActivity;
@@ -235,8 +234,7 @@ public class Seat1Activity_Student extends AppCompatActivity {
                         }
                         CheckOBJ insert = new CheckOBJ(subjectOBJ.getSubject_id(), subjectOBJ.getSubject_th(), studentOBJ.getStudent_id(), seat_index, start_time);
                         try {   //尝试签到
-                            if (Judge.pointInPolygon(GetLocation.getLocation(Seat1Activity_Student.this, Seat1Activity_Student.this),
-                                    BuildingLocation.ChooseClassroomBuilding(Fun_QuaryClassroom.http_QuaryClassroom(subjectOBJ)))) {
+                            if (Judge.pointInPolygon(GetLocation.getLocation(Seat1Activity_Student.this,Seat1Activity_Student.this), BuildingLocation.ChooseClassroomBuilding(Fun_QuaryClassroom.http_QuaryClassroom(subjectOBJ)))) {
                                 if (Fun_InsertCheckInfo.http_InsertCheckInfo(insert)) {
                                     Toast.makeText(Seat1Activity_Student.this, "签到成功！", Toast.LENGTH_SHORT).show();
                                     Student_FillSeatView();//刷新界面
@@ -372,11 +370,11 @@ public class Seat1Activity_Student extends AppCompatActivity {
             checkOBJ = (CheckOBJ) getItem(arg0);
             if (checkOBJ.getStudent_id() == null) {
                 FrameLayout frameLayout = view.findViewById(R.id.mylayout);
-                frameLayout.setBackgroundColor(Color.parseColor("#56abe4"));
+                frameLayout.setBackground(getResources().getDrawable(R.drawable.whitechair));
             } else {
                 if (checkOBJ.getStudent_id().equals(studentOBJ.getStudent_id())) {
-                    TextView textView = view.findViewById(R.id.seat_name);
-                    textView.setText("你");
+                    FrameLayout frameLayout = view.findViewById(R.id.mylayout);
+                    frameLayout.setBackground(getResources().getDrawable(R.drawable.greenchair));
                 }
             }
             if (selectItem == arg0) {

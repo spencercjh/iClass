@@ -20,7 +20,6 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hp.iclass.CommonActivity.MainActivity;
@@ -378,11 +377,11 @@ public class Seat2Activity_Student extends AppCompatActivity {
             checkOBJ = (CheckOBJ) getItem(arg0);
             if (checkOBJ.getStudent_id() == null) {
                 FrameLayout frameLayout = view.findViewById(R.id.mylayout);
-                frameLayout.setBackgroundColor(Color.parseColor("#56abe4"));
+                frameLayout.setBackground(getResources().getDrawable(R.drawable.whitechair));
             } else {
                 if (checkOBJ.getStudent_id().equals(studentOBJ.getStudent_id())) {
-                    TextView textView = view.findViewById(R.id.seat_name);
-                    textView.setText("你");
+                    FrameLayout frameLayout = view.findViewById(R.id.mylayout);
+                    frameLayout.setBackground(getResources().getDrawable(R.drawable.greenchair));
                 }
             }
             if (selectItem == arg0) {
