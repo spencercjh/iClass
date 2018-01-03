@@ -65,7 +65,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/teacher_name"
+            android:id="@+id/device_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60px"

@@ -105,7 +105,7 @@ public class ResetSexActivity extends AppCompatActivity implements View.OnClickL
                 try {
                     if (Fun_UpdateTeacherSex.http_UpdateTeacherSex(teacherOBJ.getTeacher_id(), sex)) {
                         Toast.makeText(ResetSexActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                        handler.sendEmptyMessageDelayed(0, 1000);
+                        handler.sendEmptyMessageDelayed(0, 500);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -114,7 +114,7 @@ public class ResetSexActivity extends AppCompatActivity implements View.OnClickL
                 try {
                     if (Fun_UpdateStudentSex.http_UpdateStudentSex(studentOBJ.getStudent_id(), sex)) {
                         Toast.makeText(ResetSexActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                        handler.sendEmptyMessageDelayed(0, 1000);
+                        handler.sendEmptyMessageDelayed(0, 500);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();

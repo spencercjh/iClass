@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
@@ -20,8 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hp.iclass.CommonActivity.MainActivity;
+import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_QuaryStudentDeviceCode;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_StudentLogin;
+import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_UpdateStudentDeviceCode;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_QuaryTeacherDeviceCode;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_TeacherLogin;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_UpdateTeacherDeviceCode;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
@@ -225,49 +230,95 @@ public class LoginActivity extends AppCompatActivity {
                         .show();
             } else if (choice_student.isChecked()) {//学生登录
                 StudentOBJ studentOBJ = new StudentOBJ(str1, str2);
-                int result = Fun_StudentLogin.//网络登录请求
-                        http_LoginStudent(studentOBJ.getStudent_id(), studentOBJ.getStudent_password());
-                if (result == 1) {
-                    if (rem_pw.isChecked()) {
-                        //记住用户名、密码、
-                        SharedPreferences.Editor editor = sp.edit();
-                        editor.putString("USER_ID", studentOBJ.getStudent_id());
-                        editor.putString("PASSWORD", studentOBJ.getStudent_password());
-                        editor.apply();
+                if (Student_Judge_Only(str1)) {
+                    int result = Fun_StudentLogin.//网络登录请求
+                            http_LoginStudent(studentOBJ.getStudent_id(), studentOBJ.getStudent_password());
+                    if (result == 1) {
+                        if (rem_pw.isChecked()) {
+                            //记住用户名、密码、
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putString("USER_ID", studentOBJ.getStudent_id());
+                            editor.putString("PASSWORD", studentOBJ.getStudent_password());
+                            editor.apply();
+                        }
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("studentOBJ", studentOBJ);
+                        intent.putExtra("user", "student");
+                        LoginActivity.this.startActivity(intent);
+                        finish();
+                    } else if (result == 0) {
+                        Toast.makeText(getApplicationContext(), "用户名不存在或密码错误", Toast.LENGTH_SHORT).show();
+                    } else if (result == -1) {
+                        Toast.makeText(getApplicationContext(), "连接服务器失败", Toast.LENGTH_SHORT).show();
                     }
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("studentOBJ", studentOBJ);
-                    intent.putExtra("user", "student");
-                    LoginActivity.this.startActivity(intent);
-                    finish();
-                } else if (result == 0) {
-                    Toast.makeText(getApplicationContext(), "用户名不存在或密码错误", Toast.LENGTH_SHORT).show();
-                } else if (result == -1) {
-                    Toast.makeText(getApplicationContext(), "连接服务器失败", Toast.LENGTH_SHORT).show();
+                } else {
+                    new AlertDialog.Builder(LoginActivity.this).setMessage("您的设备已登陆过别的账号，请联系你的任课老师").setCancelable(true).
+                            setIcon(android.R.drawable.ic_dialog_alert).setTitle("警告").setPositiveButton("确认", null).show();
                 }
             } else if (choice_teacher.isChecked()) {//教师登录
                 TeacherOBJ teacherOBJ = new TeacherOBJ(str1, str2);
-                int result = Fun_TeacherLogin.//网络登录请求
-                        http_LoginTeacher(teacherOBJ.getTeacher_id(), teacherOBJ.getTeacher_password());
-                if (result == 1) {
-                    if (rem_pw.isChecked()) {
-                        //记住用户名、密码、
-                        SharedPreferences.Editor editor = sp.edit();
-                        editor.putString("USER_ID", teacherOBJ.getTeacher_id());
-                        editor.putString("PASSWORD", teacherOBJ.getTeacher_password());
-                        editor.apply();
+                if (Teacher_Judge_Only(str1)) {
+                    int result = Fun_TeacherLogin.//网络登录请求
+                            http_LoginTeacher(teacherOBJ.getTeacher_id(), teacherOBJ.getTeacher_password());
+                    if (result == 1) {
+                        if (rem_pw.isChecked()) {
+                            //记住用户名、密码、
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putString("USER_ID", teacherOBJ.getTeacher_id());
+                            editor.putString("PASSWORD", teacherOBJ.getTeacher_password());
+                            editor.apply();
+                        }
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("teacherOBJ", teacherOBJ);
+                        intent.putExtra("user", "teacher");
+                        LoginActivity.this.startActivity(intent);
+                        finish();
+                    } else if (result == 0) {
+                        Toast.makeText(getApplicationContext(), "用户名不存在或密码错误", Toast.LENGTH_SHORT).show();
+                    } else if (result == -1) {
+                        Toast.makeText(getApplicationContext(), "连接服务器失败", Toast.LENGTH_SHORT).show();
                     }
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("teacherOBJ", teacherOBJ);
-                    intent.putExtra("user", "teacher");
-                    LoginActivity.this.startActivity(intent);
-                    finish();
-                } else if (result == 0) {
-                    Toast.makeText(getApplicationContext(), "用户名不存在或密码错误", Toast.LENGTH_SHORT).show();
-                } else if (result == -1) {
-                    Toast.makeText(getApplicationContext(), "连接服务器失败", Toast.LENGTH_SHORT).show();
+                } else {
+                    new AlertDialog.Builder(LoginActivity.this).setMessage("您的设备已登陆过别的账号，请联系管理员").setCancelable(true).
+                            setIcon(android.R.drawable.ic_dialog_alert).setTitle("警告").setPositiveButton("确认", null).show();
                 }
             }
+        }
+    }
+
+    private boolean Teacher_Judge_Only(String teacher_id) throws InterruptedException {
+        String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
+        String quary_device_id = Fun_QuaryTeacherDeviceCode.http_QuaryTeacherDeviceCode(teacher_id);
+        if (!ANDROID_ID.equals(quary_device_id)) {
+            if (quary_device_id.equals(teacher_id)) {
+                if (Fun_UpdateTeacherDeviceCode.http_UpdateTeacherDeviceCode(teacher_id, ANDROID_ID)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    private boolean Student_Judge_Only(String student_id) throws InterruptedException {
+        String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
+        String quary_device_id = Fun_QuaryStudentDeviceCode.http_QuaryStudentDeviceCode(student_id);
+        if (!ANDROID_ID.equals(quary_device_id)) {
+            if (quary_device_id.equals(student_id)) {
+                if (Fun_UpdateStudentDeviceCode.http_UpdateStudentDeviceCode(student_id, ANDROID_ID)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return true;
         }
     }
 

@@ -7,33 +7,29 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 /**
- * Created by spencercjh on 2017/12/14.
+ * Created by spencercjh on 2018/1/3.
  * iClass
  */
 
-public class UpdateStudentCollege extends Thread {
+public class UpdateStudentDeviceCode extends Thread {
     private boolean flag;
     private String url;
     private String student_id;
-    private String student_college;
-    private String upadate_state;
+    private String device_code;
 
-    public UpdateStudentCollege(String url, String teacher_id, String student_college) {
+    public UpdateStudentDeviceCode(String url, String teacher_id, String device_code) {
         // TODO Auto-generated constructor stub
         this.url = url;
         this.student_id = teacher_id;
-        this.student_college = student_college;
+        this.device_code = device_code;
     }
 
     private void doGet() throws IOException {
-        student_college = URLEncoder.encode(student_college, "UTF-8");
-        student_college = URLEncoder.encode(student_college, "UTF-8");
         /*将username和password传给Tomcat服务器*/
-        url = url + "?student_id=" +student_id
-                + "&student_college=" + student_college;
+        url = url + "?student_id=" + student_id
+                + "&device_code=" + device_code;
         try {
             URL httpUrl = new URL(url);
             /*获取网络连接*/
@@ -53,12 +49,12 @@ public class UpdateStudentCollege extends Thread {
                 while ((line = in.readLine()) != null) {
                     buffer.append(line);
                 }
-                upadate_state = buffer.toString();
-                upadate_state = URLDecoder.decode(upadate_state, "UTF-8");
+                device_code = buffer.toString();
+                device_code = URLDecoder.decode(device_code, "UTF-8");
             }
             //把服务端返回的数据打印出来
-            System.out.println("result:" + upadate_state);
-            if (getUpadate_state().equals("update student_college failed")) {
+            System.out.println("result:" + device_code);
+            if (getDevice_code().equals("update device_code failed")) {
                 setFlag(false);
             } else {
                 setFlag(true);
@@ -77,8 +73,8 @@ public class UpdateStudentCollege extends Thread {
         this.flag = flag;
     }
 
-    private String getUpadate_state() {
-        return upadate_state;
+    private String getDevice_code() {
+        return device_code;
     }
 
 
