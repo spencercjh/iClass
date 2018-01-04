@@ -76,6 +76,7 @@ public class BuildingLocation {
         return path;
     }
 
+
     public static Vector<Point> ChooseClassroomBuilding(String classroom) {
     /*    char B=classroom.charAt(0);
         System.out.println("教学楼Location:    "+B);
