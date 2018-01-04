@@ -6,8 +6,8 @@ package com.example.hp.iclass.StudentCheckActivity.ElectricBarrier;
  */
 
 public class Point {
-    Double x;
-    Double y;
+    Double x;   //Latitude纬度
+    Double y;   //Longitude经度
 
     Point() {
     }

@@ -9,7 +9,7 @@
     <string name="查看已到学生信息">查看已到学生</string>
     <string name="查看签到座位表">查看签到座位图</string>
     <string name="结束本次签到">结束本次签到</string>
-    <string name="tips包括各种异常签到的同学">TIPS：”实到“包括各种异常签到的同学</string>
+    <string name="tips包括各种异常签到的同学">TIPS：”实到“包括各种异常签到/教师代签的同学</string>
     <string name="学生">学生</string>
     <string name="教师">教师</string>
     <string name="请输入您的用户名">请输入您的用户名</string>

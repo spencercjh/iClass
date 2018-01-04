@@ -252,7 +252,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "连接服务器失败", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    new AlertDialog.Builder(LoginActivity.this).setMessage("您的设备已登陆过别的账号，请联系你的任课老师").setCancelable(true).
+                    new AlertDialog.Builder(LoginActivity.this).setMessage("您的设备已登陆过别的账号或连接服务器失败，请联系你的任课老师").setCancelable(true).
                             setIcon(android.R.drawable.ic_dialog_alert).setTitle("警告").setPositiveButton("确认", null).show();
                 }
             } else if (choice_teacher.isChecked()) {//教师登录
@@ -279,7 +279,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "连接服务器失败", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    new AlertDialog.Builder(LoginActivity.this).setMessage("您的设备已登陆过别的账号，请联系管理员").setCancelable(true).
+                    new AlertDialog.Builder(LoginActivity.this).setMessage("您的设备已登陆过别的账号或连接服务器失败，请联系管理员").setCancelable(true).
                             setIcon(android.R.drawable.ic_dialog_alert).setTitle("警告").setPositiveButton("确认", null).show();
                 }
             }

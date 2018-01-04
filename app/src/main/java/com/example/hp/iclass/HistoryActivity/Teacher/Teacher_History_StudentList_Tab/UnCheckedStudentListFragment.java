@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentScore;
-import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentCheckNum;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllStudent;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
@@ -32,6 +31,7 @@ import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
 
 import java.util.ArrayList;
+
 @SuppressLint("ValidFragment")
 public class UnCheckedStudentListFragment extends Fragment {
     private static final String TAG = "UnCheckedStudentListFragment";
@@ -149,13 +149,13 @@ public class UnCheckedStudentListFragment extends Fragment {
                     all_check_num = -1;
                 }
                 int subject_th_num;
-                try {
-                    subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
-                    subject_th_num = subjectOBJ.getSubject_th();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    subject_th_num = -1;
-                }
+//                try {
+//                    subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
+                subject_th_num = subjectOBJ.getSubject_th();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                    subject_th_num = -1;
+//                }
                 Tischeck.setText(String.valueOf(all_check_num) + "/" + String.valueOf(subject_th_num));
                 TextView Tscore = view.findViewById(R.id.tv_stuscore);
                 int score;
@@ -176,7 +176,7 @@ public class UnCheckedStudentListFragment extends Fragment {
                 TextView Tstudent_id = view.findViewById(R.id.tv_studentID);
                 String student_name = Tstudent_name.getText().toString().trim();
                 String student_id = Tstudent_id.getText().toString().trim();
-               dialog1(student_name,student_id);
+                dialog1(student_name, student_id);
             }
         });
 /*        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -209,24 +209,24 @@ public class UnCheckedStudentListFragment extends Fragment {
 
     private void dialog1(String student_name, final String student_id) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("你要为吗"+student_name+"签到吗？");
+        builder.setMessage("你要为吗" + student_name + "签到吗？");
         builder.setTitle("注意");
         builder.setCancelable(false);
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();//关闭对话框
-                CheckOBJ checkOBJ=new CheckOBJ(subjectOBJ.getSubject_id(),subjectOBJ.getSubject_th(),student_id,5,999);
+                CheckOBJ checkOBJ = new CheckOBJ(subjectOBJ.getSubject_id(), subjectOBJ.getSubject_th(), student_id, 5, 999);
                 try {
-                    if(Fun_InsertCheckInfo_Teacher_Help.http_InsertCheckInfo_Teacher_Help(checkOBJ)){
-                        Toast.makeText(getContext(),"代签成功！",Toast.LENGTH_SHORT).show();
+                    if (Fun_InsertCheckInfo_Teacher_Help.http_InsertCheckInfo_Teacher_Help(checkOBJ)) {
+                        Toast.makeText(getContext(), "代签成功！", Toast.LENGTH_SHORT).show();
                         Teacher_FillUncheckedStudentList();
-                    }else{
-                        Toast.makeText(getContext(),"代签失败！",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "代签失败！", Toast.LENGTH_SHORT).show();
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    Toast.makeText(getContext(),"代签失败！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "代签失败！", Toast.LENGTH_SHORT).show();
                 }
             }
         });

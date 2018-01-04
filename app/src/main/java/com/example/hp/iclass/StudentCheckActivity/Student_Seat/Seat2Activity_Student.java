@@ -107,6 +107,9 @@ public class Seat2Activity_Student extends AppCompatActivity {
         CheckOBJ hash[] = new CheckOBJ[seatnum];
         boolean exist[] = new boolean[seatnum];
         for (CheckOBJ i : check_student) {
+            if(i.getSeat_index()==999){
+                continue;
+            }
             hash[i.getSeat_index()] = i;
             exist[i.getSeat_index()] = true;
         }
@@ -241,7 +244,8 @@ public class Seat2Activity_Student extends AppCompatActivity {
                         }
                         CheckOBJ insert = new CheckOBJ(subjectOBJ.getSubject_id(), subjectOBJ.getSubject_th(), studentOBJ.getStudent_id(), seat_index, start_time);
                         try {   //尝试签到
-                            if (Judge.pointInPolygon(GetLocation.getLocation(Seat2Activity_Student.this,Seat2Activity_Student.this),
+                            GetLocation getLocation=new GetLocation(Seat2Activity_Student.this,Seat2Activity_Student.this);
+                            if (Judge.pointInPolygon(getLocation.getLocation(),
                                     BuildingLocation.ChooseClassroomBuilding(Fun_QuaryClassroom.http_QuaryClassroom(subjectOBJ)))) {
                                 if (Fun_InsertCheckInfo.http_InsertCheckInfo(insert)) {
                                     Toast.makeText(Seat2Activity_Student.this, "签到成功！", Toast.LENGTH_SHORT).show();

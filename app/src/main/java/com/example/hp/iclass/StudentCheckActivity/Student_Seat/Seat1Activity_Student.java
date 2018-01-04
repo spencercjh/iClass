@@ -29,7 +29,6 @@ import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_CountStud
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStartTime;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_InsertCheckInfo;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_QuaryCheckSituation;
-import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_QuaryClassroom;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
 import com.example.hp.iclass.OBJ.CheckOBJ;
@@ -106,6 +105,9 @@ public class Seat1Activity_Student extends AppCompatActivity {
         CheckOBJ hash[] = new CheckOBJ[seatnum];
         boolean exist[] = new boolean[seatnum];
         for (CheckOBJ i : check_student) {
+            if (i.getSeat_index() == 999) {
+                continue;
+            }
             hash[i.getSeat_index()] = i;
             exist[i.getSeat_index()] = true;
         }
@@ -234,7 +236,9 @@ public class Seat1Activity_Student extends AppCompatActivity {
                         }
                         CheckOBJ insert = new CheckOBJ(subjectOBJ.getSubject_id(), subjectOBJ.getSubject_th(), studentOBJ.getStudent_id(), seat_index, start_time);
                         try {   //尝试签到
-                            if (Judge.pointInPolygon(GetLocation.getLocation(Seat1Activity_Student.this,Seat1Activity_Student.this), BuildingLocation.ChooseClassroomBuilding(Fun_QuaryClassroom.http_QuaryClassroom(subjectOBJ)))) {
+                            GetLocation getLocation=new GetLocation(Seat1Activity_Student.this, Seat1Activity_Student.this);
+                            if (Judge.pointInPolygon(getLocation.getLocation(),
+                                    BuildingLocation.ChooseClassroomBuilding(subjectOBJ.getClassroom()))) {
                                 if (Fun_InsertCheckInfo.http_InsertCheckInfo(insert)) {
                                     Toast.makeText(Seat1Activity_Student.this, "签到成功！", Toast.LENGTH_SHORT).show();
                                     Student_FillSeatView();//刷新界面

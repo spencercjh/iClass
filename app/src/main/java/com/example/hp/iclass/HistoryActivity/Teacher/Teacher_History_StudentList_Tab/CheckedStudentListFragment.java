@@ -35,7 +35,7 @@ public class CheckedStudentListFragment extends Fragment {
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
     private CheckOBJ checkOBJ = new CheckOBJ();
     private ListView lv;
-    private SwipeRefreshLayout srl_simple;
+    private SwipeRefreshLayout    srl_simple;
 
     CheckedStudentListFragment() {
     }

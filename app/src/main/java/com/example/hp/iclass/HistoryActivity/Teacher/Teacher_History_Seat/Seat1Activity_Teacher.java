@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 import com.example.hp.iclass.HistoryActivity.Teacher.CheckedStudentHistoryDetailActivity;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetStudentName;
-import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountCheckStudent_AllTypes;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_UpdateStudentScore;
@@ -54,11 +53,11 @@ public class Seat1Activity_Teacher extends AppCompatActivity {
         Intent intent = getIntent();
         teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
         subjectOBJ = (SubjectOBJ) intent.getSerializableExtra("subjectOBJ");
-        try {
+       /* try {
             subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         tl_head = (Toolbar) findViewById(R.id.tl_head);
         tl_head.setNavigationIcon(R.drawable.ic_back);
         try {
@@ -90,7 +89,7 @@ public class Seat1Activity_Teacher extends AppCompatActivity {
         final ArrayList<CheckOBJ> seat = new ArrayList<>();
         ArrayList<CheckOBJ> check_student = new ArrayList<>();
         try {
-            subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
+//            subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
             check_student = Json_CheckedStudentList.parserJson2(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
         } catch (InterruptedException e) {
             e.printStackTrace();

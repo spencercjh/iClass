@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.121" />
 
-    <LinearLayout
+<!--    <LinearLayout
         android:id="@+id/loginPanel"
         android:layout_width="278dp"
         android:layout_height="425dp"
@@ -38,13 +38,49 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.605">
+        app:layout_constraintVertical_bias="0.605">-->
 
-        <LinearLayout
-            android:layout_width="250sp"
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.398">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="95sp"
             android:layout_height="75sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/实到"
+            android:textSize="25sp"
+            tools:layout_editor_absoluteX="165dp"
+            tools:layout_editor_absoluteY="47dp" />
+
+        <TextView
+            android:id="@+id/text_present"
+            android:layout_width="145dp"
+            android:layout_height="75dp"
+            android:gravity="center"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="75dp"
             android:orientation="horizontal"
-            android:weightSum="1">
+            android:weightSum="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.229">
 
             <TextView
                 android:id="@+id/textView1"
@@ -55,76 +91,63 @@
 
                 android:gravity="center"
                 android:text="@string/应到"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:layout_weight="1.20" />
 
-            <TextView
-                android:id="@+id/text_should"
-                android:layout_width="145dp"
-                android:layout_height="75dp"
-                android:gravity="center"
-                android:textSize="30sp" />
+        <TextView
+            android:id="@+id/text_should"
+            android:layout_width="145sp"
+            android:layout_height="75dp"
+            android:gravity="center"
+            android:textSize="30sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="95sp"
-                    android:layout_height="75sp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="15dp"
-                    android:layout_weight="0.01"
-                    android:gravity="center"
-                    android:text="@string/实到"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/text_present"
-                    android:layout_width="145dp"
-                    android:layout_height="75dp"
-                    android:gravity="center"
-                    android:textSize="30sp" />
-            </LinearLayout>
-
-        </LinearLayout>
+    </LinearLayout>
 
         <Button
             android:id="@+id/button_student_list"
-            android:layout_width="150sp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15sp"
             android:background="@drawable/background_button_div"
-            android:text="@string/查看学生列表" />
+            android:text="@string/查看学生列表"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.552"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
         <Button
             android:id="@+id/button_seat"
-            android:layout_width="150sp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15sp"
             android:background="@drawable/background_button_div"
-            android:text="@string/查看签到座位表" />
+            android:text="@string/查看签到座位表"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintVertical_bias="0.672" />
 
         <Button
             android:id="@+id/button_end_check"
-            android:layout_width="150sp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15sp"
             android:background="@drawable/background_button_div2"
             android:text="@string/结束本次签到"
-            android:textColor="?attr/colorBackgroundFloating" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintVertical_bias="0.809" />
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="368dp"
-        android:layout_height="50sp"
+        android:layout_height="56dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/bgp"
         app:layout_constraintBottom_toBottomOf="parent"

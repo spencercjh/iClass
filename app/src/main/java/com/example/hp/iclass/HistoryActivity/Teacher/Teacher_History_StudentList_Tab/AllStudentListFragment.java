@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentScore;
-import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentCheckNum;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllStudent;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
@@ -26,6 +25,7 @@ import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
 
 import java.util.ArrayList;
+
 @SuppressLint("ValidFragment")
 public class AllStudentListFragment extends Fragment {
     private static final String TAG = "UnCheckedStudentListFragment";
@@ -141,13 +141,13 @@ public class AllStudentListFragment extends Fragment {
                     all_check_num = -1;
                 }
                 int subject_th_num;
-                try {
-                    subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
-                    subject_th_num = subjectOBJ.getSubject_th();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    subject_th_num = -1;
-                }
+//                try {
+//                    subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
+                subject_th_num = subjectOBJ.getSubject_th();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                    subject_th_num = -1;
+//                }
                 Tischeck.setText(String.valueOf(all_check_num) + "/" + String.valueOf(subject_th_num));
                 TextView Tscore = view.findViewById(R.id.tv_stuscore);
                 int score;

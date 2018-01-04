@@ -33,6 +33,7 @@ public class CheckedStudentDetailActivity extends AppCompatActivity {
     private TextView Tcollege;
     private TextView Tclass;
     private TextView Tsex;
+    private TextView Ttitle;
     private int score;
 
     @Override
@@ -55,6 +56,7 @@ public class CheckedStudentDetailActivity extends AppCompatActivity {
         Tcollege = (TextView) findViewById(R.id.tv_college);
         Tclass = (TextView) findViewById(R.id.tv_class);
         Tsex = (TextView) findViewById(R.id.tv_sex);
+        Ttitle=(TextView)findViewById(R.id.tv_title);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         toolbar.setNavigationIcon(R.drawable.ic_back);
@@ -78,6 +80,7 @@ public class CheckedStudentDetailActivity extends AppCompatActivity {
                 }
             }
         });
+        Ttitle.setText("为"+checkOBJ.getStudent_name()+"这节课的表现打个分吧");
         FreshDetail();
     }
 

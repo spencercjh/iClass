@@ -115,7 +115,7 @@
 
             <TextView
                 android:id="@+id/tv_starttime"
-                android:layout_width="174dp"
+                android:layout_width="176dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="123"
