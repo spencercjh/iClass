@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private long lastPressTime = 0;
     private SharedPreferences sp;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
