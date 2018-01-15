@@ -58,6 +58,10 @@ public class SubjectOBJ implements Serializable {
         this.check_situation = check_situation;
     }
 
+    public SubjectOBJ(String subject_id) {
+        this.subject_id=subject_id;
+    }
+
     public String getClassroom() {
         return classroom;
     }

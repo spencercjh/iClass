@@ -1,7 +1,4 @@
-package com.example.hp.iclass.HttpFunction.Thread.Student_Thread;
-
-import com.example.hp.iclass.OBJ.StudentOBJ;
-import com.example.hp.iclass.OBJ.SubjectOBJ;
+package com.example.hp.iclass.HttpFunction.Thread.Teacher_Thread;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,41 +7,32 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 /**
- * Created by spencercjh on 2017/11/28.
+ * Created by spencercjh on 2018/1/15.
  * iClass
  */
 
-public class InsertSubject extends Thread {
+public class CountOneStudentAllCheck_Checkin extends Thread{
     private boolean flag;
     private String url;
-    private SubjectOBJ subjectOBJ = new SubjectOBJ();
-    private StudentOBJ studentOBJ = new StudentOBJ();
-    private String state = "";
+    private String subject_id;
+    private String student_id;
+    private String num_checkin;
 
-    public InsertSubject(String url, SubjectOBJ subjectOBJ, StudentOBJ studentOBJ) {
+    public CountOneStudentAllCheck_Checkin(String url, String subject_id, String student_id) {
         // TODO Auto-generated constructor stub
         this.url = url;
-        this.subjectOBJ = subjectOBJ;
-        this.studentOBJ = studentOBJ;
+        this.subject_id = subject_id;
+        this.student_id = student_id;
     }
 
     private void doGet() throws IOException {
-        String subject_name = URLEncoder.encode(subjectOBJ.getSubject_name(), "UTF-8");
-        subject_name = URLEncoder.encode(subject_name, "UTF-8");
-        String teacher_name = URLEncoder.encode(subjectOBJ.getTeacher_name(), "UTF-8");
-        teacher_name = URLEncoder.encode(teacher_name, "UTF-8");
         /*将username和password传给Tomcat服务器*/
-        url = url + "?student_id=" + studentOBJ.getStudent_id()
-                + "&subject_id=" + subjectOBJ.getSubject_id()
-                + "&subject_name=" + subject_name
-                + "&teacher_name=" + teacher_name
-                + "&classroom=" + subjectOBJ.getClassroom();
+        url = url + "?subject_id=" + subject_id + "&student_id=" + student_id;
         try {
-//            URLEncoder.encode(URLEncoder.encode(url));
             URL httpUrl = new URL(url);
+//            URLEncoder.encode(url);
             /*获取网络连接*/
             HttpURLConnection conn = (HttpURLConnection) httpUrl.openConnection();
             /*设置请求方法为GET方法*/
@@ -62,12 +50,12 @@ public class InsertSubject extends Thread {
                 while ((line = in.readLine()) != null) {
                     buffer.append(line);
                 }
-                state = buffer.toString();
-                state = URLDecoder.decode(state, "UTF-8");
+                num_checkin = buffer.toString();
+                num_checkin = URLDecoder.decode(num_checkin, "UTF-8");
             }
             //把服务端返回的数据打印出来
-            System.out.println("result:" + state);
-            if (state.equals("insert subject failed")) {
+            System.out.println("result:" + num_checkin);
+            if (num_checkin.equals("count failed")) {
                 setFlag(false);
             } else {
                 setFlag(true);
@@ -86,12 +74,8 @@ public class InsertSubject extends Thread {
         this.flag = flag;
     }
 
-    public String getstate() {
-        return state.trim();
-    }
-
-    public void setJsonstr(String state) {
-        this.state = state;
+    public String getNum_checkin() {
+        return num_checkin;
     }
 
     /*在run中调用doGet*/

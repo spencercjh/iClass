@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 
 public class Json_StudentSubjectList {
-    public static ArrayList<SubjectOBJ> parserJson(String jsonStr) {
+    /*public static ArrayList<SubjectOBJ> parserJson(String jsonStr) {
         ArrayList<SubjectOBJ> list = new ArrayList<>();
         try {
             JSONArray jsonArray = new JSONArray(jsonStr);
@@ -25,6 +25,21 @@ public class Json_StudentSubjectList {
                 String classroom = list_item.getString("classroom");
                 String teacher_name = list_item.getString("teacher_name");
                 SubjectOBJ subjectOBJ = new SubjectOBJ(subject_id, subject_name, teacher_name, classroom);
+                list.add(subjectOBJ);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }*/
+    public static ArrayList<SubjectOBJ> parserJson(String jsonStr) {
+        ArrayList<SubjectOBJ> list = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(jsonStr);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject list_item = jsonArray.getJSONObject(i);
+                String subject_id = list_item.getString("subject_id");
+                SubjectOBJ subjectOBJ = new SubjectOBJ(subject_id);
                 list.add(subjectOBJ);
             }
         } catch (JSONException e) {

@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.hp.iclass.HistoryActivity.Teacher.CheckedStudentHistoryDetailActivity;
-import com.example.hp.iclass.HistoryActivity.Teacher.OutputExcel.ExcelUtil;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetStudentName;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
@@ -26,6 +25,7 @@ import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
 
 import java.util.ArrayList;
+
 @SuppressLint("ValidFragment")
 public class CheckedStudentListFragment extends Fragment {
     private static final String TAG = "CheckedStudentListFragment";
@@ -35,7 +35,7 @@ public class CheckedStudentListFragment extends Fragment {
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
     private CheckOBJ checkOBJ = new CheckOBJ();
     private ListView lv;
-    private SwipeRefreshLayout    srl_simple;
+    private SwipeRefreshLayout srl_simple;
 
     CheckedStudentListFragment() {
     }
@@ -93,11 +93,6 @@ public class CheckedStudentListFragment extends Fragment {
     private void Teacher_FillCheckInfoList() throws InterruptedException {
         lv = mView.findViewById(R.id.checked_students_list);
         final ArrayList<CheckOBJ> CheckInfoList = Json_CheckedStudentList.parserJson(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
-        try {
-            ExcelUtil.writeExcel(getContext(),CheckInfoList,"test");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         //获取ListView,并通过Adapter把studentlist的信息显示到ListView
         //为ListView设置一个适配器,getCount()返回数据个数;getView()为每一行设置一个条目
         lv.setAdapter(new BaseAdapter() {
@@ -148,9 +143,9 @@ public class CheckedStudentListFragment extends Fragment {
                     Tischeck.setText(R.string.Ninety分钟内签到);
                 } else if (checkOBJ.getIscheck() == 4) {
                     Tischeck.setText(R.string.Ninety分钟后签到);
-                }else if (checkOBJ.getIscheck()==5){
+                } else if (checkOBJ.getIscheck() == 5) {
                     Tischeck.setText(R.string.教师代签);
-                }else{
+                } else {
                     Tischeck.setText("系统错误");
                 }
                 return view;
@@ -169,13 +164,13 @@ public class CheckedStudentListFragment extends Fragment {
                 String check_time = Tcheck_time.getText().toString().trim();
                 String ischeck = Tischeck.getText().toString().trim();
                 int ischeck_num;
-                if (ischeck.equals(R.string.Ten分钟内签到)) {
+                if (ischeck.equals(getResources().getString(R.string.Ten分钟内签到))) {
                     ischeck_num = 1;
-                } else if (ischeck.equals(R.string.Forty分钟内签到)) {
+                } else if (ischeck.equals(getResources().getString(R.string.Forty分钟内签到))) {
                     ischeck_num = 2;
-                } else if (ischeck.equals(R.string.Ninety分钟内签到)) {
+                } else if (ischeck.equals(getResources().getString(R.string.Ninety分钟内签到))) {
                     ischeck_num = 3;
-                } else if (ischeck.equals(R.string.Ninety分钟后签到)) {
+                } else if (ischeck.equals(getResources().getString(R.string.Ninety分钟后签到))) {
                     ischeck_num = 4;
                 } else {
                     ischeck_num = -1;

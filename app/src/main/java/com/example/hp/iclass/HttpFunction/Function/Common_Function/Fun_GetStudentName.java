@@ -1,5 +1,7 @@
 package com.example.hp.iclass.HttpFunction.Function.Common_Function;
 
+import android.support.annotation.NonNull;
+
 import com.example.hp.iclass.HttpFunction.Function.IPCondition;
 import com.example.hp.iclass.HttpFunction.Thread.Common_Thread.GetStudentName;
 import com.example.hp.iclass.OBJ.StudentOBJ;
@@ -10,7 +12,7 @@ import com.example.hp.iclass.OBJ.StudentOBJ;
  */
 
 public class Fun_GetStudentName {
-
+    @NonNull
     public static String http_GetStudentName(StudentOBJ studentOBJ) throws InterruptedException {
         String ip = IPCondition.server_ip;
         String url = ip + "iClass_Sever/GetStudentName";
@@ -24,6 +26,7 @@ public class Fun_GetStudentName {
         }
     }
 
+    @NonNull
     public static String http_GetStudentName(String student_id) throws InterruptedException {
         String ip = IPCondition.server_ip;
         String url = ip + "iClass_Sever/GetStudentName";
