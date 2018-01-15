@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.hp.iclass.CommonActivity.MainActivity;
 import com.example.hp.iclass.HistoryActivity.Student.History_SubjectInfo_StudentActivity;
 import com.example.hp.iclass.HistoryActivity.Teacher.History_SubjectInfo_TeacherActivity;
+import com.example.hp.iclass.HistoryActivity.Teacher.OutputExcel.OutputInfo;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetHistorySubjectTimeandTh;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_QuaryTeacherID;
 import com.example.hp.iclass.HttpFunction.Json.Json_HistorySubjectTimeList;
@@ -57,6 +58,7 @@ public class ChooseTimeActivity extends AppCompatActivity {
         if (user.equals("teacher")) {
             choice_user = 1;
             teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
+
         } else if (user.equals("student")) {
             choice_user = 0;
             studentOBJ = (StudentOBJ) intent.getSerializableExtra("studentOBJ");
@@ -72,7 +74,7 @@ public class ChooseTimeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_only_fresh, menu);
+        inflater.inflate(R.menu.menu_teacher_output, menu);
         return true;
     }
 
@@ -84,6 +86,9 @@ public class ChooseTimeActivity extends AppCompatActivity {
                 Fill_HistorySubject();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            if (id==R.id.outputscore){
+                gotonext();
             }
         }
         return super.onOptionsItemSelected(item);
@@ -169,7 +174,32 @@ public class ChooseTimeActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
+    private void gotolast() {
+        Intent intent = new Intent(ChooseTimeActivity.this, MainActivity.class);
+        if (choice_user == 1) {
+            intent.putExtra("teacherOBJ", teacherOBJ);
+            intent.putExtra("user", "teacher");
+        } else if (choice_user == 0) {
+            intent.putExtra("studentOBJ", studentOBJ);
+            intent.putExtra("user", "student");
+        }
+        intent.putExtra("to_history", "true");
+        startActivity(intent);
+        finish();
+    }
+    private void gotonext() {
+        Intent intent = new Intent(ChooseTimeActivity.this, OutputInfo.class);
+        if (choice_user == 1) {
+            intent.putExtra("teacherOBJ", teacherOBJ);
+            intent.putExtra("user", "teacher");
+        } else if (choice_user == 0) {
+            intent.putExtra("studentOBJ", studentOBJ);
+            intent.putExtra("user", "student");
+        }
+        intent.putExtra("to_history", "true");
+        startActivity(intent);
+        finish();
+    }
     public void onBackPressed() {
         gotomain();
     }
