@@ -19,17 +19,21 @@ import android.widget.Toast;
 
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentScore;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
+import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStudentProperty;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentCheckNum;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllStudent;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_InsertCheckInfo_Teacher_Help;
 import com.example.hp.iclass.HttpFunction.Json.Json_AllStudentList;
 import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
+import com.example.hp.iclass.HttpFunction.Json.Json_StudentProperty;
 import com.example.hp.iclass.OBJ.CheckOBJ;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 @SuppressLint("ValidFragment")
@@ -63,7 +67,7 @@ public class UnCheckedStudentListFragment extends Fragment {
             public void onRefresh() {
                 try {
                     Teacher_FillUncheckedStudentList();
-                } catch (InterruptedException e) {
+                } catch (InterruptedException | JSONException e) {
                     e.printStackTrace();
                     srl_simple.setRefreshing(false);
                 }
@@ -93,15 +97,16 @@ public class UnCheckedStudentListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         try {
             Teacher_FillUncheckedStudentList();
-        } catch (InterruptedException e) {
+        } catch (InterruptedException | JSONException e) {
             e.printStackTrace();
         }
     }
 
 
-    private void Teacher_FillUncheckedStudentList() throws InterruptedException {
+    private void Teacher_FillUncheckedStudentList() throws InterruptedException, JSONException {
         final ArrayList<StudentOBJ> CheckInfoList = Json_CheckedStudentList.parserJson3(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
         final ArrayList<StudentOBJ> AllStudentList = Json_AllStudentList.parserJson(Fun_GetAllStudent.http_GetAllStudent(subjectOBJ));
+        init_student_property(AllStudentList);
         final ArrayList<StudentOBJ> UnCheckedStudentList = GetUnCheckedStudnetList(CheckInfoList, AllStudentList);
         lv.setAdapter(new BaseAdapter() {
             @Override
@@ -224,7 +229,7 @@ public class UnCheckedStudentListFragment extends Fragment {
                     }else{
                         Toast.makeText(getContext(),"代签失败！",Toast.LENGTH_SHORT).show();
                     }
-                } catch (InterruptedException e) {
+                } catch (InterruptedException | JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getContext(),"代签失败！",Toast.LENGTH_SHORT).show();
                 }
@@ -254,6 +259,12 @@ public class UnCheckedStudentListFragment extends Fragment {
             }
         }
         return UnCheckedStudentList;
+    }
+    void init_student_property(ArrayList<StudentOBJ> AllStudentList) throws InterruptedException, JSONException {
+        for (int i = 0; i < AllStudentList.size(); i++) {
+            AllStudentList.set(i, Json_StudentProperty.pareJson(
+                    Fun_GetStudentProperty.http_GetStudentProperty(AllStudentList.get(i).getStudent_id())));
+        }
     }
 }
 

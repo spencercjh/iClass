@@ -23,4 +23,17 @@ public class Fun_QuarySubjectTh {
             return Integer.parseInt(thread.getPresent_subject_th().trim());
         }
     }
+
+    public static int http_QuarySubjectTh(String subject_id) throws InterruptedException {
+        String ip = IPCondition.server_ip;
+        String url = ip + "iClass_Sever/QuarySubjectTh";
+        QuarySubjectTh thread = new QuarySubjectTh(url, subject_id);
+        thread.start();
+        thread.join();
+        if (!thread.getFlag()) {
+            return 0;
+        } else {
+            return Integer.parseInt(thread.getPresent_subject_th().trim());
+        }
+    }
 }

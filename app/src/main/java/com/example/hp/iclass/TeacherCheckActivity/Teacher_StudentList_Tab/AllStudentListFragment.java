@@ -15,17 +15,22 @@ import android.widget.TextView;
 
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStudentScore;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
+import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStudentProperty;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentCheckNum;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllStudent;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Json.Json_AllStudentList;
 import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
+import com.example.hp.iclass.HttpFunction.Json.Json_StudentProperty;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
+
 @SuppressLint("ValidFragment")
 public class AllStudentListFragment extends Fragment {
     private static final String TAG = "UnCheckedStudentListFragment";
@@ -55,7 +60,7 @@ public class AllStudentListFragment extends Fragment {
             public void onRefresh() {
                 try {
                     Teacher_FillAllStudentList();
-                } catch (InterruptedException e) {
+                } catch (InterruptedException | JSONException e) {
                     e.printStackTrace();
                 }
                 srl_simple.setRefreshing(false);
@@ -84,14 +89,15 @@ public class AllStudentListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         try {
             Teacher_FillAllStudentList();
-        } catch (InterruptedException e) {
+        } catch (InterruptedException | JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void Teacher_FillAllStudentList() throws InterruptedException {
+    private void Teacher_FillAllStudentList() throws InterruptedException, JSONException {
         lv = mView.findViewById(R.id.all_studnet_list);
         final ArrayList<StudentOBJ> AllStudentList = Json_AllStudentList.parserJson(Fun_GetAllStudent.http_GetAllStudent(subjectOBJ));
+        init_student_property(AllStudentList);
         final ArrayList<String> CheckInfoList = Json_CheckedStudentList.parserJson4(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
 
         //获取ListView,并通过Adapter把studentlist的信息显示到ListView
@@ -231,5 +237,12 @@ public class AllStudentListFragment extends Fragment {
                 return true;
             }
         });*/
+    }
+
+    void init_student_property(ArrayList<StudentOBJ> AllStudentList) throws InterruptedException, JSONException {
+        for (int i = 0; i < AllStudentList.size(); i++) {
+            AllStudentList.set(i, Json_StudentProperty.pareJson(
+                    Fun_GetStudentProperty.http_GetStudentProperty(AllStudentList.get(i).getStudent_id())));
+        }
     }
 }

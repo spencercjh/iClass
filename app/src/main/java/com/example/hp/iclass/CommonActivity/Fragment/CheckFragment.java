@@ -21,22 +21,24 @@ import android.widget.TextView;
 
 import com.example.hp.iclass.CommonActivity.BeginningActivity.Login.LoginActivity;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetSubjectClassType;
+import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetSubjectProperty;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetTeacherName;
-import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_CreateStudentSubjectTable;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStudentSubject;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetTeacherSubject;
 import com.example.hp.iclass.HttpFunction.Json.Json_StudentSubjectList;
+import com.example.hp.iclass.HttpFunction.Json.Json_SubjectProperty;
 import com.example.hp.iclass.HttpFunction.Json.Json_TeacherSubjectList;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
-import com.example.hp.iclass.StudentCheckActivity.AddsubjectActivity;
 import com.example.hp.iclass.StudentCheckActivity.Student_Seat.Seat1Activity_Student;
 import com.example.hp.iclass.StudentCheckActivity.Student_Seat.Seat2Activity_Student;
 import com.example.hp.iclass.StudentCheckActivity.Student_Seat.Seat3Activity_Student;
 import com.example.hp.iclass.StudentCheckActivity.Student_Seat.SeatErrorActivity_Student;
 import com.example.hp.iclass.TeacherCheckActivity.CheckConditionActivity;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -108,14 +110,14 @@ public class CheckFragment extends Fragment {
                 e.printStackTrace();
             }
         } else if (choice_user == 0) {
-            try {
+            /*try {
                 Fun_CreateStudentSubjectTable.http_CreateStudentSubjectTable(studentOBJ);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
             try {
                 Student_FillSubject();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException | JSONException e) {
                 e.printStackTrace();
             }
         }
@@ -141,7 +143,7 @@ public class CheckFragment extends Fragment {
             } else if (choice_user == 0) {
                 try {
                     Student_FillSubject();
-                } catch (InterruptedException e) {
+                } catch (InterruptedException | JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -163,7 +165,7 @@ public class CheckFragment extends Fragment {
     }
 
     private void gotoaddcourse() {   //toobar menu里的添加课程
-        Intent it = new Intent(getActivity(), AddsubjectActivity.class);
+    /*    Intent it = new Intent(getActivity(), AddsubjectActivity.class);
         it.putExtra("user", choice_user);
         if (choice_user == 1) {
             it.putExtra("teacherOBJ", teacherOBJ);
@@ -171,7 +173,7 @@ public class CheckFragment extends Fragment {
             it.putExtra("studentOBJ", studentOBJ);
         }
         startActivity(it);
-        getActivity().finish();
+        getActivity().finish();*/
     }
 
     private void Teacher_FillSubjectList() throws InterruptedException {
@@ -293,11 +295,11 @@ public class CheckFragment extends Fragment {
         });*/
     }
 
-    private void Student_FillSubject() throws InterruptedException {
+    private void Student_FillSubject() throws InterruptedException, JSONException {
         lv = myview.findViewById(R.id.lv);
         final ArrayList<SubjectOBJ> SubjectList = Json_StudentSubjectList.parserJson
                 (Fun_GetStudentSubject.http_GetStudentSubject(studentOBJ));
-
+        init_subject_property(SubjectList);
         //获取ListView,并通过Adapter把studentlist的信息显示到ListView
         //为ListView设置一个适配器,getCount()返回数据个数;getView()为每一行设置一个条目
         lv.setAdapter(new BaseAdapter() {
@@ -411,5 +413,10 @@ public class CheckFragment extends Fragment {
                 return true;
             }
         });*/
+    }
+    void init_subject_property(ArrayList<SubjectOBJ> SubjectList) throws InterruptedException, JSONException {
+        for(int i=0;i<SubjectList.size();i++){
+            SubjectList.set(i, Json_SubjectProperty.pareJson(Fun_GetSubjectProperty.http_GetSubjectProperty(SubjectList.get(i).getSubject_id())));
+        }
     }
 }

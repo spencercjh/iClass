@@ -26,7 +26,6 @@
         </activity>
         <activity android:name=".CommonActivity.BeginningActivity.Login.LoginActivity" />
         <activity android:name=".CommonActivity.MainActivity" />
-        <activity android:name=".StudentCheckActivity.AddsubjectActivity" />
         <activity android:name=".StudentCheckActivity.Student_Seat.Seat3Activity_Student" />
         <activity android:name=".StudentCheckActivity.Student_Seat.SeatErrorActivity_Student" />
         <activity android:name=".StudentCheckActivity.Student_Seat.Seat2Activity_Student" />

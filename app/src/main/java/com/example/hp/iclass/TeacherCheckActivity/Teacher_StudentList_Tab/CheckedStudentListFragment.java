@@ -25,6 +25,7 @@ import com.example.hp.iclass.R;
 import com.example.hp.iclass.TeacherCheckActivity.CheckedStudentDetailActivity;
 
 import java.util.ArrayList;
+
 @SuppressLint("ValidFragment")
 public class CheckedStudentListFragment extends Fragment {
     private static final String TAG = "CheckedStudentListFragment";
@@ -142,9 +143,9 @@ public class CheckedStudentListFragment extends Fragment {
                     Tischeck.setText(R.string.Ninety分钟内签到);
                 } else if (checkOBJ.getIscheck() == 4) {
                     Tischeck.setText(R.string.Ninety分钟后签到);
-                }else if (checkOBJ.getIscheck()==5){
+                } else if (checkOBJ.getIscheck() == 5) {
                     Tischeck.setText(R.string.教师代签);
-                }else{
+                } else {
                     Tischeck.setText("系统错误");
                 }
                 return view;
@@ -163,13 +164,13 @@ public class CheckedStudentListFragment extends Fragment {
                 String check_time = Tcheck_time.getText().toString().trim();
                 String ischeck = Tischeck.getText().toString().trim();
                 int ischeck_num;
-                if (ischeck.equals(R.string.Ten分钟内签到)) {
+                if (ischeck.equals(getResources().getString(R.string.Ten分钟内签到))) {
                     ischeck_num = 1;
-                } else if (ischeck.equals(R.string.Forty分钟内签到)) {
+                } else if (ischeck.equals(getResources().getString(R.string.Forty分钟内签到))) {
                     ischeck_num = 2;
-                } else if (ischeck.equals(R.string.Ninety分钟内签到)) {
+                } else if (ischeck.equals(getResources().getString(R.string.Ninety分钟内签到))) {
                     ischeck_num = 3;
-                } else if (ischeck.equals(R.string.Ninety分钟后签到)) {
+                } else if (ischeck.equals(getResources().getString(R.string.Ninety分钟后签到))) {
                     ischeck_num = 4;
                 } else {
                     ischeck_num = -1;

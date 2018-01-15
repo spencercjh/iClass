@@ -84,7 +84,6 @@
         android:layout_height="48dp"
         android:background="@drawable/btn_list_item_bg"
         android:clickable="true"
-        android:onClick="setting"
         android:paddingLeft="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

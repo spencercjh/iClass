@@ -1,4 +1,4 @@
-package com.example.hp.iclass.HttpFunction.Thread.Student_Thread;
+package com.example.hp.iclass.HttpFunction.Thread.Teacher_Thread;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,24 +9,27 @@ import java.net.URL;
 import java.net.URLDecoder;
 
 /**
- * Created by spencercjh on 2017/11/30.
+ * Created by spencercjh on 2018/1/15.
  * iClass
  */
 
-public class CreateStudentSubjectTable extends Thread {
+public class CountOneStudentAllCheck_Score_Good extends Thread{
     private boolean flag;
     private String url;
+    private String subject_id;
     private String student_id;
-    private String state;
+    private String num_score_good;
 
-    public CreateStudentSubjectTable(String url, String student_id) {
+    public CountOneStudentAllCheck_Score_Good(String url, String subject_id, String student_id) {
+        // TODO Auto-generated constructor stub
         this.url = url;
+        this.subject_id = subject_id;
         this.student_id = student_id;
     }
 
     private void doGet() throws IOException {
         /*将username和password传给Tomcat服务器*/
-        url = url + "?student_id=" + student_id;
+        url = url + "?subject_id=" + subject_id + "&student_id=" + student_id;
         try {
             URL httpUrl = new URL(url);
 //            URLEncoder.encode(url);
@@ -47,12 +50,12 @@ public class CreateStudentSubjectTable extends Thread {
                 while ((line = in.readLine()) != null) {
                     buffer.append(line);
                 }
-                state = buffer.toString();
-                state = URLDecoder.decode(state, "UTF-8");
+                num_score_good = buffer.toString();
+                num_score_good = URLDecoder.decode(num_score_good, "UTF-8");
             }
             //把服务端返回的数据打印出来
-            System.out.println("result:" + state);
-            if (state.contains("failed")) {
+            System.out.println("result:" + num_score_good);
+            if (num_score_good.equals("count failed")) {
                 setFlag(false);
             } else {
                 setFlag(true);
@@ -71,8 +74,8 @@ public class CreateStudentSubjectTable extends Thread {
         this.flag = flag;
     }
 
-    public String getstate() {
-        return state;
+    public String getNum_score_good() {
+        return num_score_good;
     }
 
     /*在run中调用doGet*/

@@ -6,7 +6,15 @@ import android.os.StatFs;
 import android.widget.Toast;
 
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetStudentName;
-import com.example.hp.iclass.OBJ.CheckOBJ;
+import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentAllCheck_AllTypes;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentAllCheck_Checkin;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentAllCheck_Late;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentAllCheck_PP;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentAllCheck_Score_Bad;
+import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentAllCheck_Score_Good;
+import com.example.hp.iclass.OBJ.StudentScoreOBJ;
+import com.example.hp.iclass.OBJ.SubjectSumUpOBJ;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,16 +37,24 @@ import jxl.write.WriteException;
 
 public class ExcelUtil {
     //内存地址
-    public static String root = Environment.getExternalStorageDirectory()
+    private static String root = Environment.getExternalStorageDirectory()
             .getPath();
 
-    public static void writeExcel(Context context, ArrayList<CheckOBJ> CheckInfo,
-                                  String fileName) throws Exception {
+    public static boolean writeExcel(Context context, SubjectSumUpOBJ subjectSumUpOBJ) throws Exception {
+        ArrayList<StudentScoreOBJ> Subject_Check_Info = subjectSumUpOBJ.getSumupArray();
+        ArrayList<String> StudentArray = subjectSumUpOBJ.getStudentArray();
+        String fileName = subjectSumUpOBJ.getFilename();
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) && getAvailableStorage() > 1000000) {
             Toast.makeText(context, "SD卡不可用", Toast.LENGTH_LONG).show();
-            return;
+            return false;
         }
-        String[] title = {"学号", "姓名", "签到状态", "签到时间"};
+        String[] title = {"序号", "学号", "姓名", "出勤", "缺勤", "迟到", "教师代签", "好评", "差评", "平时出勤成绩"};
+        String Direction_Title = fileName +
+                "(缺勤：-" + subjectSumUpOBJ.getScore_uncheckin() + "分" +
+                "迟到：-" + subjectSumUpOBJ.getScore_late() + "分" +
+                "好评：+" + subjectSumUpOBJ.getScore_good() + "分" +
+                "差评：-" + subjectSumUpOBJ.getScore_bad() + "分" +
+                "总分： " + subjectSumUpOBJ.getTotal_points() + "分";
         File file;
         File dir = new File(context.getExternalFilesDir(null).getPath());
         file = new File(dir, fileName + ".xls");
@@ -50,44 +66,47 @@ public class ExcelUtil {
         OutputStream os = new FileOutputStream(file);
         wwb = Workbook.createWorkbook(os);
         // 添加第一个工作表并设置第一个Sheet的名字
-        WritableSheet sheet = wwb.createSheet("订单", 0);
-        Label label;
+        WritableSheet sheet = wwb.createSheet(fileName, 0);
+        Label label = new Label(0, 0, Direction_Title, getHeader()); //添加表的大标题
+        sheet.addCell(label);
         for (int i = 0; i < title.length; i++) {
             // Label(x,y,z) 代表单元格的第x+1列，第y+1行, 内容z
             // 在Label对象的子对象中指明单元格的位置和内容
-            label = new Label(i, 0, title[i], getHeader());
+            label = new Label(i, 1, title[i], getHeader());
             // 将定义好的单元格添加到工作表中
             sheet.addCell(label);
         }
-
-        for (int i = 0; i < CheckInfo.size(); i++) {
-            CheckOBJ checkOBJ = CheckInfo.get(i);
-            checkOBJ.setStudent_name(Fun_GetStudentName.http_GetStudentName(checkOBJ.getStudent_id()));
-            Label student_id = new Label(0, i + 1, checkOBJ.getStudent_id());
-            Label student_name = new Label(1, i + 1, checkOBJ.getStudent_name());
-            Label ischeck;
-            if (checkOBJ.getIscheck() == 1) {
-                ischeck = new Label(2, i + 1, "正常");
-            } else if (checkOBJ.getIscheck() == 5) {
-                ischeck = new Label(2, i + 1, "教师代签");
-            } else {
-                ischeck = new Label(2, i + 1, "异常");
-            }
-            Label time = new Label(3, i + 1, checkOBJ.getCheck_time());
-
-            sheet.addCell(student_id);
-            sheet.addCell(student_name);
-            sheet.addCell(ischeck);
-            sheet.addCell(time);
+        for (int i = 0; i < StudentArray.size(); i++) {
+            String student_id = StudentArray.get(i);
+            StudentScoreOBJ student_score = init_Subject_Check_Info(i, student_id, Subject_Check_Info, subjectSumUpOBJ);
+            Label Lindex = new Label(0, i + 2, String.valueOf(i + 1));
+            Label Lstudent_id = new Label(1, i + 2, student_score.getStudent_id());
+            Label Lstudent_name = new Label(2, i + 2, student_score.getStudent_name());
+            Label Lnum_checkin = new Label(3, i + 2, String.valueOf(student_score.getNum_checkin() + student_score.getNum_pp()));  //出勤==出勤+教师代签
+            Label Lnum_uncheckin = new Label(4, i + 2, String.valueOf(student_score.getNum_uncheck_in()));
+            Label Lnum_late = new Label(4, i + 2, String.valueOf(student_score.getNum_late()));
+            Label Lnum_pp = new Label(5, i + 2, String.valueOf(student_score.getNum_pp()));
+            Label Lscore_good = new Label(6, i + 2, String.valueOf(student_score.getNum_good()));
+            Label Lscore_bad = new Label(7, i + 2, String.valueOf(student_score.getNum_bad()));
+            Label Lclass_score = new Label(8, i + 2, String.valueOf(student_score.getClass_score()));
+            sheet.addCell(Lindex);
+            sheet.addCell(Lstudent_id);
+            sheet.addCell(Lstudent_name);
+            sheet.addCell(Lnum_checkin);
+            sheet.addCell(Lnum_uncheckin);
+            sheet.addCell(Lnum_late);
+            sheet.addCell(Lnum_pp);
+            sheet.addCell(Lscore_good);
+            sheet.addCell(Lscore_bad);
+            sheet.addCell(Lclass_score);
 //            Toast.makeText(context, "写入成功", Toast.LENGTH_LONG).show();
-
         }
         // 写入数据
         wwb.write();
         // 关闭文件
         wwb.close();
+        return true;
     }
-
 
     public static WritableCellFormat getHeader() {
         WritableFont font = new WritableFont(WritableFont.TIMES, 10,
@@ -121,5 +140,29 @@ public class ExcelUtil {
         long availableSize = blockSize * availableBlocks;
         // Formatter.formatFileSize(context, availableSize);
         return availableSize;
+    }
+
+    static StudentScoreOBJ init_Subject_Check_Info(int i, String student_id, ArrayList<StudentScoreOBJ> Subject_Check_Info, SubjectSumUpOBJ subjectSumUpOBJ) throws InterruptedException {
+        String subject_id = subjectSumUpOBJ.getSubject_id();
+        Subject_Check_Info.get(i).setStudent_id(student_id);    //学生id
+        Subject_Check_Info.get(i).setStudent_name(Fun_GetStudentName.http_GetStudentName(student_id));  //学生姓名
+        Subject_Check_Info.get(i).setNum_checkin(Integer.parseInt(  //出勤（不包含教师代签）
+                Fun_CountOneStudentAllCheck_Checkin.http_CountOneStudentAllCheck_Checkin(subject_id, student_id)));
+        Subject_Check_Info.get(i).setNum_uncheck_in(Fun_QuarySubjectTh.http_QuarySubjectTh(subject_id) + 1  //缺勤  节数+1=所有课时数 课时数-出勤（任何形式的）=缺勤
+                - Integer.parseInt(Fun_CountOneStudentAllCheck_AllTypes.http_CountOneStudentAllCheck_AllTypes(subject_id, student_id)));
+        Subject_Check_Info.get(i).setNum_late(Integer.parseInt( //迟到
+                Fun_CountOneStudentAllCheck_Late.http_CountOneStudentAllCheck_Late(subject_id, student_id)));
+        Subject_Check_Info.get(i).setNum_pp(Integer.parseInt(   //教师代签
+                Fun_CountOneStudentAllCheck_PP.http_CountOneStudentAllCheck_PP(subject_id, student_id)));
+        Subject_Check_Info.get(i).setNum_good(Integer.parseInt( //好评
+                Fun_CountOneStudentAllCheck_Score_Good.http_CountOneStudentAllCheck_Score_Good(subject_id, student_id)));
+        Subject_Check_Info.get(i).setNum_bad(Integer.parseInt(  //差评
+                Fun_CountOneStudentAllCheck_Score_Bad.http_CountOneStudentAllCheck_Score_Bad(subject_id, student_id)));
+        Subject_Check_Info.get(i).setClass_score(subjectSumUpOBJ.getTotal_points() - //总分
+                subjectSumUpOBJ.getScore_uncheckin() * Subject_Check_Info.get(i).getNum_uncheck_in() - //缺勤扣分
+                subjectSumUpOBJ.getScore_late() * Subject_Check_Info.get(i).getNum_late() +    //迟到扣分
+                subjectSumUpOBJ.getScore_good() * Subject_Check_Info.get(i).getNum_good() -    //好评加分
+                subjectSumUpOBJ.getScore_bad() * Subject_Check_Info.get(i).getNum_bad());     //差评扣分
+        return Subject_Check_Info.get(i);
     }
 }
