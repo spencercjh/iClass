@@ -160,8 +160,8 @@ public class OutputInfo extends AppCompatActivity {
     public void confirm(View view) {
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        dialog.setTitle("进度对话框");
-        dialog.setMessage("长方形进度条");
+        dialog.setTitle("正在导出……");
+        dialog.setMessage("请稍后");
         dialog.setIcon(android.R.drawable.ic_dialog_alert);
         dialog.setMax(100);
         dialog.setButton("取消", new ProgressDialog.OnClickListener() {

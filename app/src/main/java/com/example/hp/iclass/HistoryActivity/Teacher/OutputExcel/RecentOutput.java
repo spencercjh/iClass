@@ -41,7 +41,7 @@ public class RecentOutput extends AppCompatActivity {
         subjectOBJ = (SubjectOBJ) intent.getSerializableExtra("subjectOBJ");
         user = (String) intent.getSerializableExtra("user");
         tl_head = (Toolbar) findViewById(R.id.tl_head);
-        tl_head.setTitle("             找回密码");
+        tl_head.setTitle("           ");
         tl_head.setTitleTextColor(Color.WHITE);
         tl_head.setNavigationIcon(R.drawable.ic_back);
         setSupportActionBar(tl_head);
