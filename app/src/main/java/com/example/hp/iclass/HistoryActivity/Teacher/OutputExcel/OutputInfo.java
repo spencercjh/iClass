@@ -20,11 +20,6 @@ import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
 
 public class OutputInfo extends AppCompatActivity {
-    private TeacherOBJ teacherOBJ = new TeacherOBJ();
-    private StudentOBJ studentOBJ = new StudentOBJ();
-    private SubjectOBJ subjectOBJ = new SubjectOBJ();
-    private String user = "";
-    private int choice_user;
     EditText score;
     EditText eachlatescore;
     EditText eachabsentscore;
@@ -32,17 +27,24 @@ public class OutputInfo extends AppCompatActivity {
     EditText eachbadscore;
     Button bt_confirm;
     Button bt_recovery;
-    private Toolbar tl_head;
     String str1 = "";
     String str2 = "";
     String str3 = "";
     String str4 = "";
     String str5 = "";
+    private TeacherOBJ teacherOBJ = new TeacherOBJ();
+    private StudentOBJ studentOBJ = new StudentOBJ();
+    private SubjectOBJ subjectOBJ = new SubjectOBJ();
+    private String user = "";
+    private int choice_user;
+    private Toolbar tl_head;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_output_info);
         Intent intent = getIntent();
+        user = (String) intent.getSerializableExtra("user");
         if (user.equals("teacher")) {
             choice_user = 1;
             teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
@@ -51,7 +53,6 @@ public class OutputInfo extends AppCompatActivity {
             studentOBJ = (StudentOBJ) intent.getSerializableExtra("studentOBJ");
         }
         subjectOBJ = (SubjectOBJ) intent.getSerializableExtra("subjectOBJ");
-        user = (String) intent.getSerializableExtra("user");
         tl_head = (Toolbar) findViewById(R.id.tl_head);
         tl_head.setTitle("             找回密码");
         tl_head.setTitleTextColor(Color.WHITE);
@@ -63,7 +64,7 @@ public class OutputInfo extends AppCompatActivity {
                 gotolast();
             }
         });
-        score = (EditText) findViewById(R.id.score);
+        score = (EditText) findViewById(R.id.total_points);
         score.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -81,7 +82,7 @@ public class OutputInfo extends AppCompatActivity {
             }
         });
 
-        eachabsentscore = (EditText) findViewById(R.id.eachabsentscore);
+        eachabsentscore = (EditText) findViewById(R.id.each_uncheckin_score);
         eachabsentscore.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -99,7 +100,7 @@ public class OutputInfo extends AppCompatActivity {
             }
         });
 
-        eachbadscore = (EditText) findViewById(R.id.eachbadscore);
+        eachbadscore = (EditText) findViewById(R.id.each_bad_score);
         eachbadscore.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -117,7 +118,7 @@ public class OutputInfo extends AppCompatActivity {
             }
         });
 
-        eachgoodscore = (EditText) findViewById(R.id.eachgoodscore);
+        eachgoodscore = (EditText) findViewById(R.id.each_good_score);
         eachgoodscore.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -135,7 +136,7 @@ public class OutputInfo extends AppCompatActivity {
             }
         });
 
-        eachlatescore = (EditText) findViewById(R.id.eachlatescore);
+        eachlatescore = (EditText) findViewById(R.id.each_late_score);
         eachlatescore.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -212,6 +213,7 @@ public class OutputInfo extends AppCompatActivity {
         eachbadscore.setText("2");
 
     }
+
     private void gotolast() {
         Intent intent = new Intent(this, ChooseTimeActivity.class);
         if (choice_user == 1) {

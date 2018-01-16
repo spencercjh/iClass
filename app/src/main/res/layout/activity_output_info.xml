@@ -61,11 +61,12 @@
                 android:layout_width="126dp"
                 android:layout_height="33dp"
                 android:layout_marginLeft="10sp"
-                android:text="平时分:"
+                android:gravity="center"
+                android:text="总分:"
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/score"
+                android:id="@+id/total_points"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5sp"
@@ -95,7 +96,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/eachlatescore"
+                android:id="@+id/each_late_score"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
                 android:layout_marginLeft="5sp"
@@ -125,7 +126,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/eachabsentscore"
+                android:id="@+id/each_uncheckin_score"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
                 android:layout_marginLeft="5sp"
@@ -155,7 +156,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/eachgoodscore"
+                android:id="@+id/each_good_score"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
                 android:layout_marginLeft="5sp"
@@ -184,7 +185,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/eachbadscore"
+                android:id="@+id/each_bad_score"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
                 android:layout_marginLeft="5sp"
