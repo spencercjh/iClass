@@ -1,20 +1,16 @@
 package com.example.hp.iclass.TeacherCheckActivity;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v13.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -50,9 +46,7 @@ import com.example.hp.iclass.TeacherCheckActivity.Teacher_StudentList_Tab.Studen
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Properties;
 
 public class CheckConditionActivity extends AppCompatActivity implements View.OnClickListener {
@@ -82,7 +76,6 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         seatbtn.setOnClickListener(this);
         infobtn.setOnClickListener(this);
         button_end_check.setOnClickListener(this);
-
         Intent intent = getIntent();
         teacherOBJ = (TeacherOBJ) intent.getSerializableExtra("teacherOBJ");
         subjectOBJ = (SubjectOBJ) intent.getSerializableExtra("subjectOBJ");
@@ -101,7 +94,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             String Str_student_num = String.valueOf(subjectOBJ.getStudent_num());
             should.setText(Str_student_num.trim());
             //present.setText(R.string.右上角打call);
-            button_end_check.setEnabled(true);
+//            button_end_check.setEnabled(true);
             // button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
             button_end_check.setText("开始签到！");
         } else if (subjectOBJ.getCheck_situation() == 1) {
@@ -118,7 +111,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            button_end_check.setEnabled(true);
+//            button_end_check.setEnabled(true);
         }
         tl_head.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +120,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             }
         });
         FreshPresentStudentNum();
+        dialog3();
     }
 
     @Override
@@ -144,29 +138,46 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             return true;
         } else if (id == R.id.menu_check) {
             try {
-                UpdateSubject_th();
+                int check_open = Fun_QuaryCheckSituation.http_QuaryCheckSituation(subjectOBJ);
+                if (check_open == 1) {
+                    dialog4();
+                } else if (check_open == 0) {
+                    try {
+                        UpdateSubject_th();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        Tsubject_th.setText(subject_th_tips + String.valueOf(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ)) + getString(R.string.大节));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    FreshPresentStudentNum();
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            try {
-                Tsubject_th.setText(subject_th_tips + String.valueOf(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ)) + getString(R.string.大节));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            FreshPresentStudentNum();
         } else if (id == R.id.menu_reupdate) {
-            tl_head.setTitle("签到未开启");
             try {
-                ReupdateCheck();
+                int check_open = Fun_QuaryCheckSituation.http_QuaryCheckSituation(subjectOBJ);
+                if (check_open == 1) {
+                    dialog4();
+                } else {
+                    try {
+                        ReupdateCheck();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        Tsubject_th.setText(subject_th_tips + String.valueOf(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ)) + getString(R.string.大节));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    FreshPresentStudentNum();
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            try {
-                Tsubject_th.setText(subject_th_tips + String.valueOf(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ)) + getString(R.string.大节));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            FreshPresentStudentNum();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -174,7 +185,8 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
     private void dialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(CheckConditionActivity.this);
         builder.setMessage("确认结束本次签到吗？");
-        builder.setTitle("警告！");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setTitle("警告");
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -244,6 +256,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             e.printStackTrace();
         }
         if (if_set_muted()) {
+            getDoNotDisturb();
             int require = Build.VERSION_CODES.M;
             int present = Integer.parseInt(Build.VERSION.SDK);
             if (present >= require) {
@@ -304,6 +317,9 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
     private void set_silent_higher() {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         int previous_notification_interrupt_setting = notificationManager.getCurrentInterruptionFilter();
+        if (!notificationManager.isNotificationPolicyAccessGranted()){
+            return;
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             previous_notification_interrupt_setting = notificationManager.getCurrentInterruptionFilter();
             notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
@@ -319,9 +335,16 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         Toast.makeText(CheckConditionActivity.this, "已为您将手机调整为静音！", Toast.LENGTH_SHORT).show();
     }
 
+    private void getDoNotDisturb() {
+        NotificationManager notificationManager = (NotificationManager) CheckConditionActivity.this.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !notificationManager.isNotificationPolicyAccessGranted()) {
+            dialog7();
+        }
+    }
+
     private void UpdateSubject_th() throws InterruptedException {
         //      更新开始签到时间
-        Fun_UpdateStartTime.http_UpdateStartTime(subjectOBJ);
+//        Fun_UpdateStartTime.http_UpdateStartTime(subjectOBJ);
         //      更新课程节数
         try {
             Fun_UpdateSubjectTh.http_UpdateSubjectTh(subjectOBJ);
@@ -332,16 +355,12 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
 
     private void ReupdateCheck() throws InterruptedException {
         subjectOBJ.setSubject_th(Fun_QuarySubjectTh.http_QuarySubjectTh(subjectOBJ));
-        if (subjectOBJ.getSubject_th() > 0) {
-            Fun_ReUpdateSubjectTh.http_ReUpdateSubjectTh(subjectOBJ);
-            Fun_SetCheckSituationFalse.http_SetCheckSituationFalse(subjectOBJ);
-            subjectOBJ.setCheck_situation(0);
-        } else if (subjectOBJ.getSubject_th() == 0) {
-            Fun_SetCheckSituationFalse.http_SetCheckSituationFalse(subjectOBJ);
-            subjectOBJ.setCheck_situation(0);
-        }//把老师插入的签到信息删掉
-        Fun_DeleteCheckInfo_Teacher.http_DeleteCheckInfo_Teacher(subjectOBJ.getSubject_id(), subjectOBJ.getSubject_th(), teacherOBJ.getTeacher_id());
-        button_end_check.setEnabled(false);
+        if (subjectOBJ.getSubject_th() > 1) {
+            dialog6();
+        } else if (subjectOBJ.getSubject_th() == 1) {
+            dialog5();
+        }
+//        button_end_check.setEnabled(false);
 //        button_end_check.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_button_div));
         button_end_check.setText("开始签到！");
     }
@@ -403,7 +422,8 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
     private void dialog2() {
         AlertDialog.Builder builder = new AlertDialog.Builder(CheckConditionActivity.this);
         builder.setMessage("确认开始签到吗？");
-        builder.setTitle("警告！");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setTitle("警告");
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -460,5 +480,107 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         } else if (view.getId() == R.id.button_seat) {
             CheckSeat();
         }
+    }
+
+    private void dialog3() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CheckConditionActivity.this);
+        builder.setMessage("点击工具栏中的上箭头和下箭头调整课程进行到的节数！");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setTitle("警告");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();//关闭对话框
+            }
+        });
+        builder.create().show();//显示对话框
+    }
+
+    private void dialog4() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CheckConditionActivity.this);
+        builder.setMessage("当节课程正在签到中，无法更改课程节数！");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setTitle("警告");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();//关闭对话框
+            }
+        });
+        builder.create().show();//显示对话框
+    }
+
+    private void dialog5() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CheckConditionActivity.this);
+        builder.setMessage("课程节数已经最小，您确定想把第一节课的学生签到信息都删除吗？");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setTitle("警告");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();//关闭对话框
+                try {
+                    subjectOBJ.setCheck_situation(0);
+                    Fun_SetCheckSituationFalse.http_SetCheckSituationFalse(subjectOBJ);
+                    Fun_DeleteCheckInfo_Teacher.http_DeleteCheckInfo_Teacher(subjectOBJ.getSubject_id(),
+                            subjectOBJ.getSubject_th(), teacherOBJ.getTeacher_id());//把老师插入的签到信息删掉
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();//显示对话框
+    }
+
+    private void dialog6() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CheckConditionActivity.this);
+        builder.setMessage("您确定想把这节课的学生签到信息都删除吗？");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setTitle("警告");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();//关闭对话框
+                try {
+                    subjectOBJ.setCheck_situation(0);
+                    Fun_ReUpdateSubjectTh.http_ReUpdateSubjectTh(subjectOBJ);
+                    Fun_SetCheckSituationFalse.http_SetCheckSituationFalse(subjectOBJ);
+                    Fun_DeleteCheckInfo_Teacher.http_DeleteCheckInfo_Teacher(subjectOBJ.getSubject_id(),
+                            subjectOBJ.getSubject_th(), teacherOBJ.getTeacher_id());//把老师插入的签到信息删掉
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();//显示对话框
+    }
+
+    private void dialog7() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CheckConditionActivity.this);
+        builder.setMessage("保持课堂秩序，手机将静音，请在接下来的页面中给予权限！");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setTitle("注意");
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();//关闭对话框
+                Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                startActivity(intent);
+            }
+        });
+        builder.create().show();//显示对话框
     }
 }

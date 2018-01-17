@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void dialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setMessage("请前往个人中心修改自己的密码和个人信息");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
         builder.setTitle("警告");
         builder.setCancelable(false);
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {

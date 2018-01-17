@@ -13,6 +13,7 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -35,7 +36,7 @@ import java.util.Date;
 
 import static com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_isNetworkAvailable.isNetworkAvailable;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private long lastPressTime = 0;
     private TextView forgetkey;
     private EditText id;
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences sp;
     private RadioButton choice_student;
     private RadioButton choice_teacher;
+    private Button bt_login;
     private int choice_user;
     private String exit = "";
 
@@ -60,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
         auto_login = (CheckBox) findViewById(R.id.auto_login);
         choice_student = (RadioButton) findViewById(R.id.user_student);
         choice_teacher = (RadioButton) findViewById(R.id.user_teacher);
+        bt_login = (Button) findViewById(R.id.button_search);
+        bt_login.setOnClickListener(this);
         //退出登录后回到login界面清空输入过的id和pwd
         try {
             Intent it_exit = getIntent();
@@ -79,9 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         } catch (RuntimeException ignored) {
             ignored.printStackTrace();
         }
-
         forget_password();
-
         if (!isNetworkAvailable(LoginActivity.this)) {        //检测用户联网状态
             new AlertDialog.Builder(LoginActivity.this).setMessage("你是不是忘记打开数据连接了？").setCancelable(true).
                     setIcon(android.R.drawable.ic_dialog_alert).setTitle("警告").setPositiveButton("确认", null).show();
@@ -230,7 +232,8 @@ public class LoginActivity extends AppCompatActivity {
                         .show();
             } else if (choice_student.isChecked()) {//学生登录
                 StudentOBJ studentOBJ = new StudentOBJ(str1, str2);
-                if (Student_Judge_Only(str1)) {
+                int check_device = Student_Judge_Only(str1);
+                if (check_device == 1) {
                     int result = Fun_StudentLogin.//网络登录请求
                             http_LoginStudent(studentOBJ.getStudent_id(), studentOBJ.getStudent_password());
                     if (result == 1) {
@@ -251,13 +254,20 @@ public class LoginActivity extends AppCompatActivity {
                     } else if (result == -1) {
                         Toast.makeText(getApplicationContext(), "连接服务器失败", Toast.LENGTH_SHORT).show();
                     }
-                } else {
+                } else if (check_device == 0) {
                     new AlertDialog.Builder(LoginActivity.this).setMessage("您的设备已登陆过别的账号或连接服务器失败，请联系你的任课老师").setCancelable(true).
+                            setIcon(android.R.drawable.ic_dialog_alert).setTitle("警告").setPositiveButton("确认", null).show();
+                } else if (check_device == -1) {
+                    new AlertDialog.Builder(LoginActivity.this).setMessage("连接服务器失败").setCancelable(true).
+                            setIcon(android.R.drawable.ic_dialog_alert).setTitle("警告").setPositiveButton("确认", null).show();
+                } else if (check_device == -2) {
+                    new AlertDialog.Builder(LoginActivity.this).setMessage("在这个用户组中并没有您的信息，请确认！").setCancelable(true).
                             setIcon(android.R.drawable.ic_dialog_alert).setTitle("警告").setPositiveButton("确认", null).show();
                 }
             } else if (choice_teacher.isChecked()) {//教师登录
                 TeacherOBJ teacherOBJ = new TeacherOBJ(str1, str2);
-                if (Teacher_Judge_Only(str1)) {
+                int check_device = Teacher_Judge_Only(str1);
+                if (check_device == 1) {
                     int result = Fun_TeacherLogin.//网络登录请求
                             http_LoginTeacher(teacherOBJ.getTeacher_id(), teacherOBJ.getTeacher_password());
                     if (result == 1) {
@@ -278,47 +288,65 @@ public class LoginActivity extends AppCompatActivity {
                     } else if (result == -1) {
                         Toast.makeText(getApplicationContext(), "连接服务器失败", Toast.LENGTH_SHORT).show();
                     }
-                } else {
+                } else if (check_device == 0) {
                     new AlertDialog.Builder(LoginActivity.this).setMessage("您的设备已登陆过别的账号或连接服务器失败，请联系管理员").setCancelable(true).
+                            setIcon(android.R.drawable.ic_dialog_alert).setTitle("警告").setPositiveButton("确认", null).show();
+                } else if (check_device == -1) {
+                    new AlertDialog.Builder(LoginActivity.this).setMessage("连接服务器失败").setCancelable(true).
+                            setIcon(android.R.drawable.ic_dialog_alert).setTitle("警告").setPositiveButton("确认", null).show();
+                } else if (check_device == -2) {
+                    new AlertDialog.Builder(LoginActivity.this).setMessage("在这个用户组中并没有您的信息，请确认！").setCancelable(true).
                             setIcon(android.R.drawable.ic_dialog_alert).setTitle("警告").setPositiveButton("确认", null).show();
                 }
             }
         }
     }
 
-    private boolean Teacher_Judge_Only(String teacher_id) throws InterruptedException {
+    private int Teacher_Judge_Only(String teacher_id) throws InterruptedException {
         String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
         String quary_device_id = Fun_QuaryTeacherDeviceCode.http_QuaryTeacherDeviceCode(teacher_id);
-        if (!ANDROID_ID.equals(quary_device_id)) {
-            if (quary_device_id.equals(teacher_id)) {
-                if (Fun_UpdateTeacherDeviceCode.http_UpdateTeacherDeviceCode(teacher_id, ANDROID_ID)) {
-                    return true;
+        if (quary_device_id.equals("failed")) {
+            return -1;  //获取设备码失败，可能是连接服务器失败
+        }
+        if (quary_device_id.isEmpty()) {
+            return -2;  //获取设备码失败，可能是在这个用户组中没有该用户
+        }
+        if (!ANDROID_ID.equals(quary_device_id)) {//本机设备码和服务器中存储的设备码不同
+            if (quary_device_id.equals(teacher_id)) {//服务器中存储的设备码是用户id，则为第一次登陆的用户
+                if (Fun_UpdateTeacherDeviceCode.http_UpdateTeacherDeviceCode(teacher_id, ANDROID_ID)) {//上传设备码
+                    return 1;   //通过检测
                 } else {
-                    return false;
+                    return -1;  //上传设备码失败，可能是连接服务器失败
                 }
             } else {
-                return false;
+                return 0;   //不通过检测
             }
         } else {
-            return true;
+            return 1;   //通过检测
         }
     }
 
-    private boolean Student_Judge_Only(String student_id) throws InterruptedException {
+    private int Student_Judge_Only(String student_id) throws InterruptedException {
         String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
         String quary_device_id = Fun_QuaryStudentDeviceCode.http_QuaryStudentDeviceCode(student_id);
-        if (!ANDROID_ID.equals(quary_device_id)) {
-            if (quary_device_id.equals(student_id)) {
-                if (Fun_UpdateStudentDeviceCode.http_UpdateStudentDeviceCode(student_id, ANDROID_ID)) {
-                    return true;
+        if (quary_device_id.equals("failed")) {
+            return -1;  //获取设备码失败，可能是连接服务器失败
+        }
+        if (quary_device_id.isEmpty()) {
+            return -2;  //获取设备码失败，可能是在这个用户组中没有该用户
+        }
+        if (!ANDROID_ID.equals(quary_device_id)) {  //本机设备码和服务器中存储的设备码不同
+            if (quary_device_id.equals(student_id)) {   //服务器中存储的设备码是用户id，则为第一次登陆的用户
+                if (Fun_UpdateStudentDeviceCode.http_UpdateStudentDeviceCode(student_id, ANDROID_ID)) { //上传设备码
+                    return 1;   //通过检测
                 } else {
-                    return false;
+                    return -1;  //上传设备码失败，可能是连接服务器失败
                 }
             } else {
-                return false;
+                return 0;   //不通过检测
             }
         } else {
-            return true;
+            return 1;   //通过检测
         }
     }
 
@@ -330,6 +358,17 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             lastPressTime = new Date().getTime();//重置lastPressTime
             Toast.makeText(this, "再按一次返回键退出程序", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.button_search) {
+            try {
+                Login(view);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

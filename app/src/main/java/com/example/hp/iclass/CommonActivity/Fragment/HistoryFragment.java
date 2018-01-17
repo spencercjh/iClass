@@ -20,14 +20,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.hp.iclass.HistoryActivity.Common.ChooseTimeActivity;
+import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetSubjectProperty;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStudentSubject;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetTeacherSubject;
 import com.example.hp.iclass.HttpFunction.Json.Json_StudentSubjectList;
+import com.example.hp.iclass.HttpFunction.Json.Json_SubjectProperty;
 import com.example.hp.iclass.HttpFunction.Json.Json_TeacherSubjectList;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -89,7 +93,7 @@ public class HistoryFragment extends Fragment {
         } else if (choice_user == 0) {
             try {
                 Student_FillSubject();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException | JSONException e) {
                 e.printStackTrace();
             }
         }
@@ -114,7 +118,7 @@ public class HistoryFragment extends Fragment {
             } else if (choice_user == 0) {
                 try {
                     Student_FillSubject();
-                } catch (InterruptedException e) {
+                } catch (InterruptedException | JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -184,6 +188,7 @@ public class HistoryFragment extends Fragment {
                 String str_student_num = Tstudent_num.getText().toString().trim();
                 int student_num = Integer.parseInt(str_student_num);
                 SubjectOBJ subjectOBJ = new SubjectOBJ(subject_id, subject_name, classroom, student_num);
+                subjectOBJ.setTeacher_name(teacherOBJ.getTeacher_name());
                 Intent intent = new Intent(getActivity(), ChooseTimeActivity.class);
                 if (choice_user == 1) {
                     intent.putExtra("teacherOBJ", teacherOBJ);
@@ -199,11 +204,11 @@ public class HistoryFragment extends Fragment {
         });
     }
 
-    private void Student_FillSubject() throws InterruptedException {
+    private void Student_FillSubject() throws InterruptedException, JSONException {
         lv = myview.findViewById(R.id.lv2);
         final ArrayList<SubjectOBJ> SubjectList = Json_StudentSubjectList.parserJson
                 (Fun_GetStudentSubject.http_GetStudentSubject(studentOBJ));
-
+        init_subject_property(SubjectList);
         //获取ListView,并通过Adapter把studentlist的信息显示到ListView
         //为ListView设置一个适配器,getCount()返回数据个数;getView()为每一行设置一个条目
         lv.setAdapter(new BaseAdapter() {
@@ -272,5 +277,11 @@ public class HistoryFragment extends Fragment {
                 getActivity().finish();
             }
         });
+    }
+
+    void init_subject_property(ArrayList<SubjectOBJ> SubjectList) throws InterruptedException, JSONException {
+        for (int i = 0; i < SubjectList.size(); i++) {
+            SubjectList.set(i, Json_SubjectProperty.pareJson(Fun_GetSubjectProperty.http_GetSubjectProperty(SubjectList.get(i).getSubject_id())));
+        }
     }
 }

@@ -60,4 +60,13 @@
     <string name="教师代签">教师代签</string>
     <string name="性别">性别：</string>
     <string name="例16计科3班">例:16计科3班</string>
+    <string name="参数设置">参数设置</string>
+    <string name="总分">总分:</string>
+    <string name="请输入整数">请输入正整数</string>
+    <string name="单次迟到扣分">单次迟到扣分:</string>
+    <string name="单次缺勤扣分">单次缺勤扣分:</string>
+    <string name="单次好评加分">单次好评加分:</string>
+    <string name="单次差评扣分">单次差评扣分:</string>
+    <string name="恢复默认">恢复默认</string>
+    <string name="平时成绩导出">平时成绩导出</string>
 </resources>

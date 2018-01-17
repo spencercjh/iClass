@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bgc"
     tools:context="com.example.hp.iclass.HistoryActivity.Teacher.OutputExcel.RecentOutput">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="368dp"
@@ -18,7 +19,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:navigationIcon="@drawable/ic_back" />
+        app:navigationIcon="@drawable/ic_back"
+        android:layout_marginTop="8dp" />
     <LinearLayout
         android:id="@+id/loginPanel"
         android:layout_width="287dp"
@@ -58,7 +60,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20sp"
             android:background="@drawable/background_button_div"
-            android:onClick="open"
             android:text="立即打开"
             android:textSize="20sp" />
 
@@ -69,7 +70,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20sp"
             android:background="@drawable/background_button_div"
-            android:onClick="open1"
             android:text="使用资源管理器打开"
             android:textSize="20sp" />
 

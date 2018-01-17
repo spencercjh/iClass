@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bgc"
     tools:context="com.example.hp.iclass.HistoryActivity.Teacher.OutputExcel.OutputInfo">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="368dp"
@@ -19,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:navigationIcon="@drawable/ic_back" />
+
     <LinearLayout
         android:id="@+id/loginPanel"
         android:layout_width="301dp"
@@ -47,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="平时分设置"
+            android:text="@string/参数设置"
             android:textSize="25sp" />
 
         <LinearLayout
@@ -62,7 +64,7 @@
                 android:layout_height="33dp"
                 android:layout_marginLeft="10sp"
                 android:gravity="center"
-                android:text="总分:"
+                android:text="@string/总分"
                 android:textSize="20sp" />
 
             <EditText
@@ -75,7 +77,7 @@
                 android:background="@drawable/qq_edit_login"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="请输入整数"
+                android:hint="@string/请输入整数"
                 android:inputType="number"
                 android:maxLines="1"
                 android:text="30" />
@@ -92,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
                 android:layout_marginLeft="10sp"
-                android:text="单次迟到扣分:"
+                android:text="@string/单次迟到扣分"
                 android:textSize="20sp" />
 
             <EditText
@@ -105,7 +107,7 @@
                 android:background="@drawable/qq_edit_login"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="请输入整数"
+                android:hint="@string/请输入整数"
                 android:inputType="number"
                 android:maxLines="1"
                 android:text="2" />
@@ -122,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
                 android:layout_marginLeft="10sp"
-                android:text="单次缺勤扣分:"
+                android:text="@string/单次缺勤扣分"
                 android:textSize="20sp" />
 
             <EditText
@@ -134,7 +136,7 @@
                 android:background="@drawable/qq_edit_login"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="请输入整数"
+                android:hint="@string/请输入整数"
                 android:inputType="number"
                 android:maxLines="1"
                 android:text="2" />
@@ -152,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
                 android:layout_marginLeft="10sp"
-                android:text="单次好评加分:"
+                android:text="@string/单次好评加分"
                 android:textSize="20sp" />
 
             <EditText
@@ -164,7 +166,7 @@
                 android:background="@drawable/qq_edit_login"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="请输入整数"
+                android:hint="@string/请输入整数"
                 android:inputType="number"
                 android:maxLines="1"
                 android:text="2" />
@@ -181,7 +183,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
                 android:layout_marginLeft="10sp"
-                android:text="单次差评扣分:"
+                android:text="@string/单次差评扣分"
                 android:textSize="20sp" />
 
             <EditText
@@ -193,7 +195,7 @@
                 android:background="@drawable/qq_edit_login"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="请输入整数"
+                android:hint="@string/请输入整数"
                 android:inputType="number"
                 android:maxLines="1"
                 android:text="2" />
@@ -206,8 +208,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20sp"
             android:background="@drawable/background_button_div"
-            android:onClick="confirm"
-            android:text="确认"
+            android:text="@string/确认"
             android:textSize="20sp" />
 
         <Button
@@ -217,8 +218,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20sp"
             android:background="@drawable/background_button_div"
-            android:onClick="recovery"
-            android:text="恢复默认"
+            android:text="@string/恢复默认"
             android:textSize="20sp" />
 
     </LinearLayout>

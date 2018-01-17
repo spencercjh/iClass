@@ -216,6 +216,7 @@ public class UnCheckedStudentListFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("你要为吗"+student_name+"签到吗？");
         builder.setTitle("注意");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
         builder.setCancelable(false);
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override

@@ -215,6 +215,7 @@ public class Seat1Activity_Student extends AppCompatActivity {
     private void dialog1(final int seat_index) {
         AlertDialog.Builder builder = new AlertDialog.Builder(Seat1Activity_Student.this);
         builder.setMessage("你要在此入座吗？");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
         builder.setTitle("注意");
         builder.setCancelable(false);
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
@@ -271,6 +272,7 @@ public class Seat1Activity_Student extends AppCompatActivity {
     private void dialog2() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Seat1Activity_Student.this);
         builder.setMessage("这里已经有人了！");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
         builder.setTitle("抱歉！");
         builder.setCancelable(false);
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
@@ -302,6 +304,7 @@ public class Seat1Activity_Student extends AppCompatActivity {
     private void dialog3() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Seat1Activity_Student.this);
         builder.setMessage("教室的最后" + ban * 100 + "%的座位不能坐！");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
         builder.setTitle("抱歉！");
         builder.setCancelable(false);
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
@@ -317,6 +320,7 @@ public class Seat1Activity_Student extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(Seat1Activity_Student.this);
         builder.setMessage("你不在这门课所在的教学楼内！");
         builder.setTitle("警告！");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
         builder.setCancelable(false);
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override

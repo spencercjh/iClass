@@ -1,5 +1,6 @@
 package com.example.hp.iclass.OBJ;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * iClass
  */
 
-public class SubjectSumUpOBJ {
+public class SubjectSumUpOBJ implements Serializable {
     private String subject_id;  //课程id
     private String filename;    //Excel文件名
     private int score_checkin;  //出勤权重
@@ -16,17 +17,18 @@ public class SubjectSumUpOBJ {
     private int score_good; //好评权重
     private int score_bad;  //差评权重
     private int total_points;   //平时课堂成绩满分
-    private ArrayList<StudentScoreOBJ> SumupArray;
-    private ArrayList<String> StudentArray;
+    private ArrayList<StudentScoreOBJ> ScoreArray;  //学生成绩表
+    private ArrayList<String> StudentArray; //学生名表
 
-    SubjectSumUpOBJ() {
+    public SubjectSumUpOBJ() {
 
     }
 
-    SubjectSumUpOBJ(ArrayList<StudentScoreOBJ> sumupArray, ArrayList<String> studentArray, String filename, int score_checkin, int score_uncheckin, int score_late, int score_good, int score_bad, int total_points) {
-        this.SumupArray = sumupArray;
+    public SubjectSumUpOBJ(ArrayList<String> studentArray, String filename, String subject_id,
+                           int score_checkin, int score_uncheckin, int score_late, int score_good, int score_bad, int total_points) {
         this.StudentArray = studentArray;
         this.filename = filename;
+        this.subject_id = subject_id;
         this.score_checkin = score_checkin;
         this.score_uncheckin = score_uncheckin;
         this.score_late = score_late;
@@ -91,12 +93,12 @@ public class SubjectSumUpOBJ {
         this.filename = filename;
     }
 
-    public ArrayList<StudentScoreOBJ> getSumupArray() {
-        return SumupArray;
+    public ArrayList<StudentScoreOBJ> getScoreArray() {
+        return ScoreArray;
     }
 
-    public void setSumupArray(ArrayList<StudentScoreOBJ> sumupArray) {
-        SumupArray = sumupArray;
+    public void setScoreArray(ArrayList<StudentScoreOBJ> scoreArray) {
+        ScoreArray = scoreArray;
     }
 
     public ArrayList<String> getStudentArray() {

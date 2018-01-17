@@ -10,8 +10,8 @@ import com.example.hp.iclass.OBJ.SubjectSumUpOBJ;
  */
 
 public class OutputExcelFile_Fun {
-    public static boolean http_OutputExcelFile(Context context,SubjectSumUpOBJ Subject_Check_Info) throws InterruptedException {
-        OutputExcelFile_Thread thread=new OutputExcelFile_Thread(context,Subject_Check_Info);
+    public static boolean http_OutputExcelFile(Context context,SubjectSumUpOBJ subjectSumUpOBJ) throws InterruptedException {
+        OutputExcelFile_Thread thread=new OutputExcelFile_Thread(context,subjectSumUpOBJ);
         thread.start();
         thread.join();
         return thread.isFlag();

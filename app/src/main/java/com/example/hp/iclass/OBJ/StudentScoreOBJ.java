@@ -16,11 +16,11 @@ public class StudentScoreOBJ {
     private int num_bad;    //差评次数
     private int class_score;    //平时课堂成绩
 
-    StudentScoreOBJ() {
+    public StudentScoreOBJ() {
 
     }
 
-    StudentScoreOBJ(String student_id, String student_name, int num_checkin, int num_uncheck_in, int num_late, int num_pp, int num_good, int num_bad, int class_score) {
+    public StudentScoreOBJ(String student_id, String student_name, int num_checkin, int num_uncheck_in, int num_late, int num_pp, int num_good, int num_bad, int class_score) {
         this.student_id = student_id;
         this.student_name = student_name;
         this.num_checkin = num_checkin;

@@ -49,4 +49,19 @@ public class Json_AllStudentList {
         }
         return list;
     }
+
+    public static ArrayList<String> parserJson2(String jsonStr) {
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(jsonStr);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject list_item = jsonArray.getJSONObject(i);
+                String student_id = list_item.getString("student_id");
+                list.add(student_id);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
