@@ -65,100 +65,20 @@ public class OutputInfo extends AppCompatActivity {
             }
         });
         score = (EditText) findViewById(R.id.total_points);
-        score.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                str1 = score.getText().toString();
-            }
-        });
-
         eachabsentscore = (EditText) findViewById(R.id.each_uncheckin_score);
-        eachabsentscore.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                str2 = eachabsentscore.getText().toString();
-            }
-        });
-
         eachbadscore = (EditText) findViewById(R.id.each_bad_score);
-        eachbadscore.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                str3 = eachbadscore.getText().toString();
-            }
-        });
-
         eachgoodscore = (EditText) findViewById(R.id.each_good_score);
-        eachgoodscore.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                str4 = eachgoodscore.getText().toString();
-            }
-        });
-
         eachlatescore = (EditText) findViewById(R.id.each_late_score);
-        eachlatescore.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                str5 = eachlatescore.getText().toString();
-            }
-        });
-
         bt_confirm = (Button) findViewById(R.id.bt_confirm);
         bt_recovery = (Button) findViewById(R.id.bt_recovery);
     }
 
     public void confirm(View view) {
+        str1 = score.getText().toString();
+        str2 = eachlatescore.getText().toString();
+        str3 = eachabsentscore.getText().toString();
+        str4 = eachgoodscore.getText().toString();
+        str5 = eachbadscore.getText().toString();
         final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         dialog.setTitle("正在导出……");
