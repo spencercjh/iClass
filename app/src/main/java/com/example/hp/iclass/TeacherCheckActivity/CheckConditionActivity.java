@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Build;
@@ -61,6 +62,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
     private TextView Tsubject_th;
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +122,11 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             }
         });
         FreshPresentStudentNum();
-        dialog3();
+        sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        if (sp.getBoolean("first_in_check", true)) {
+            sp.edit().putBoolean("first_in_check", false).apply();
+            dialog3();
+        }
     }
 
     @Override
@@ -370,6 +376,7 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
         it.putExtra("teacherOBJ", teacherOBJ);
         it.putExtra("subjectOBJ", subjectOBJ);
         startActivity(it);
+        finish();
     }
 
     private void CheckSeat() {
@@ -384,21 +391,25 @@ public class CheckConditionActivity extends AppCompatActivity implements View.On
             intent.putExtra("subjectOBJ", subjectOBJ);
             intent.putExtra("teacherOBJ", teacherOBJ);
             startActivity(intent);
+            finish();
         } else if (subjectOBJ.getClass_type() == 2) {
             Intent intent = new Intent(this, Seat2Activity_Teacher.class);
             intent.putExtra("subjectOBJ", subjectOBJ);
             intent.putExtra("teacherOBJ", teacherOBJ);
             startActivity(intent);
+            finish();
         } else if (subjectOBJ.getClass_type() == 3) {
             Intent intent = new Intent(this, Seat3Activity_Teacher.class);
             intent.putExtra("subjectOBJ", subjectOBJ);
             intent.putExtra("teacherOBJ", teacherOBJ);
             startActivity(intent);
+            finish();
         } else {
             Intent intent = new Intent(this, SeatErrorActivity_Teacher.class);
             intent.putExtra("subjectOBJ", subjectOBJ);
             intent.putExtra("teacherOBJ", teacherOBJ);
             startActivity(intent);
+            finish();
         }
     }
 

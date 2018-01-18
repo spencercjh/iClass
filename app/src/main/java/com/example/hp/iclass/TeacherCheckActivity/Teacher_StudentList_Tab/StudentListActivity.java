@@ -1,9 +1,5 @@
 package com.example.hp.iclass.TeacherCheckActivity.Teacher_StudentList_Tab;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -20,6 +16,10 @@ import android.view.Window;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
 import com.example.hp.iclass.OBJ.TeacherOBJ;
 import com.example.hp.iclass.R;
+import com.example.hp.iclass.TeacherCheckActivity.CheckConditionActivity;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 
 public class StudentListActivity extends AppCompatActivity implements OnTabSelectedListener {
@@ -47,7 +47,7 @@ public class StudentListActivity extends AppCompatActivity implements OnTabSelec
         tl_head.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                goback();
             }
         });
         mTitleArray.add("已签");
@@ -55,6 +55,14 @@ public class StudentListActivity extends AppCompatActivity implements OnTabSelec
         mTitleArray.add("全体");
         initTabLayout();
         initTabViewPager();
+    }
+
+    private void goback() {
+        Intent it = new Intent(this, CheckConditionActivity.class);
+        it.putExtra("teacherOBJ", teacherOBJ);
+        it.putExtra("subjectOBJ", subjectOBJ);
+        startActivity(it);
+        finish();
     }
 
     private void initTabLayout() {
@@ -109,6 +117,6 @@ public class StudentListActivity extends AppCompatActivity implements OnTabSelec
     }
 
     public void onBackPressed() {
-        finish();
+        goback();
     }
 }

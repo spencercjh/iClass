@@ -1,27 +1,19 @@
 package com.example.hp.iclass.TeacherCheckActivity.Teacher_Seat;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.TextView;
 
-import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_GetStudentName;
 import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuarySubjectTh;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountCheckStudent_AllTypes;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
@@ -39,7 +31,6 @@ import java.util.ArrayList;
 public class Seat1Activity_Teacher extends AppCompatActivity {
     final private int seatnum = 45;
     private GridView gridView;
-    private View view;
     private MyAdapter myAdapter;
     private TeacherOBJ teacherOBJ = new TeacherOBJ();
     private SubjectOBJ subjectOBJ = new SubjectOBJ();
@@ -113,7 +104,7 @@ public class Seat1Activity_Teacher extends AppCompatActivity {
                 seat.add(new CheckOBJ());
             }
         }
-        myAdapter = new MyAdapter(seat, this);
+        myAdapter = new MyAdapter(seat, this,teacherOBJ,subjectOBJ);
         gridView.setAdapter(myAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -176,7 +167,6 @@ public class Seat1Activity_Teacher extends AppCompatActivity {
     }
 
     private void goback() {
-        view = null;
         Intent it = new Intent(this, CheckConditionActivity.class);
         it.putExtra("teacherOBJ", teacherOBJ);
         it.putExtra("subjectOBJ", subjectOBJ);
@@ -212,7 +202,7 @@ public class Seat1Activity_Teacher extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class MyAdapter extends BaseAdapter {
+   /* private class MyAdapter extends BaseAdapter {
         ArrayList<CheckOBJ> arrayList;
         Context context;
         int selectItem = -1;
@@ -255,7 +245,7 @@ public class Seat1Activity_Teacher extends AppCompatActivity {
         @Override
         public View getView(int arg0, View arg1, ViewGroup arg2) {
             // TODO Auto-generated method stub
-            view = LayoutInflater.from(context).inflate(R.layout.item_seat, arg2, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.item_seat, arg2, false);
             checkOBJ = (CheckOBJ) getItem(arg0);
             if (checkOBJ.getStudent_id() == null) {
                 FrameLayout frameLayout = view.findViewById(R.id.mylayout);
@@ -283,5 +273,6 @@ public class Seat1Activity_Teacher extends AppCompatActivity {
             }
             return view;
         }//设置适配器或更新适配器调用
-    }
+    }*/
+
 }
