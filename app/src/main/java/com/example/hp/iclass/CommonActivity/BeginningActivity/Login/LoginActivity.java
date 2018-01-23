@@ -4,15 +4,22 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.URLSpan;
+import android.text.util.Linkify;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -54,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         forgetkey = (TextView) findViewById(R.id.button_forget_password);
         sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         id = (EditText) findViewById(R.id.edit_id);
@@ -64,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         choice_teacher = (RadioButton) findViewById(R.id.user_teacher);
         bt_login = (Button) findViewById(R.id.button_search);
         bt_login.setOnClickListener(this);
+        setFullScreen();
         //退出登录后回到login界面清空输入过的id和pwd
         try {
             Intent it_exit = getIntent();
@@ -201,8 +210,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //忘记密码按钮
     private void forget_password() {
-        String text2 = "忘记密码？";
+        String text2 = "忘记密码?";
         SpannableString spannableString2 = new SpannableString(text2);
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#000000"));
+        spannableString2.setSpan(colorSpan, 0,2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+
         spannableString2.setSpan(new ClickableSpan() {
             @Override
             public void onClick(View view) {
@@ -349,7 +361,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return 1;   //通过检测
         }
     }
-
+    private void setFullScreen() {
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
     //重写返回键
     public void onBackPressed() {
         if (new Date().getTime() - lastPressTime < 1000) {

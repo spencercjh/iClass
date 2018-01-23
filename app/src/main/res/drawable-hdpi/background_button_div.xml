@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="#FF72CAE1" />
+    <gradient
+        android:angle="270.0"
+        android:startColor="#0079f6"
+        android:endColor="#0065e4" />
     <!--
   设置圆角
   注意：	bottomRightRadius是左下角而不是右下角  bottomLeftRadius右下角

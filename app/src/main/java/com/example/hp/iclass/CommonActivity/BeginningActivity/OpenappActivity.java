@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -26,6 +27,7 @@ public class OpenappActivity extends AppCompatActivity implements OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setFullScreen();
         setContentView(R.layout.activity_splash);
         final LinearLayout tv_lin = (LinearLayout) findViewById(R.id.text_lin);//要显示的字体
         final LinearLayout tv_hide_lin = (LinearLayout) findViewById(R.id.text_hide_lin);//所谓的布
@@ -80,7 +82,9 @@ public class OpenappActivity extends AppCompatActivity implements OnClickListene
             Toast.makeText(this, "再按一次返回键退出程序", Toast.LENGTH_SHORT).show();
         }
     }
-
+    private void setFullScreen() {
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.wholeview) {
