@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgc1"
+    android:background="@drawable/login1"
     tools:context="com.example.hp.iclass.TeacherCheckActivity.CheckedStudentDetailActivity">
 
     <android.support.v7.widget.Toolbar
@@ -23,15 +23,13 @@
 
     <LinearLayout
         android:id="@+id/loginPanel"
-        android:layout_width="309dp"
+        android:layout_width="290dp"
         android:layout_height="376dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
 
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_login_div"
         android:gravity="center"
@@ -46,7 +44,7 @@
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="299dp"
+            android:layout_width="290dp"
             android:layout_height="51dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
@@ -54,15 +52,16 @@
             android:textSize="23sp" />
 
         <LinearLayout
-            android:layout_width="291dp"
-            android:layout_height="73dp"
+            android:layout_width="232dp"
+            android:layout_height="149dp"
             android:layout_marginTop="15dp"
             android:layout_weight="0.41"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="32sp"
+                android:layout_height="40sp"
+                android:layout_marginBottom="15dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -70,14 +69,17 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="0.01"
-                    android:text="@string/性别"
+                    android:gravity="right|center_vertical"
+                    android:text="性别:"
+
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tv_sex"
-                    android:layout_width="223dp"
+                    android:layout_width="167dp"
                     android:layout_height="match_parent"
                     android:ellipsize="end"
+                    android:gravity="left|center_vertical"
                     android:lines="1"
                     android:textSize="18sp" />
 
@@ -85,7 +87,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="32sp"
+                android:layout_height="40sp"
+                android:layout_marginBottom="15dp"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -94,6 +97,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="0.01"
+                    android:gravity="right|center_vertical"
                     android:text="@string/学院"
                     android:textSize="18sp" />
 
@@ -102,13 +106,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ellipsize="end"
+                    android:gravity="left|center_vertical"
                     android:lines="1"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="32sp"
+                android:layout_height="40sp"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -117,6 +122,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="0.01"
+                    android:gravity="right|center_vertical"
                     android:text="@string/班级"
                     android:textSize="18sp" />
 
@@ -125,6 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ellipsize="end"
+                    android:gravity="left|center_vertical"
                     android:lines="1"
                     android:textSize="18sp" />
             </LinearLayout>
