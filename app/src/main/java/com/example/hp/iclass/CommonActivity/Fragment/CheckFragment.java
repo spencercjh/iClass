@@ -52,7 +52,7 @@ public class CheckFragment extends Fragment {
     private Toolbar tl_head;
     private TeacherOBJ teacherOBJ;
     private StudentOBJ studentOBJ;
-    private int choice_user=-1;
+    private int choice_user = -1;
 
     public CheckFragment(TeacherOBJ OBJ, int user) {
         teacherOBJ = OBJ;
@@ -78,7 +78,6 @@ public class CheckFragment extends Fragment {
         }
         tl_head = view.findViewById(R.id.tl_head);
         ((AppCompatActivity) getActivity()).setSupportActionBar(tl_head);
-
         tl_head.setTitle("       请选择一门课开始签到");
         tl_head.setTitleTextColor(Color.WHITE);
         myview = view;
@@ -414,8 +413,9 @@ public class CheckFragment extends Fragment {
             }
         });*/
     }
+
     void init_subject_property(ArrayList<SubjectOBJ> SubjectList) throws InterruptedException, JSONException {
-        for(int i=0;i<SubjectList.size();i++){
+        for (int i = 0; i < SubjectList.size(); i++) {
             SubjectList.set(i, Json_SubjectProperty.pareJson(Fun_GetSubjectProperty.http_GetSubjectProperty(SubjectList.get(i).getSubject_id())));
         }
     }

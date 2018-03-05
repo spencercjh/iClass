@@ -70,7 +70,6 @@ public class ResetCollegeActivity extends AppCompatActivity implements View.OnCl
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //      绑定 Adapter到控件
         spinner.setAdapter(adapter);
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,

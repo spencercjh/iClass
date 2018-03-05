@@ -22,6 +22,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 
+@SuppressWarnings("ConstantConditions")
 public class StudentListActivity extends AppCompatActivity implements OnTabSelectedListener {
     private final static String TAG = "StudentListActivity";
     private Toolbar tl_head;
