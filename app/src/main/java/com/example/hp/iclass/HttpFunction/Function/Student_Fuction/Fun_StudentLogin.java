@@ -8,7 +8,7 @@ import com.example.hp.iclass.HttpFunction.Thread.Student_Thread.LoginStudent;
  * iClass
  */
 
-public class Fun_StudentLogin {
+public class    Fun_StudentLogin {
     private final static String success = "100";
     private final static String failed = "200";
 

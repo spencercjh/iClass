@@ -39,10 +39,10 @@ public class Json_AllStudentList {
         try {
             JSONArray jsonArray = new JSONArray(jsonStr);
             for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject list_item = jsonArray.getJSONObject(i);
-                String student_id = list_item.getString("student_id");
-                StudentOBJ StudentOBJ = new StudentOBJ(student_id);
-                list.add(StudentOBJ);
+                    JSONObject list_item = jsonArray.getJSONObject(i);
+                    String student_id = list_item.getString("student_id");
+                    StudentOBJ StudentOBJ = new StudentOBJ(student_id);
+                    list.add(StudentOBJ);
             }
         } catch (JSONException e) {
             e.printStackTrace();
