@@ -21,7 +21,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="40dp"
+                android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:gravity="right|center_vertical"
@@ -30,14 +30,14 @@
 
             <TextView
                 android:id="@+id/text_subject_name"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:gravity="left|center"
                 android:text="TextView" />
 
             <TextView
-                android:layout_width="20dp"
+                android:layout_width="15dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:gravity="right|center"
@@ -61,7 +61,7 @@
 
             <TextView
                 android:id="@+id/textView16"
-                android:layout_width="40dp"
+                android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:gravity="right|center"
@@ -70,14 +70,14 @@
 
             <TextView
                 android:id="@+id/text_subject_id"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:gravity="left|center"
                 android:text="TextView" />
 
             <TextView
-                android:layout_width="20dp"
+                android:layout_width="15dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:gravity="right|center"

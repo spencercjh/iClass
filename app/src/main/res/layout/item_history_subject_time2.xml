@@ -20,7 +20,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="签到时间:" />
+            android:text="签到时间:"
+            android:textColor="@color/textcolor"/>
 
         <TextView
             android:id="@+id/TextView_SubjectDate"
@@ -42,7 +43,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="课程节数:" />
+            android:text="课程节数:"
+            android:textColor="@color/textcolor"/>
 
         <TextView
             android:id="@+id/TextView_SubjectTh"

@@ -40,7 +40,7 @@
 
                     <TextView
                         android:id="@+id/text_subject_name"
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="30dp"
                         android:layout_weight="1"
                         android:gravity="left|center"
@@ -80,7 +80,7 @@
 
                     <TextView
                         android:id="@+id/text_subject_id"
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="30dp"
                         android:layout_weight="1"
                         android:gravity="left|center"
@@ -107,10 +107,11 @@
 
         <Button
             android:id="@+id/text_check_situation"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="10dp"
+
+            android:layout_height="29dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="22dp"
             android:layout_marginTop="15dp"
             android:layout_weight="1"
             android:background="@drawable/background_button_div"

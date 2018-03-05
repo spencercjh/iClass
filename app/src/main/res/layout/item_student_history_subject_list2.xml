@@ -21,26 +21,28 @@
             android:layout_marginLeft="15sp"
             android:layout_weight="1"
             android:gravity="right|center_vertical"
-            android:text="课程:" />
+            android:text="课程:"
+            android:textColor="@color/textcolor"/>
 
         <TextView
             android:id="@+id/tv_subjectname"
-            android:layout_width="wrap_content"
+            android:layout_width="65dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:text="TextView" />
 
         <TextView
-            android:layout_width="1dp"
+            android:layout_width="3dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="right|center_vertical"
-            android:text="教师:" />
+            android:text="教师:"
+            android:textColor="@color/textcolor"/>
 
         <TextView
             android:id="@+id/tv_teacher"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="left|center_vertical"
@@ -54,31 +56,33 @@
 
         <TextView
             android:id="@+id/textView14"
-            android:layout_width="8dp"
+            android:layout_width="3dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="15sp"
             android:layout_weight="1"
             android:gravity="right|center_vertical"
             android:text="课程号:"
-            android:layout_marginLeft="15sp"/>
+            android:textColor="@color/textcolor"/>
 
         <TextView
             android:id="@+id/tv_subjectID"
-            android:layout_width="47dp"
+            android:layout_width="65dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:text="TextView" />
 
         <TextView
-            android:layout_width="4dp"
+            android:layout_width="3dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="right|center_vertical"
-            android:text="教室:" />
+            android:text="教室:"
+            android:textColor="@color/textcolor"/>
 
         <TextView
             android:id="@+id/tv_classroom"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="left|center_vertical"

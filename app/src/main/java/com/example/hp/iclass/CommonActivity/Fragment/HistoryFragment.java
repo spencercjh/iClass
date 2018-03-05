@@ -158,7 +158,7 @@ public class HistoryFragment extends Fragment {
                 //对ListView的优化，convertView为空时，创建一个新视图；convertView不为空时，代表它是滚出
                 //屏幕，放入Recycler中的视图,若需要用到其他layout，则用inflate(),同一视图，用fiindViewBy()
                 if (convertView == null) {
-                    view = View.inflate(getActivity(), R.layout.item_teacher_history_subject_list, null);
+                    view = View.inflate(getActivity(), R.layout.item_teacher_history_subject_list2, null);
                 } else {
                     view = convertView;
                 }
@@ -234,7 +234,7 @@ public class HistoryFragment extends Fragment {
                 //对ListView的优化，convertView为空时，创建一个新视图；convertView不为空时，代表它是滚出
                 //屏幕，放入Recycler中的视图,若需要用到其他layout，则用inflate(),同一视图，用fiindViewBy()
                 if (convertView == null) {
-                    view = View.inflate(getActivity(), R.layout.item_student_history_subject_list, null);
+                    view = View.inflate(getActivity(), R.layout.item_student_history_subject_list2, null);
                 } else {
                     view = convertView;
                 }

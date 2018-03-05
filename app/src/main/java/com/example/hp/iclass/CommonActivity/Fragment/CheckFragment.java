@@ -207,7 +207,7 @@ public class CheckFragment extends Fragment {
                 //对ListView的优化，convertView为空时，创建一个新视图；convertView不为空时，代表它是滚出
                 //屏幕，放入Recycler中的视图,若需要用到其他layout，则用inflate(),同一视图，用fiindViewBy()
                 if (convertView == null) {
-                    view = View.inflate(getActivity(), R.layout.item_teacher_subject, null);
+                    view = View.inflate(getActivity(), R.layout.item_teacher_subject2, null);
                 } else {
                     view = convertView;
                 }
@@ -325,7 +325,7 @@ public class CheckFragment extends Fragment {
                 //对ListView的优化，convertView为空时，创建一个新视图；convertView不为空时，代表它是滚出
                 //屏幕，放入Recycler中的视图,若需要用到其他layout，则用inflate(),同一视图，用fiindViewBy()
                 if (convertView == null) {
-                    view = View.inflate(getActivity(), R.layout.item_student_subject, null);
+                    view = View.inflate(getActivity(), R.layout.item_student_subject2, null);
                 } else {
                     view = convertView;
                 }
