@@ -27,6 +27,7 @@ public class History_SubjectInfo_StudentActivity extends AppCompatActivity {
     private TextView seat_index;
     private TextView check_time;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
