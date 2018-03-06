@@ -17,9 +17,7 @@ import com.example.hp.iclass.HttpFunction.Function.Common_Function.Fun_QuaryStud
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_GetStudentProperty;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_CountOneStudentCheckNum;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetAllStudent;
-import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_GetCheckStudent;
 import com.example.hp.iclass.HttpFunction.Json.Json_AllStudentList;
-import com.example.hp.iclass.HttpFunction.Json.Json_CheckedStudentList;
 import com.example.hp.iclass.HttpFunction.Json.Json_StudentProperty;
 import com.example.hp.iclass.OBJ.StudentOBJ;
 import com.example.hp.iclass.OBJ.SubjectOBJ;
@@ -97,7 +95,6 @@ public class AllStudentListFragment extends Fragment {
         lv = mView.findViewById(R.id.all_studnet_list);
         final ArrayList<StudentOBJ> AllStudentList = Json_AllStudentList.parserJson(Fun_GetAllStudent.http_GetAllStudent(subjectOBJ));
         init_student_property(AllStudentList);
-        final ArrayList<String> CheckInfoList = Json_CheckedStudentList.parserJson4(Fun_GetCheckStudent.http_GetCheckStudent(subjectOBJ));
         //获取ListView,并通过Adapter把studentlist的信息显示到ListView
         //为ListView设置一个适配器,getCount()返回数据个数;getView()为每一行设置一个条目
         lv.setAdapter(new BaseAdapter() {
