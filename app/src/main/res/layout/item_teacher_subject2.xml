@@ -115,6 +115,7 @@
             android:layout_marginTop="15dp"
             android:layout_weight="1"
             android:background="@drawable/background_button_div"
+            android:gravity="center_vertical|center_horizontal"
             android:text="开始签到"
             android:textColor="@color/white"
             android:textSize="12dp" />
