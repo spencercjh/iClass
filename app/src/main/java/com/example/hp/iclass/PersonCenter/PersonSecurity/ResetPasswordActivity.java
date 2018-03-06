@@ -29,6 +29,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
     private EditText edit_newpassword;
     private EditText edit_newpassword2;
     private Button btn_confirm;
+
     private Handler handler = new Handler() {   //修改成功后延迟1秒返回前一活动
         @Override
         public void handleMessage(Message msg) {

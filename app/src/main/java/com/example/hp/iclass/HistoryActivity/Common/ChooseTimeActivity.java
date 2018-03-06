@@ -74,7 +74,10 @@ public class ChooseTimeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_teacher_output, menu);
+        Intent intent = getIntent();
+        user = (String) intent.getSerializableExtra("user");
+        if (user.equals("teacher")) {
+        inflater.inflate(R.menu.menu_teacher_output, menu);}
         return true;
     }
 

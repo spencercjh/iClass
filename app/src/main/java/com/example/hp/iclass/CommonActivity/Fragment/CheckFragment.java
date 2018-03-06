@@ -36,6 +36,7 @@ import com.example.hp.iclass.StudentCheckActivity.Student_Seat.Seat1Activity_Stu
 import com.example.hp.iclass.StudentCheckActivity.Student_Seat.Seat2Activity_Student;
 import com.example.hp.iclass.StudentCheckActivity.Student_Seat.Seat3Activity_Student;
 import com.example.hp.iclass.StudentCheckActivity.Student_Seat.SeatErrorActivity_Student;
+import com.example.hp.iclass.TeacherCheckActivity.AddStudentActivity;
 import com.example.hp.iclass.TeacherCheckActivity.CheckConditionActivity;
 
 import org.json.JSONException;
@@ -164,7 +165,7 @@ public class CheckFragment extends Fragment {
     }
 
     private void gotoaddcourse() {   //toobar menu里的添加课程
-    /*    Intent it = new Intent(getActivity(), AddsubjectActivity.class);
+       Intent it = new Intent(getActivity(), AddStudentActivity.class);
         it.putExtra("user", choice_user);
         if (choice_user == 1) {
             it.putExtra("teacherOBJ", teacherOBJ);
@@ -172,7 +173,7 @@ public class CheckFragment extends Fragment {
             it.putExtra("studentOBJ", studentOBJ);
         }
         startActivity(it);
-        getActivity().finish();*/
+        getActivity().finish();
     }
 
     private void Teacher_FillSubjectList() throws InterruptedException {
