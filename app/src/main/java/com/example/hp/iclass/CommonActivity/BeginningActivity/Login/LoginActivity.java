@@ -9,15 +9,11 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.URLSpan;
-import android.text.util.Linkify;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -116,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     TeacherOBJ teacherOBJ = new TeacherOBJ(id.getText().toString().trim(), pwd.getText().toString().trim());
                     int result = -1;
                     try {
-                        result = Fun_TeacherLogin.http_LoginTeacher(teacherOBJ.getTeacher_id(), teacherOBJ.getTeacher_password());
+                        result = Fun_TeacherLogin.http_LoginTeacher(teacherOBJ.getTeacher_id(), MD5andKL.MD5(teacherOBJ.getTeacher_password()));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -136,7 +132,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     int result = -1;
                     try {
                         result = Fun_StudentLogin.//网络登录请求
-                                http_LoginStudent(studentOBJ.getStudent_id(), studentOBJ.getStudent_password());
+                                http_LoginStudent(studentOBJ.getStudent_id(), MD5andKL.MD5(studentOBJ.getStudent_password()));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -213,7 +209,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String text2 = "忘记密码?";
         SpannableString spannableString2 = new SpannableString(text2);
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#000000"));
-        spannableString2.setSpan(colorSpan, 0,2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString2.setSpan(colorSpan, 0, 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 
         spannableString2.setSpan(new ClickableSpan() {
             @Override
@@ -247,7 +243,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 int check_device = Student_Judge_Only(str1);
                 if (check_device == 1) {
                     int result = Fun_StudentLogin.//网络登录请求
-                            http_LoginStudent(studentOBJ.getStudent_id(), studentOBJ.getStudent_password());
+                            http_LoginStudent(studentOBJ.getStudent_id(), MD5andKL.MD5(studentOBJ.getStudent_password()));
                     if (result == 1) {
                         if (rem_pw.isChecked()) {
                             //记住用户名、密码、
@@ -281,7 +277,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 int check_device = Teacher_Judge_Only(str1);
                 if (check_device == 1) {
                     int result = Fun_TeacherLogin.//网络登录请求
-                            http_LoginTeacher(teacherOBJ.getTeacher_id(), teacherOBJ.getTeacher_password());
+                            http_LoginTeacher(teacherOBJ.getTeacher_id(), MD5andKL.MD5(teacherOBJ.getTeacher_password()));
                     if (result == 1) {
                         if (rem_pw.isChecked()) {
                             //记住用户名、密码、
@@ -361,9 +357,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return 1;   //通过检测
         }
     }
+
     private void setFullScreen() {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
+
     //重写返回键
     public void onBackPressed() {
         if (new Date().getTime() - lastPressTime < 1000) {

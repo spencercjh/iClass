@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.hp.iclass.CommonActivity.BeginningActivity.Login.MD5andKL;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_StudentLogin;
 import com.example.hp.iclass.HttpFunction.Function.Student_Fuction.Fun_UpdateStudentPassword;
 import com.example.hp.iclass.HttpFunction.Function.Teacher_Function.Fun_TeacherLogin;
@@ -87,7 +88,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
     private void ChangePassword() throws InterruptedException {
         if (choice_user == 1) {
             String old_password = edit_oldpassword.getText().toString().trim();
-            int result = Fun_TeacherLogin.http_LoginTeacher(teacherOBJ.getTeacher_id(), old_password);
+            int result = Fun_TeacherLogin.http_LoginTeacher(teacherOBJ.getTeacher_id(), MD5andKL.MD5(old_password));
             if (result == 1) {
                 String new_password = edit_newpassword.getText().toString().trim();
                 String confirm = edit_newpassword2.getText().toString().trim();
@@ -97,7 +98,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
                     if (new_password.equals(old_password)) {
                         Toast.makeText(ResetPasswordActivity.this, "新密码不能和旧密码相同！", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (Fun_UpdateTeacherPassword.http_UpdateTeacherPassword(teacherOBJ.getTeacher_id(), new_password)) {
+                        if (Fun_UpdateTeacherPassword.http_UpdateTeacherPassword(teacherOBJ.getTeacher_id(), MD5andKL.MD5(new_password))) {
                             Toast.makeText(ResetPasswordActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                             handler.sendEmptyMessageDelayed(0, 1000);
                         }
@@ -110,7 +111,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
             }
         } else if (choice_user == 0) {
             String old_password = edit_oldpassword.getText().toString().trim();
-            int result = Fun_StudentLogin.http_LoginStudent(studentOBJ.getStudent_id(), old_password);
+            int result = Fun_StudentLogin.http_LoginStudent(studentOBJ.getStudent_id(), MD5andKL.MD5(old_password));
             if (result == 1) {
                 String new_password = edit_newpassword.getText().toString().trim();
                 String confirm = edit_newpassword2.getText().toString().trim();
@@ -120,7 +121,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
                     if (new_password.equals(old_password)) {
                         Toast.makeText(ResetPasswordActivity.this, "新密码不能和旧密码相同！", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (Fun_UpdateStudentPassword.http_UpdateStudentPassword(studentOBJ.getStudent_id(), new_password)) {
+                        if (Fun_UpdateStudentPassword.http_UpdateStudentPassword(studentOBJ.getStudent_id(), MD5andKL.MD5(new_password))) {
                             Toast.makeText(ResetPasswordActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                             handler.sendEmptyMessageDelayed(0, 1000);
                         }
