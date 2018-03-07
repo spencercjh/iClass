@@ -149,7 +149,7 @@ public class CheckFragment extends Fragment {
             }
             return true;
         } else if (id == R.id.addsubject) {
-            gotoaddcourse();
+            gotoaddstudent();
             return true;
         } else if (id == R.id.end) {
             exit_login();
@@ -164,7 +164,7 @@ public class CheckFragment extends Fragment {
         getActivity().finish();
     }
 
-    private void gotoaddcourse() {   //toobar menu里的添加课程
+    private void gotoaddstudent() {   //toobar menu里的添加课程
        Intent it = new Intent(getActivity(), AddStudentActivity.class);
         it.putExtra("user", choice_user);
         if (choice_user == 1) {

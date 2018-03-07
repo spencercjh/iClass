@@ -36,4 +36,21 @@ public class Json_TeacherSubjectList {
         }
         return list;
     }
+
+    public static ArrayList<String> parserJson2(String jsonStr) {
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(jsonStr);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject list_item = jsonArray.getJSONObject(i);
+                String subject_id = list_item.getString("subject_id");
+                String subject_name = list_item.getString("subject_name");
+                String subject=subject_id+"-"+subject_name;
+                list.add(subject);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
