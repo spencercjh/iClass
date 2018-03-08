@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * Created by spencercjh on 2017/11/29.
  * iClass
+ *
  */
 
 public class CheckOBJ implements Serializable {
