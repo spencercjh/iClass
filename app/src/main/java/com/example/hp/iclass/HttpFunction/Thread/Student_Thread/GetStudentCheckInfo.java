@@ -83,7 +83,7 @@ public class GetStudentCheckInfo extends Thread {
 
     /*在run中调用doGet*/
     @Override
-    public void run() {
+    synchronized public void run() {
         try {
             doGet();
         } catch (IOException e) {

@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 /**
  * Created by spencercjh on 2017/12/5.
@@ -81,7 +80,7 @@ public class QuaryOneSubjectTable extends Thread{
 
     /*在run中调用doGet*/
     @Override
-    public void run() {
+    synchronized public void run() {
         try {
             doGet();
         } catch (IOException e) {
