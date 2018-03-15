@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="10sp"
+            android:layout_height="10dp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/linearLayout3"
             android:orientation="horizontal" />

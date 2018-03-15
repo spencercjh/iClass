@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".CommonActivity.BeginningActivity.Login.LoginActivity">
+    android:background="@color/white">
 
     <android.support.v7.widget.Toolbar
         android:id="@id/tl_head"
-        android:layout_width="368dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
 
@@ -23,15 +22,16 @@
 
     <ListView
         android:id="@+id/lv"
-        android:layout_width="380dp"
-        android:layout_height="506dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:cacheColorHint="#00000000"
         android:divider="@drawable/list_divider"
         android:dividerHeight="1.5dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.967" />
+        app:layout_constraintTop_toBottomOf="@+id/tl_head"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

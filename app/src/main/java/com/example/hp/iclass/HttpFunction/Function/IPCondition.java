@@ -6,7 +6,7 @@ package com.example.hp.iclass.HttpFunction.Function;
  */
 
 public class IPCondition {
-    public static String ip="192.168.3.16";
+    public static String ip="192.168.43.198";
     public static String port="8080";
     public static String server_ip = "http://"+ip+":"+port+"/";
 }
